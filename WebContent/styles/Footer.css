@@ -8,46 +8,42 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #DFDFDF; 
+            background-color: #DFDFDF;
         }
 
-        
-        footer {
-            background-color: #000080; 
+        .piede-pagina {
+            background-color: #000080;
             height: 60px;
-            overflow: hidden; 
+            overflow: hidden;
             position: absolute;
             bottom: 0;
             width: 100%;
         }
 
-       
-        .footer-sinistra {
+        .blocco-sinistro {
             float: left;
-            line-height: 60px; 
+            line-height: 60px;
             padding-left: 20px;
-            color: #FFFFFF; 
+            color: #FFFFFF;
             font-size: 13px;
         }
 
-        .footer-info {
-            margin-right: 25px; 
-            display: inline-block;
+        .testo-info {
+            float: left;
+            padding-right: 25px;
         }
 
-       
-        .youtube-btn {
+        .pulsante-youtube {
             float: right;
-            background-color: #FFCA00; 
-            color: #000000; 
+            background-color: #FFCA00;
+            color: #000000;
             text-decoration: none;
-            display: inline-block;
             line-height: 60px;
             padding: 0 25px;
             font-size: 16px;
             font-weight: bold;
         }
 
-        .youtube-btn:hover {
-            background-color: #e6b800; 
+        .pulsante-youtube:hover {
+            background-color: #e6b800;
         }
