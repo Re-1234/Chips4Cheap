@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+		* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #DFDFDF; /* Sfondo pagina */
+        }
+
+        /* Stile dell'Header principale */
+        .main-header {
+            background-color: #000080; /* Blu Navy */
+            height: 60px;
+            /* L'overflow: hidden è fondamentale qui per "contenere" gli elementi fluttuanti 
+               ed evitare che l'header collassi su se stesso (clearfix) */
+            overflow: hidden; 
+        }
+
+        /* Stile comune per tutti i link nell'header */
+        .main-header a {
+            text-decoration: none;
+            display: inline-block;
+            line-height: 60px; /* Centra verticalmente il testo rispetto ai 60px di altezza */
+        }
+
+        /* -- ELEMENTI ALLINEATI A SINISTRA -- */
+        .logo {
+            float: left;
+            color: #FFCA00; /* Giallo Oro */
+            font-size: 22px;
+            font-weight: bold;
+            padding-left: 20px;
+            padding-right: 40px; /* Spazio tra logo e link successivi */
+        }
+
+        .nav-link {
+            float: left;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        /* -- ELEMENTI ALLINEATI A DESTRA -- */
+        /* Nota: con float: right, il primo elemento nell'HTML andrà tutto a destra, 
+           il secondo si affiancherà alla sua sinistra, ecc. */
+           
+        .catalog-btn {
+            float: right;
+            background-color: #FFCA00;
+            color: #000000;
+            padding: 0 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .catalog-btn:hover {
+            background-color: #e6b800;
+        }
+
+        .user-link {
+            float: right;
+            color: #FFFFFF;
+            font-size: 15px;
+            padding-right: 20px; /* Spaziatura tra i vari link utente */
+        }
+
+        .user-link:hover {
+            text-decoration: underline;
+        }
