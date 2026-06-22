@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 @WebListener
-public class Contextlistener implements ServletContextListener {
+public class InitListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
@@ -18,7 +18,7 @@ public class Contextlistener implements ServletContextListener {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			ds = (DataSource) envCtx.lookup("jdbc/storage");
+			ds = (DataSource) envCtx.lookup("jdbc/Chips4CheapDB");
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
