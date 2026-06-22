@@ -1,68 +1,154 @@
 @charset "UTF-8";
 
 		* {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #DFDFDF;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DFDFDF;
+}
 
-        header {
-            background-color: #000080; /* Blu Navy */
-            height: 60px;
-            overflow: hidden; 
-        }
+/* --- STILE DI BASE: TV / SCHERMI GRANDI (> 2560px) --- */
+header {
+    background-color: #000080;
+    height: 100px;
+    overflow: hidden; 
+}
 
-        header a {
-            text-decoration: none;
-            display: inline-block;
-            line-height: 60px; /* Centra verticalmente il testo rispetto ai 60px di altezza */
-        }
+header a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 100px; 
+}
 
-        .logo {
-            float: left;
-            color: #FFCA00;
-            font-size: 22px;
-            font-weight: bold;
-            padding-left: 20px;
-            padding-right: 40px;
-        }
+.logo {
+    float: left;
+    color: #FFCA00;
+    font-size: 32px;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-right: 60px;
+}
 
-        .nav-link {
-            float: left;
-            color: #FFFFFF;
-            font-size: 15px;
-            font-weight: 500;
-        }
+.nav-link {
+    float: left;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 500;
+}
 
-        .nav-link:hover {
-            text-decoration: underline;
-        }
-           
-        .catalog-btn {
-            float: right;
-            background-color: #FFCA00;
-            color: #000000;
-            padding: 0 25px;
-            font-size: 18px;
-            font-weight: bold;
-        }
+.nav-link:hover {
+    text-decoration: underline;
+}
+   
+.catalog-btn {
+    float: right;
+    background-color: #FFCA00;
+    color: #000000;
+    padding: 0 40px;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .catalog-btn:hover {
-            background-color: #e6b800;
-        }
+.catalog-btn:hover {
+    background-color: #e6b800;
+}
 
-        .user-link {
-            float: right;
-            color: #FFFFFF;
-            font-size: 15px;
-            padding-right: 20px;
-        }
+.user-link {
+    float: right;
+    color: #FFFFFF;
+    font-size: 22px;
+    padding-right: 30px;
+}
 
-        .user-link:hover {
-            text-decoration: underline;
-        }
+.user-link:hover {
+    text-decoration: underline;
+}
+
+/* --- BREAKPOINT 1: MONITOR PC E LAPTOP (fino a 2560px) --- */
+@media (max-width: 2560px) {
+    header {
+        height: 80px;
+    }
+    header a {
+        line-height: 80px;
+    }
+    .logo {
+        font-size: 26px;
+        padding-left: 30px;
+        padding-right: 50px;
+    }
+    .nav-link {
+        font-size: 18px;
+    }
+    .catalog-btn {
+        padding: 0 30px;
+        font-size: 20px;
+    }
+    .user-link {
+        font-size: 18px;
+        padding-right: 25px;
+    }
+}
+
+/* --- BREAKPOINT 2: LAPTOP PICCOLI / TABLET (fino a 1280px - Corrisponde al tuo codice originale) --- */
+@media (max-width: 1280px) {
+    header {
+        height: 60px;
+    }
+    header a {
+        line-height: 60px;
+    }
+    .logo {
+        font-size: 22px;
+        padding-left: 20px;
+        padding-right: 40px;
+    }
+    .nav-link {
+        font-size: 15px;
+    }
+    .catalog-btn {
+        padding: 0 25px;
+        font-size: 18px;
+    }
+    .user-link {
+        font-size: 15px;
+        padding-right: 20px;
+    }
+}
+
+/* --- BREAKPOINT 3: SMARTPHONE (fino a 480px) --- */
+@media (max-width: 480px) {
+    header {
+        height: auto;
+        padding: 15px 0;
+    }
+    header a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+        line-height: normal;
+        padding: 10px 0;
+    }
+    .logo {
+        padding: 5px 0;
+        font-size: 24px;
+    }
+    .nav-link {
+        font-size: 16px;
+    }
+    .catalog-btn {
+        width: 90%;
+        margin: 10px auto;
+        padding: 12px 0;
+        font-size: 18px;
+    }
+    .user-link {
+        font-size: 16px;
+        padding-right: 0;
+    }
+}
