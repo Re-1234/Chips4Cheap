@@ -16,11 +16,10 @@
             <span class="testo-info">© 2026 Chips4Cheap. Tutti i diritti riservati.</span>
         </div>
 
-        <a href="https://www.youtube.com" class="pulsante-youtube" target="_blank">
-            🎥 YouTube
+        <a href="https://www.youtube.com" class="collegamento-youtube" target="_blank">
+            <img src="images/youtube_logo.jpg" alt="YouTube" class="immagine-youtube">
         </a>
-        
-    </footer>
+</footer>
 
 </body>
 </html>
