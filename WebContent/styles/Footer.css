@@ -90,7 +90,7 @@ body {
     }
 }
 
-@media (max-width: 1280px) and (min-width: 481px) and (orientation: landscape) {
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
     .piede-pagina {
         height: 75px;
     }
@@ -112,7 +112,7 @@ body {
     }
 }
 
-@media (max-width: 1280px) and (min-width: 481px) and (orientation: portrait) {
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
     .piede-pagina {
         height: 70px;
     }
@@ -134,7 +134,7 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .piede-pagina {
         height: auto;
         position: relative;
