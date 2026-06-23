@@ -6,22 +6,38 @@ public final class ProdottoRicevuta implements Serializable{
 	private String nCAutore;
 	private String nomeModello;
 	private double prezzo;
-	private String descrizione;
 	private String tipo;
 	private int quantità;
 	private String imagine;
 	
 	public final static double EPSILON = 1e9;
+	
+	public ProdottoRicevuta(){
+		nCAutore = "";
+		nomeModello = "";
+		prezzo = 0;
+		tipo = "";
+		quantità = 0;
+		imagine = "";
+	}
+	
+	public ProdottoRicevuta(String nCAutore,String nomeModello ,double prezzo , String tipo , int quantità , String image) {
+		this.nCAutore = nCAutore;
+		this.nomeModello = nomeModello;
+		this.prezzo = prezzo;
+		this.tipo = tipo;
+		this.quantità = quantità;
+		this.imagine = image; 
+	}
+	
+	
+	
 	public String getnCAutore() {
 		return nCAutore;
 	}
 	
 	public double getPrezzo() {
 		return prezzo;
-	}
-	
-	public String getDescrizione() {
-		return descrizione;
 	}
 	
 	public String getNomeModello() {
@@ -56,12 +72,12 @@ public final class ProdottoRicevuta implements Serializable{
 		ProdottoRicevuta prodotto = (ProdottoRicevuta) o;
 		
 		return prodotto.nCAutore.equalsIgnoreCase(nCAutore) && prodotto.nomeModello.equalsIgnoreCase(nomeModello) && Math.abs(prodotto.prezzo - prezzo) <= EPSILON && 
-				descrizione.equalsIgnoreCase(prodotto.descrizione) && tipo.equalsIgnoreCase(prodotto.tipo) && quantità == prodotto.quantità && imagine.equalsIgnoreCase(prodotto.imagine);
+				 tipo.equalsIgnoreCase(prodotto.tipo) && quantità == prodotto.quantità && imagine.equalsIgnoreCase(prodotto.imagine);
 				
 	}
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo + ", descrizione = " + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
+		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo  + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
 	}
 }
