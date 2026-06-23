@@ -6,36 +6,47 @@
     padding: 0;
 }
 
+/* Regole per tenere il footer sempre in basso anche in pagine vuote */
+html {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #DFDFDF;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 120px; /* Crea uno spazio per evitare che il footer copra il testo */
 }
 
 .piede-pagina {
     background-color: #000080;
-    height: 100px;
-    overflow: hidden;
+    min-height: 100px; /* Cambiato in min-height per permettere l'espansione */
+    overflow: hidden;  /* Agisce da clearfix per espandere il colore blu */
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
 }
 
 .blocco-sinistro {
     float: left;
-    line-height: 100px;
+    padding-top: 25px;
     padding-left: 40px;
     color: #FFFFFF;
     font-size: 22px;
 }
 
+/* TESTO IMPILATO SEMPRE - Risolve il problema dello spazio orizzontale */
 .testo-info {
-    float: left;
-    padding-right: 40px;
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 5px;
 }
 
 .collegamento-youtube {
     float: right;
-    height: 100px;
+    min-height: 100px;
     padding: 0 40px;
 }
 
@@ -48,18 +59,15 @@ body {
 
 @media (max-width: 2560px) {
     .piede-pagina {
-        height: 80px;
+        min-height: 80px;
     }
     .blocco-sinistro {
-        line-height: 80px;
+        padding-top: 20px;
         padding-left: 30px;
         font-size: 17px;
     }
-    .testo-info {
-        padding-right: 30px;
-    }
     .collegamento-youtube {
-        height: 80px;
+        min-height: 80px;
         padding: 0 30px;
     }
     .immagine-youtube {
@@ -70,18 +78,15 @@ body {
 
 @media (max-width: 1280px) {
     .piede-pagina {
-        height: 60px;
+        min-height: 60px;
     }
     .blocco-sinistro {
-        line-height: 60px;
+        padding-top: 14px;
         padding-left: 20px;
         font-size: 13px;
     }
-    .testo-info {
-        padding-right: 25px;
-    }
     .collegamento-youtube {
-        height: 60px;
+        min-height: 60px;
         padding: 0 25px;
     }
     .immagine-youtube {
@@ -92,18 +97,15 @@ body {
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
     .piede-pagina {
-        height: 75px;
+        min-height: 75px;
     }
     .blocco-sinistro {
-        line-height: 75px;
+        padding-top: 18px;
         padding-left: 25px;
         font-size: 16px;
     }
-    .testo-info {
-        padding-right: 25px;
-    }
     .collegamento-youtube {
-        height: 75px;
+        min-height: 75px;
         padding: 0 25px;
     }
     .immagine-youtube {
@@ -114,18 +116,15 @@ body {
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
     .piede-pagina {
-        height: 70px;
+        min-height: 70px;
     }
     .blocco-sinistro {
-        line-height: 70px;
+        padding-top: 18px;
         padding-left: 20px;
         font-size: 14px;
     }
-    .testo-info {
-        padding-right: 20px;
-    }
     .collegamento-youtube {
-        height: 70px;
+        min-height: 70px;
         padding: 0 20px;
     }
     .immagine-youtube {
@@ -135,27 +134,24 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-bottom: 160px; /* Aumenta lo spazio dal fondo quando il footer diventa più alto a blocchi */
+    }
     .piede-pagina {
-        height: auto;
-        position: relative;
+        min-height: auto;
+        position: absolute; /* Ripristinato ad absolute per tenerlo in basso */
         padding: 20px 0;
         text-align: center;
     }
     .blocco-sinistro {
         float: none;
-        line-height: normal;
+        padding-top: 0;
         padding-left: 0;
         width: 100%;
     }
-    .testo-info {
-        float: none;
-        padding-right: 0;
-        display: block;
-        margin-bottom: 10px;
-    }
     .collegamento-youtube {
         float: none;
-        height: auto;
+        min-height: auto;
         padding: 0;
         display: block;
         width: 100%;
