@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-		* {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -11,7 +11,6 @@ body {
     background-color: #DFDFDF;
 }
 
-/* --- STILE DI BASE: TV / SCHERMI GRANDI (> 2560px) --- */
 header {
     background-color: #000080;
     height: 100px;
@@ -68,7 +67,6 @@ header a {
     text-decoration: underline;
 }
 
-/* --- BREAKPOINT 1: MONITOR PC E LAPTOP (fino a 2560px) --- */
 @media (max-width: 2560px) {
     header {
         height: 80px;
@@ -94,7 +92,6 @@ header a {
     }
 }
 
-/* --- BREAKPOINT 2: LAPTOP PICCOLI / TABLET (fino a 1280px - Corrisponde al tuo codice originale) --- */
 @media (max-width: 1280px) {
     header {
         height: 60px;
@@ -120,7 +117,56 @@ header a {
     }
 }
 
-/* --- BREAKPOINT 3: SMARTPHONE (fino a 480px) --- */
+@media (max-width: 1280px) and (min-width: 481px) and (orientation: landscape) {
+    header {
+        height: 70px;
+    }
+    header a {
+        line-height: 70px;
+    }
+    .logo {
+        font-size: 24px;
+        padding-left: 25px;
+        padding-right: 45px;
+    }
+    .nav-link {
+        font-size: 16px;
+    }
+    .catalog-btn {
+        padding: 0 30px;
+        font-size: 19px;
+    }
+    .user-link {
+        font-size: 16px;
+        padding-right: 25px;
+    }
+}
+
+@media (max-width: 1280px) and (min-width: 481px) and (orientation: portrait) {
+    header {
+        height: 65px;
+    }
+    header a {
+        line-height: 65px;
+    }
+    .logo {
+        font-size: 20px;
+        padding-left: 15px;
+        padding-right: 25px;
+    }
+    .nav-link {
+        font-size: 14px;
+    }
+    .catalog-btn {
+        padding: 0 20px;
+        font-size: 16px;
+    }
+    .user-link {
+        font-size: 14px;
+        padding-right: 15px;
+    }
+}
+
 @media (max-width: 480px) {
     header {
         height: auto;
@@ -142,7 +188,7 @@ header a {
         font-size: 16px;
     }
     .catalog-btn {
-        width: 90%;
+        width: 100%;
         margin: 10px auto;
         padding: 12px 0;
         font-size: 18px;
