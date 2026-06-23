@@ -26,7 +26,7 @@
                 </div>
             </c:if>
 
-            <form id="formRegistrazione" action="${pageContext.request.contextPath}/RegistraUtente" method="post">
+            <form id="formRegistrazione" action="${pageContext.request.contextPath}/RegistraUtente" method="post" onsubmit="return validaForm()">
                 
                 <div class="gruppo-input">
                     <label for="email">Email *</label>
@@ -47,15 +47,15 @@
                 </div>
 
                 <div class="gruppo-input">
-                    <label for="via">Via / Indirizzo</label>
-                    <input type="text" id="via" name="Via" value="${param.Via}" maxlength="50">
+                    <label for="via">Via / Indirizzo *</label>
+                    <input type="text" id="via" name="Via" value="${param.Via}" maxlength="50" required>
                     <p class="messaggio-errore" id="err-via"></p>
                 </div>
 
                 <div class="riga-input">
                     <div class="gruppo-input meta-larghezza">
-                        <label for="cap">CAP</label>
-                        <input type="number" id="cap" name="Cap" value="${param.Cap}">
+                        <label for="cap">CAP *</label>
+                        <input type="number" id="cap" name="Cap" value="${param.Cap}" required>
                         <p class="messaggio-errore" id="err-cap"></p>
                     </div>
 
