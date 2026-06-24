@@ -68,7 +68,7 @@ public class RegistraUtente extends HttpServlet {
 
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/registrazione").forward(request, response);
+            request.getRequestDispatcher("/Registrazione").forward(request, response);
         } else {
             try {
                 Account nuovoAccount = new Account();
@@ -84,12 +84,12 @@ public class RegistraUtente extends HttpServlet {
 
                 dao.doSave(nuovoAccount);
 
-                response.sendRedirect(request.getContextPath() + "/login");
+                response.sendRedirect(request.getContextPath() + "/Login");
                 
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("erroreServer", "Errore imprevisto durante la registrazione. Riprova.");
-                request.getRequestDispatcher("/registrazione").forward(request, response);
+                request.getRequestDispatcher("/Registrazione").forward(request, response);
             }
         }
     }

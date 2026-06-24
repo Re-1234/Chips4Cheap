@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrazione - Chips4Cheap</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/Header.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/Footer.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/registrazione.css" type="text/css">
 </head>
 <body>
 
-    <jsp:include page="Header.jsp" />
+    <jsp:include page="header.jsp" />
 
     <main class="contenitore-registrazione">
         <div class="modulo-registrazione">
@@ -72,7 +72,7 @@
         </div>
     </main>
 
-    <jsp:include page="Footer.jsp" />
+    <jsp:include page="footer.jsp" />
 
     <script src="${pageContext.request.contextPath}/scripts/registrazione.js"></script>
 
