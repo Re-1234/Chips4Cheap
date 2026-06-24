@@ -19,7 +19,7 @@ public class RegistraUtente extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/registrazione");
+        response.sendRedirect(request.getContextPath() + "/Registrazione");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
