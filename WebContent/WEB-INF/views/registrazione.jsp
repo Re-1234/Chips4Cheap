@@ -42,7 +42,7 @@
 
                 <div class="gruppo-input">
                     <label for="password">Password *</label>
-                    <input type="password" id="password" name="Password1" maxlength="50" required>
+                    <input type="password" id="password" name="Password1" maxlength="16" required>
                     <p class="messaggio-errore" id="err-password"></p>
                 </div>
 
