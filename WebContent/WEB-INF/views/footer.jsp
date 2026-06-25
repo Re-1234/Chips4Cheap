@@ -17,7 +17,7 @@
         </div>
 
         <a href="https://www.youtube.com" class="collegamento-youtube" target="_blank">
-            <img src="images/youtube_logo.jpg" alt="YouTube" class="immagine-youtube">
+            <img src="${pageContext.request.contextPath}/images/youtube_logo.jpg" alt="YouTube" class="immagine-youtube">
         </a>
 </footer>
 
