@@ -62,7 +62,7 @@ public class Autorizza extends HttpServlet {
 
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/Login").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
