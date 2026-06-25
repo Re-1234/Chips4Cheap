@@ -9,15 +9,14 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
-    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/login.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
 <body>
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore-login">
-        <div class="modulo-login">
+    <main class="contenitore-pagina">
+        <div class="modulo-centrato">
             <h2>Accedi al tuo Account</h2>
             
             <c:if test="${not empty requestScope.erroreLogin}">
@@ -28,22 +27,22 @@
 
             <form id="formLogin" action="${pageContext.request.contextPath}/Autorizza" method="post" onsubmit="return validaLogin()">
                 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="${param.email}" required>
                     <p class="messaggio-errore" id="err-email"></p>
                 </div>
 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                     <p class="messaggio-errore" id="err-password"></p>
                 </div>
 
-                <button type="submit" class="btn-login">Accedi</button>
+                <button type="submit" class="bottone-azione">Accedi</button>
                 
-                <div class="link-utili">
-                    <p>Non hai un account? <a href="${pageContext.request.contextPath}/Registrazione">Registrati qui</a></p>
+                <div id="zona-registrazione-alternativa">
+                    <p>Non hai un account? <a href="${pageContext.request.contextPath}/Registrazione" id="link-vai-a-registrazione">Registrati qui</a></p>
                 </div>
                 
             </form>
@@ -53,6 +52,5 @@
     <jsp:include page="footer.jsp" />
 
     <script src="${pageContext.request.contextPath}/scripts/login.js"></script>
-
 </body>
 </html>

@@ -9,15 +9,14 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
-    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/registrazione.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
 <body>
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore-registrazione">
-        <div class="modulo-registrazione">
+    <main class="contenitore-pagina">
+        <div class="modulo-centrato">
             <h2>Crea il tuo Account</h2>
             
             <c:if test="${not empty requestScope.erroreServer}">
@@ -28,45 +27,45 @@
 
             <form id="formRegistrazione" action="${pageContext.request.contextPath}/RegistraUtente" method="post" onsubmit="return validaForm()">
                 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="email">Email *</label>
                     <input type="email" id="email" name="email" value="${param.email}" maxlength="50" required>
                     <p class="messaggio-errore" id="err-email"></p>
                 </div>
 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="username">Username *</label>
-                    <input type="text" id="username" name="username" value="${param.username}" maxlength="50" required>
+                    <input type="text" id="username" name="username" value="${param.username}" maxlength="30" required>
                     <p class="messaggio-errore" id="err-username"></p>
                 </div>
 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="password">Password *</label>
                     <input type="password" id="password" name="Password1" maxlength="16" required>
                     <p class="messaggio-errore" id="err-password"></p>
                 </div>
 
-                <div class="gruppo-input">
+                <div class="gruppo-campo">
                     <label for="via">Via / Indirizzo *</label>
                     <input type="text" id="via" name="Via" value="${param.Via}" maxlength="50" required>
                     <p class="messaggio-errore" id="err-via"></p>
                 </div>
 
-                <div class="riga-input">
-                    <div class="gruppo-input meta-larghezza">
+                <div class="riga-doppia">
+                    <div class="gruppo-campo meta-larghezza">
                         <label for="cap">CAP *</label>
                         <input type="number" id="cap" name="Cap" value="${param.Cap}" required>
                         <p class="messaggio-errore" id="err-cap"></p>
                     </div>
 
-                    <div class="gruppo-input meta-larghezza">
+                    <div class="gruppo-campo meta-larghezza">
                         <label for="numeroCivico">N° Civico *</label>
                         <input type="number" id="numeroCivico" name="NumeroCivico" value="${param.NumeroCivico}" required>
                         <p class="messaggio-errore" id="err-civico"></p>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-registrati">Registrati</button>
+                <button type="submit" class="bottone-azione">Registrati</button>
                 
             </form>
         </div>
@@ -75,6 +74,5 @@
     <jsp:include page="footer.jsp" />
 
     <script src="${pageContext.request.contextPath}/scripts/registrazione.js"></script>
-
 </body>
 </html>

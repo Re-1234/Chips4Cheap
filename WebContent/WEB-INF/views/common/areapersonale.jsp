@@ -9,50 +9,50 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/areapersonale.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
 <body>
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-area-personale">
-        <div class="modulo-area-personale">
+    <main class="contenitore-pagina">
+        <div class="modulo-centrato">
             <h2>Area Personale</h2>
             
-            <div class="sezione-info">
+            <div class="sezione-contenuto">
                 <h3>I tuoi Dati</h3>
                 
-                <div class="campo-info">
-                    <span class="etichetta">Username:</span>
-                    <span class="valore">${sessionScope.account.username}</span>
+                <div class="gruppo-campo">
+                    <span class="etichetta-fissa">Username:</span>
+                    <span class="valore-fisso">${sessionScope.account.username}</span>
                 </div>
 
-                <div class="campo-info">
-                    <span class="etichetta">Email:</span>
-                    <span class="valore">${sessionScope.account.email}</span>
+                <div class="gruppo-campo">
+                    <span class="etichetta-fissa">Email:</span>
+                    <span class="valore-fisso">${sessionScope.account.email}</span>
                 </div>
 
-                <div class="campo-info">
-                    <span class="etichetta">Indirizzo:</span>
-                    <span class="valore">${sessionScope.account.via}</span>
+                <div class="gruppo-campo">
+                    <span class="etichetta-fissa">Indirizzo:</span>
+                    <span class="valore-fisso">${sessionScope.account.via}</span>
                 </div>
 
-                <div class="riga-info-compatta">
-                    <div class="campo-info mezzo-blocco">
-                        <span class="etichetta">N° Civico:</span>
-                        <span class="valore">${sessionScope.account.numeroCivico}</span>
+                <div class="riga-doppia">
+                    <div class="gruppo-campo meta-larghezza">
+                        <span class="etichetta-fissa">N° Civico:</span>
+                        <span class="valore-fisso">${sessionScope.account.numeroCivico}</span>
                     </div>
 
-                    <div class="campo-info mezzo-blocco">
-                        <span class="etichetta">CAP:</span>
-                        <span class="valore">${sessionScope.account.cap}</span>
+                    <div class="gruppo-campo meta-larghezza">
+                        <span class="etichetta-fissa">CAP:</span>
+                        <span class="valore-fisso">${sessionScope.account.cap}</span>
                     </div>
                 </div>
             </div>
 
-            <div class="collegamenti-navigazione">
-                <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-navigazione">Visualizza i tuoi acquisti e ricevute</a>
-                <a href="${pageContext.request.contextPath}/common/ModificaAccount" class="link-navigazione link-gestione">Modifica o Cancella Account</a>
+            <div id="blocco-azioni-account">
+                <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-azione" id="link-ricevute">Visualizza i tuoi acquisti e ricevute</a>
+                <a href="${pageContext.request.contextPath}/common/ModificaAccount" class="link-azione" id="link-modifica-cancella">Modifica o Cancella Account</a>
             </div>
         </div>
     </main>
