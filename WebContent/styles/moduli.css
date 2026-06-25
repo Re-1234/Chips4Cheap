@@ -1,0 +1,267 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. STRUTTURA E CONTAINER PRINCIPALI (COMUNI)
+   ========================================================================== */
+
+.contenitore-pagina {
+    padding: 3rem 5%; 
+    display: block;
+}
+
+.modulo-centrato {
+    background-color: #dfdfdf; 
+    max-width: 35rem; /* Dimensione ideale bilanciata per tutti e tre i moduli */
+    margin: 0 auto; 
+    padding: 2.5rem 6%;
+    border-radius: 0.5rem;
+}
+
+.modulo-centrato h2 {
+    text-align: center;
+    color: #000080; 
+    font-size: 2rem; 
+    margin-bottom: 1.5rem;
+}
+
+/* Specifico per la suddivisione interna dell'Area Personale */
+.sezione-contenuto {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.sezione-contenuto h3 {
+    color: #000080;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid #000080;
+    padding-bottom: 0.25rem;
+}
+
+/* ==========================================================================
+   2. ELEMENTI DEI FORM E CAMPI INFORMATIVI
+   ========================================================================== */
+
+.gruppo-campo {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Stile per le etichette dei form e per i testi descrittivi dell'area personale */
+.gruppo-campo label, 
+.etichetta-fissa {
+    display: block;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 0.375rem; 
+    font-size: 1rem;
+}
+
+/* Input editabili (Login/Registrazione) e Spazi di testo fisso (Area Personale) */
+.gruppo-campo input, 
+.valore-fisso {
+    display: block;
+    width: 100%;
+    padding: 0.75rem; 
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    color: #333333;
+    box-sizing: border-box;
+}
+
+/* Impedisce al testo fisso molto lungo (es. email) di strabordare su schermi piccoli */
+.valore-fisso {
+    word-wrap: break-word;
+}
+
+/* ==========================================================================
+   3. STRUTTURA DEL LAYOUT AFFIANCATO (CAP / CIVICO)
+   ========================================================================== */
+
+.riga-doppia {
+    width: 100%;
+    overflow: hidden; /* Clearfix automatico per i float dei figli */
+}
+
+.meta-larghezza {
+    width: 48%; 
+    float: left;
+}
+
+.meta-larghezza:first-child {
+    margin-right: 4%;
+}
+
+/* ==========================================================================
+   4. BOTTONI E LINK DI AZIONE (STILE BOTTONE)
+   ========================================================================== */
+
+.bottone-azione, 
+.link-azione {
+    display: block;
+    width: 100%;
+    background-color: #000080;
+    color: #FFCA00; 
+    padding: 1rem;
+    font-size: 1.25rem; 
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.25rem;
+    margin-top: 0.75rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.bottone-azione:hover, 
+.link-azione:hover {
+    background-color: #000055; 
+}
+
+/* ==========================================================================
+   5. SEZIONE ERRORI E VALIDAZIONE
+   ========================================================================== */
+
+.errore-server {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    padding: 1rem;
+    border: 1px solid #cc0000;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.messaggio-errore {
+    color: #cc0000;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    min-height: 1.25rem; /* Evita il saltellamento del layout alla comparsa dell'errore */
+}
+
+/* ==========================================================================
+   6. SEPARAZIONE LOGICA: REGOLE SPECIFICHE TRAMITE ID
+   ========================================================================== */
+
+/* Login: Blocco di rimando alla registrazione */
+#zona-registrazione-alternativa {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #333333;
+}
+
+#link-vai-a-registrazione {
+    color: #000080;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#link-vai-a-registrazione:hover {
+    text-decoration: underline;
+}
+
+/* Area Personale: Contenitore pulsanti in basso */
+#blocco-azioni-account {
+    margin-top: 1.5rem;
+}
+
+/* Area Personale: Pulsante secondario (Modifica/Cancella) */
+#link-modifica-cancella {
+    background-color: #a0a0a0; 
+    color: #ffffff; 
+    margin-top: 0.75rem;
+}
+
+#link-modifica-cancella:hover {
+    background-color: #707070; 
+}
+
+
+/* ==========================================================================
+   7. MEDIA QUERIES (RESPONSIVITÀ ADATTATA AI DISPOSITIVI)
+   ========================================================================== */
+
+/* Schermi Ultra-Wide / 2K */
+@media (max-width: 2560px) {
+    .contenitore-pagina {
+        padding: 2.5rem 5%;
+    }
+    .modulo-centrato h2 {
+        font-size: 1.875rem; 
+    }
+}
+
+/* Laptop e Desktop Standard */
+@media (max-width: 1280px) {
+    .contenitore-pagina {
+        padding: 2rem 5%;
+    }
+    .modulo-centrato h2 {
+        font-size: 1.75rem; 
+    }
+    .sezione-contenuto h3 {
+        font-size: 1.125rem;
+    }
+    .gruppo-campo label, 
+    .gruppo-campo input, 
+    .etichetta-fissa, 
+    .valore-fisso {
+        font-size: 0.9375rem;
+    }
+    .bottone-azione, 
+    .link-azione {
+        font-size: 1.125rem;
+    }
+    #zona-registrazione-alternativa {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Tablet e Schermi Medi in Landscape (Orizzontale) */
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
+    .contenitore-pagina {
+        padding: 2rem 5%;
+    }
+    .modulo-centrato h2 {
+        font-size: 1.75rem; 
+    }
+}
+
+/* Tablet in Portrait (Verticale) */
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
+    .contenitore-pagina {
+        padding: 2rem 4%;
+    }
+    .modulo-centrato {
+        padding: 2rem 5%;
+    }
+    .modulo-centrato h2 {
+        font-size: 1.625rem; 
+    }
+}
+
+/* Smartphone e Dispositivi Mobili (Sotto i 768px) */
+@media (max-width: 768px) {
+    .contenitore-pagina {
+        padding: 1.5rem 4%;
+    }
+    .modulo-centrato {
+        padding: 1.5rem 5%;
+    }
+    .modulo-centrato h2 {
+        font-size: 1.5rem; 
+    }
+    
+    /* Annulliamo l'affiancamento di CAP e Civico portandoli a tutta larghezza verticalmente */
+    .meta-larghezza {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+    }
+}
