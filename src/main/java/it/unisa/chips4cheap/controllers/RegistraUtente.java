@@ -51,7 +51,7 @@ public class RegistraUtente extends HttpServlet {
             errore = "Il numero civico deve essere un valore numerico.";
         }
 
-        accountDAO dao = new accountDAO();
+        AccountDAO dao = new AccountDAO();
 
         if (errore == null) {
             try {
