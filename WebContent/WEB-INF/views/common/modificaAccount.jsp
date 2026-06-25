@@ -28,8 +28,14 @@
             <form id="formModificaAccount" action="${pageContext.request.contextPath}/common/ModificaAccount" method="post" onsubmit="return validaModifica()">
                 
                 <div class="sezione-contenuto">
-                    <h3>Aggiorna i tuoi Dati</h3>
+                    <h3>Sicurezza e Dati Profilo</h3>
                     
+                    <div class="gruppo-campo">
+                        <label for="email">Email (Identificativo Account)</label>
+                        <input type="email" id="email" name="email" value="${sessionScope.account.email}" readonly style="background-color: #e9ecef; cursor: not-allowed; color: #666;">
+                        <p class="messaggio-errore" id="err-email"></p>
+                    </div>
+
                     <div class="gruppo-campo">
                         <label for="username">Username *</label>
                         <input type="text" id="username" name="username" value="${sessionScope.account.username}" maxlength="30" required>
@@ -37,9 +43,15 @@
                     </div>
 
                     <div class="gruppo-campo">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" value="${sessionScope.account.email}" maxlength="50" required>
-                        <p class="messaggio-errore" id="err-email"></p>
+                        <label for="vecchiaPassword">Vecchia Password *</label>
+                        <input type="password" id="vecchiaPassword" name="vecchiaPassword" maxlength="16" required>
+                        <p class="messaggio-errore" id="err-vecchiaPassword"></p>
+                    </div>
+
+                    <div class="gruppo-campo">
+                        <label for="password">Nuova Password *</label>
+                        <input type="password" id="password" name="password" maxlength="16" required>
+                        <p class="messaggio-errore" id="err-password"></p>
                     </div>
 
                     <div class="gruppo-campo">
@@ -74,6 +86,6 @@
 
     <jsp:include page="../footer.jsp" />
 
-    <script src="${pageContext.request.contextPath}/scripts/modifica-account.js"></script>
+    <script src="${pageContext.request.contextPath}/scripts/validazione.js"></script>
 </body>
 </html>
