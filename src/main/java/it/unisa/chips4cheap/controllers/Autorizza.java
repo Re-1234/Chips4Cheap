@@ -66,7 +66,7 @@ public class Autorizza extends HttpServlet {
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
-            session.setAttribute("role", "user"); 
+            // session.setAttribute("role", "user"); utilizziamo direttamente l'oggetto account e controlliamo la sua esistenza in AutentificazioneFilter
             
             request.getRequestDispatcher("/common/AreaPersonale").forward(request, response);
         }
