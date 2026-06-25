@@ -73,6 +73,6 @@
 
     <jsp:include page="footer.jsp" />
 
-    <script src="${pageContext.request.contextPath}/scripts/registrazione.js"></script>
+    <script src="${pageContext.request.contextPath}/scripts/validazioneInfoAccount.js"></script>
 </body>
 </html>
