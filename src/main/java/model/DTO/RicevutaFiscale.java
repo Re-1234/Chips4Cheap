@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public final class RicevutaFiscale implements Serializable{
 	private int idRicevutaFiscale;
 	private String email;
-	private Account account;
 	private String metodoPagamento;
 	private LocalDate localDate;
 	private ArrayList<ProdottoRicevuta> prodottiRicevuta;
@@ -19,14 +18,13 @@ public final class RicevutaFiscale implements Serializable{
 		localDate = LocalDate.now();
 	}
 	
-	public RicevutaFiscale(int idRicevutaFiscale,ArrayList<ProdottoRicevuta> prodottiRicevuta,Account account,String metodoPagamento,LocalDate localDate){
+	public RicevutaFiscale(int idRicevutaFiscale,ArrayList<ProdottoRicevuta> prodottiRicevuta,String metodoPagamento,LocalDate localDate){
 		this.idRicevutaFiscale = idRicevutaFiscale;
 		this.prodottiRicevuta = new ArrayList<>();
 		for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
 		     this.prodottiRicevuta.add(prodottoRicevuta);	
 		}
 		this.metodoPagamento = metodoPagamento;
-		this.account = account.clone();
 		this.localDate = localDate;
 	}
 	
@@ -60,9 +58,7 @@ public final class RicevutaFiscale implements Serializable{
 		return metodoPagamento;
 	}
 	
-	public Account getAccount() {
-		return account.clone();
-	}
+	
 	
 	public String getEmail() {
 		return email;
@@ -97,12 +93,12 @@ public final class RicevutaFiscale implements Serializable{
 		}
 		
 		
-		return ricevutaFiscale.idRicevutaFiscale == idRicevutaFiscale && allTrue && metodoPagamento.equalsIgnoreCase(ricevutaFiscale.metodoPagamento) && account.equals(ricevutaFiscale.getAccount());
+		return ricevutaFiscale.idRicevutaFiscale == idRicevutaFiscale && allTrue && metodoPagamento.equalsIgnoreCase(ricevutaFiscale.metodoPagamento);
 	}
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale + ", prodottiRicevuta = " + prodottiRicevuta.toString() +", metodoPagamento = " + metodoPagamento + ", account = " + account + ",email = " + email + ",localDate = " + localDate + "]";
+		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale + ", prodottiRicevuta = " + prodottiRicevuta.toString() +", metodoPagamento = " + metodoPagamento +  ",email = " + email + ",localDate = " + localDate + "]";
 	}
 
 	

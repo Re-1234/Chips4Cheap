@@ -1,0 +1,182 @@
+package model.DAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+
+import model.DTO.Account;
+import model.DTO.ProdottoRicevuta;
+import model.DTO.RicevutaFiscale;
+
+public class AccountDAO implements InterfaceDAO<Account>{
+
+	@Override
+	public void doSave(Account elemet){
+		if(elemet == null) {
+			throw new NullPointerException();
+		}
+		Context initCtx;
+		try{
+			initCtx = new InitialContext();
+			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			try(Connection co = ds.getConnection()){
+				PreparedStatement preparedStatement = co.prepareStatement("Insert into Account(email,username,password1,Via,Cap,NumeroCivico,Amministratore) values (?,?,?,?,?,?,?)");
+				preparedStatement.setString(1,elemet.getEmail());
+				preparedStatement.setString(2,elemet.getUsername());
+				preparedStatement.setString(3, elemet.getPassword());
+				preparedStatement.setString(4,elemet.getVia());
+				preparedStatement.setString(5,elemet.getCap());
+				preparedStatement.setInt(6,elemet.getNumeroCivico());
+				preparedStatement.setBoolean(7,elemet.isAmministratore());
+				preparedStatement.executeUpdate();
+			
+				
+				RicevutaFiscaleDAO ricevutaFiscaleDAO = new RicevutaFiscaleDAO();
+				
+				for(RicevutaFiscale ricevutaFiscale:  elemet.getRicevuteFiscali()){
+					ricevutaFiscaleDAO.doSave(ricevutaFiscale);
+				}
+				preparedStatement.close();
+			}
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch(SQLException sqlExe){
+			sqlExe.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void doDelete(Account element){
+		if(element == null) {
+			throw new NullPointerException();
+		}
+		
+		Context initCtx;
+		try{
+			initCtx = new InitialContext();
+			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			Connection c = ds.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account where email = ?");
+			preparedStatement.setString(1,element.getEmail());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			c.close();
+		}catch(NamingException c){
+			c.printStackTrace();
+		}catch(SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+	}
+
+	@Override
+	public Account doSearchElement(Object o){
+		if(!(o instanceof String) || o == null){
+			throw new RuntimeException();
+		}
+		String email = (String) o;
+		Context initCtx;
+		try{
+			initCtx = new InitialContext();
+			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			try(Connection co = ds.getConnection()){
+				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account where email = ?");
+				preparedStatement.setString(1,email);
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				if(resultSet.next()){
+					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"),null);
+					ArrayList<RicevutaFiscale> ricevuteFiscali = new ArrayList<>();
+					PreparedStatement p = co.prepareStatement("Select * From RicevutaFiscale where email = ?");
+					p.setString(1, account.getEmail());
+					ResultSet r =p.executeQuery();
+					PreparedStatement p1 = co.prepareStatement("Select * From ProdottoRicevuta where IDRicevutaFiscale = ?");
+					while(r.next()){
+						ArrayList<ProdottoRicevuta> prodottiRicevuta = new ArrayList<>();
+						p1.setInt(1,r.getInt("IDRicevutaFiscale"));
+						ResultSet resultSet2 = p1.executeQuery();
+						while(resultSet2.next()){
+							prodottiRicevuta.add(
+									new ProdottoRicevuta(
+											resultSet2.getString("NCAutore"),
+											resultSet2.getString("NomeModello"),
+											resultSet2.getDouble("Prezzo"),
+											resultSet2.getString("Tipo"),
+											resultSet2.getInt("Quantità"),
+											resultSet2.getString("Image")
+											)
+									);
+						}
+						ricevuteFiscali.add(
+								new RicevutaFiscale(
+										r.getInt("IDRicevutaFiscale"),
+										prodottiRicevuta,
+										r.getString("metodoPagamento"),
+										r.getDate("DataEmissione").toLocalDate()
+										)
+								);
+					}
+							
+					account.setRicevuteFiscali(ricevuteFiscali);
+					resultSet.close();
+					preparedStatement.close();
+					return account;
+				}
+				resultSet.close();
+				preparedStatement.close();
+			}
+			 return null;
+		}catch(NamingException namingExcep){
+			namingExcep.printStackTrace();
+		}catch(SQLException sqlExecption){
+			sqlExecption.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void doUpdate(Account element) {
+		if(element == null) {
+			throw new NullPointerException();
+		}
+		Context initCtx;
+		try{
+			initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			try(Connection conn = ds.getConnection()){
+				PreparedStatement pre = conn.prepareStatement("Update Account Set email = ? , username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
+				pre.setString(1, element.getEmail());
+				pre.setString(2,element.getUsername());
+				pre.setString(3,element.getPassword());
+				pre.setString(4, element.getCap());
+				pre.setInt(5, element.getNumeroCivico());
+				pre.setString(6,element.getEmail());
+				pre.setBoolean(7,element.isAmministratore());
+				
+				pre.executeUpdate();
+				pre.close();
+				conn.close();
+			}
+		}catch (SQLException e){
+				e.printStackTrace();
+		}catch (NamingException e) {
+			    e.printStackTrace();
+		}
+		
+		
+	}
+	
+}

@@ -78,43 +78,17 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				
 				result.close();
 			}
-			Account account = new Account();
-			try(PreparedStatement preparedStatemen = connection.prepareStatement("Select * From Account1 where email = ?")){
-				preparedStatemen.setString(1,resultSet.getString("email"));;
-				ResultSet resultS = preparedStatement.executeQuery();
-				if(resultS.next()){
-					account.setAmministratore(resultS.getBoolean("Amministratore"));
-					account.setCap(resultS.getInt("Cap"));
-					account.setVia(resultS.getString("Via"));
-					account.setUsername(resultS.getString("username"));
-					account.setPassword(resultS.getString("Password1"));
-					account.setVia(resultS.getString("Via"));
-					account.setEmail(resultS.getString("email"));
-					account.setNumeroCivico(resultS.getInt("NumeroCivico"));
-				}
+				RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),prodottiRicevuta,resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate());
+			
+				return ricevuta1;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			
-			RicevutaFiscale ricevuta = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),prodottiRicevuta,account,resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate());
-			ArrayList<RicevutaFiscale> ricevuteFiacli = new ArrayList<>();
-			ricevuteFiacli.add(ricevuta);
-			account.setRicevuteFiscali(ricevuteFiacli);
-			System.out.println(account);
-			RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),prodottiRicevuta,account,resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate());
-			
-			return ricevuta1;
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
 		
 		return new RicevutaFiscale();
 	}
-	
-	public ArrayList<RicevutaFiscale> doSearchElements(Object o){
-			return null;
-	}
-	
-	public void doUpdate(RicevutaFiscale element){
 		
+	public void doUpdate(RicevutaFiscale element){
+		throw new NonSupportatoException();
 	}
 }

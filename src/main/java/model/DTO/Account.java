@@ -7,7 +7,7 @@ public class Account implements Cloneable , Serializable{
 	private String username;
 	private String password;
 	private String via;
-	private int cap;
+	private String cap;
 	private int numeroCivico;
 	private String email;
 	private boolean amministratore;
@@ -17,14 +17,14 @@ public class Account implements Cloneable , Serializable{
 		username = "";
 		password = "";
 		via = "";
-		cap = 0;
+		cap = "";
 		numeroCivico = 0;
 		email = "";
 		amministratore = false;
 		ricevutaFiscale = new ArrayList<>();
 	}
 	
-	public Account(String username,String password , String via , int cap , int numeroCivico , String email , boolean amministratore , ArrayList<RicevutaFiscale> ricevuteFiscale){
+	public Account(String username,String password , String via , String cap , int numeroCivico , String email , boolean amministratore , ArrayList<RicevutaFiscale> ricevuteFiscale){
 		this.username = username;
 		this.password = password;
 		this.via = via;
@@ -67,12 +67,12 @@ public class Account implements Cloneable , Serializable{
 	}
 
 
-	public int getCap() {
+	public String getCap() {
 		return cap;
 	}
 
 
-	public void setCap(int cap) {
+	public void setCap(String cap) {
 		this.cap = cap;
 	}
 

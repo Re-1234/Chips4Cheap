@@ -9,6 +9,7 @@ public final class ProdottoRicevuta implements Serializable{
 	private String tipo;
 	private int quantità;
 	private String imagine;
+	private int IDRicevutaFiscale;
 	
 	public final static double EPSILON = 1e9;
 	
@@ -78,6 +79,10 @@ public final class ProdottoRicevuta implements Serializable{
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo  + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
+		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo  + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + ",IDRicevutaFiscale = "+IDRicevutaFiscale+ "]";
+	}
+
+	public int getIDRicevutaFiscale() {
+		return IDRicevutaFiscale;
 	}
 }
