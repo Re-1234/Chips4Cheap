@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
 import model.DTO.ProdottoRicevuta;
@@ -24,16 +25,18 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		try{
 			init = new InitialContext();
 			Context ext = (Context) init.lookup("java:comp/env");
-			DataSource ds = (DataSource) ext.lookup("jdbc/chips4cheap");
+			BasicDataSource ds = (BasicDataSource)  ext.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
-			PreparedStatement pre = c.prepareStatement("Insert into ProdottoRicevuta(Prezzo , IDRicevutaFiscale , email , NomeModello , Quantità , image , tipo) values (?,?,?,?,?,?,?)"); 
+			PreparedStatement pre = c.prepareStatement("Insert into ProdottoRicevuta(Prezzo , Produttore , IDRicevutaFiscale , email , NomeModello , Quantità , image , tipo) values (?,?,?,?,?,?,?,?)"); 
 			pre.setDouble(1,elemet.getPrezzo());
-			pre.setInt(2, elemet.getIDRicevutaFiscale());
-			pre.setString(3,elemet.getEmail());
-			pre.setString(4, elemet.getNomeModello());
-			pre.setInt(5, elemet.getQuantità());
-			pre.setString(6,elemet.getImagine());
-			pre.setString(7,elemet.getTipo());
+			pre.setString(2, elemet.getnCAutore());
+			pre.setInt(3, elemet.getIDRicevutaFiscale());
+			pre.setString(4,elemet.getEmail());
+			pre.setString(5, elemet.getNomeModello());
+			pre.setInt(6, elemet.getQuantità());
+			pre.setString(7,elemet.getImagine());
+			pre.setString(8,elemet.getTipo());
+			
 			pre.executeUpdate();
 			pre.close();
 			c.close();
@@ -65,7 +68,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		try {
 			init = new InitialContext();
 			Context expt = (Context) init.lookup("java:comp/env");
-			DataSource ds = (DataSource) expt.lookup("jdbc/chips4cheap");	
+			BasicDataSource ds = (BasicDataSource) expt.lookup("jdbc/chips4cheap");	
 			Connection c = ds.getConnection();
 			try(PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta Where NomeModello = ? and IDRicevutaFiscale = ?")){
 				p.setString(1, nomeModello);

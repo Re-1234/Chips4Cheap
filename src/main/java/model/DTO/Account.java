@@ -32,6 +32,7 @@ public class Account implements Cloneable , Serializable{
 		this.numeroCivico = numeroCivico;
 		this.email = email;
 		this.amministratore = amministratore;
+		this.ricevutaFiscale = new ArrayList<>();
 		for(RicevutaFiscale ricevutaFiscale : ricevuteFiscale){
 			this.ricevutaFiscale.add(ricevutaFiscale);
 		}

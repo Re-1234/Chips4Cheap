@@ -15,15 +15,17 @@ public final class RicevutaFiscale implements Serializable{
 		idRicevutaFiscale = 0;
 		prodottiRicevuta = new ArrayList<>();
 		metodoPagamento = "";
+		email = "";
 		localDate = LocalDate.now();
 	}
 	
-	public RicevutaFiscale(int idRicevutaFiscale,ArrayList<ProdottoRicevuta> prodottiRicevuta,String metodoPagamento,LocalDate localDate){
+	public RicevutaFiscale(int idRicevutaFiscale,String email,ArrayList<ProdottoRicevuta> prodottiRicevuta,String metodoPagamento,LocalDate localDate){
 		this.idRicevutaFiscale = idRicevutaFiscale;
 		this.prodottiRicevuta = new ArrayList<>();
 		for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
 		     this.prodottiRicevuta.add(prodottoRicevuta);	
 		}
+		this.email = email;
 		this.metodoPagamento = metodoPagamento;
 		this.localDate = localDate;
 	}

@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
 import model.DTO.Account;
@@ -27,9 +28,9 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			try(Connection co = ds.getConnection()){
-				PreparedStatement preparedStatement = co.prepareStatement("Insert into Account(email,username,password1,Via,Cap,NumeroCivico,Amministratore) values (?,?,?,?,?,?,?)");
+				PreparedStatement preparedStatement = co.prepareStatement("Insert into Account1(email,username,password1,Via,Cap,NumeroCivico,Amministratore) values (?,?,?,?,?,?,?)");
 				preparedStatement.setString(1,elemet.getEmail());
 				preparedStatement.setString(2,elemet.getUsername());
 				preparedStatement.setString(3, elemet.getPassword());
@@ -66,7 +67,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			BasicDataSource ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account where email = ?");
 			preparedStatement.setString(1,element.getEmail());
@@ -90,7 +91,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+		    DataSource	ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
 			try(Connection co = ds.getConnection()){
 				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account where email = ?");
 				preparedStatement.setString(1,email);
@@ -102,30 +103,10 @@ public class AccountDAO implements InterfaceDAO<Account>{
 					PreparedStatement p = co.prepareStatement("Select * From RicevutaFiscale where email = ?");
 					p.setString(1, account.getEmail());
 					ResultSet r =p.executeQuery();
-					PreparedStatement p1 = co.prepareStatement("Select * From ProdottoRicevuta where IDRicevutaFiscale = ?");
+					RicevutaFiscaleDAO r1 = new RicevutaFiscaleDAO();	
 					while(r.next()){
-						ArrayList<ProdottoRicevuta> prodottiRicevuta = new ArrayList<>();
-						p1.setInt(1,r.getInt("IDRicevutaFiscale"));
-						ResultSet resultSet2 = p1.executeQuery();
-						while(resultSet2.next()){
-							prodottiRicevuta.add(
-									new ProdottoRicevuta(
-											resultSet2.getString("NCAutore"),
-											resultSet2.getString("NomeModello"),
-											resultSet2.getDouble("Prezzo"),
-											resultSet2.getString("Tipo"),
-											resultSet2.getInt("Quantità"),
-											resultSet2.getString("Image")
-											)
-									);
-						}
 						ricevuteFiscali.add(
-								new RicevutaFiscale(
-										r.getInt("IDRicevutaFiscale"),
-										prodottiRicevuta,
-										r.getString("metodoPagamento"),
-										r.getDate("DataEmissione").toLocalDate()
-										)
+									r1.doSearchElement(r.getInt("IDRicevutaFiscale"))
 								);
 					}
 							
@@ -155,8 +136,8 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
-			try(Connection conn = ds.getConnection()){
+			DataSource	ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+				try(Connection conn = ds.getConnection()){
 				PreparedStatement pre = conn.prepareStatement("Update Account Set email = ? , username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
 				pre.setString(1, element.getEmail());
 				pre.setString(2,element.getUsername());
