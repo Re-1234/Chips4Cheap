@@ -1,0 +1,208 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DFDFDF;
+}
+
+header {
+    background-color: #000080;
+    min-height: 6.25rem; /* ~100px */
+    overflow: hidden; 
+}
+
+.nav-principale {
+    width: 100%;
+    display: block;
+}
+
+.nav-principale a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 6.25rem; /* Stessa altezza del contenitore per centrare in verticale */
+}
+
+.logo {
+    float: left;
+    color: #FFCA00;
+    font-size: 2rem; /* ~32px */
+    font-weight: bold;
+    padding-left: 4%;
+    padding-right: 3%;
+}
+
+.nav-link {
+    float: left;
+    color: #FFFFFF;
+    font-size: 1.375rem; /* ~22px */
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+   
+.catalog-btn {
+    float: right;
+    background-color: #FFCA00;
+    color: #000000;
+    padding: 0 4%;
+    font-size: 1.5rem; /* ~24px */
+    font-weight: bold;
+}
+
+.catalog-btn:hover {
+    background-color: #e6b800;
+}
+
+.user-link {
+    float: right;
+    color: #FFFFFF;
+    font-size: 1.375rem; /* ~22px */
+    padding-right: 3%;
+}
+
+.user-link:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 2560px) {
+    header {
+        min-height: 5rem; /* ~80px */
+    }
+    .nav-principale a {
+        line-height: 5rem;
+    }
+    .logo {
+        font-size: 1.625rem; /* ~26px */
+        padding-left: 3%;
+        padding-right: 2%;
+    }
+    .nav-link {
+        font-size: 1.125rem; /* ~18px */
+    }
+    .catalog-btn {
+        padding: 0 3%;
+        font-size: 1.25rem; /* ~20px */
+    }
+    .user-link {
+        font-size: 1.125rem;
+        padding-right: 2%;
+    }
+}
+
+
+@media (max-width: 1280px) {
+    header {
+        min-height: 3.75rem; /* ~60px */
+    }
+    .nav-principale a {
+        line-height: 3.75rem;
+    }
+    .logo {
+        font-size: 1.375rem; /* ~22px */
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .nav-link {
+        font-size: 0.9375rem; /* ~15px */
+    }
+    .catalog-btn {
+        padding: 0 2%;
+        font-size: 1.125rem; /* ~18px */
+    }
+    .user-link {
+        font-size: 0.9375rem;
+        padding-right: 2%;
+    }
+}
+
+
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
+    header {
+        min-height: 4.375rem; /* ~70px */
+    }
+    .nav-principale a {
+        line-height: 4.375rem;
+    }
+    .logo {
+        font-size: 1.5rem; /* ~24px */
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    .nav-link {
+        font-size: 1rem; /* ~16px */
+    }
+    .catalog-btn {
+        padding: 0 3%;
+        font-size: 1.1875rem; /* ~19px */
+    }
+    .user-link {
+        font-size: 1rem;
+        padding-right: 2.5%;
+    }
+}
+
+
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
+    header {
+        min-height: 4.0625rem; /* ~65px */
+    }
+    .nav-principale a {
+        line-height: 4.0625rem;
+    }
+    .logo {
+        font-size: 1.25rem; /* ~20px */
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .nav-link {
+        font-size: 0.875rem; /* ~14px */
+    }
+    .catalog-btn {
+        padding: 0 2%;
+        font-size: 1rem; /* ~16px */
+    }
+    .user-link {
+        font-size: 0.875rem;
+        padding-right: 1.5%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    header {
+        min-height: auto;
+        padding: 1rem 0; /* padding verticale */
+    }
+    .nav-principale a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+        line-height: normal;
+        padding: 0.625rem 0; /* ~10px di spazio tra i link */
+    }
+    .logo {
+        padding: 0.3125rem 0;
+        font-size: 1.5rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+    }
+    .catalog-btn {
+        width: 90%;
+        margin: 0.625rem auto; /* centratura del bottone */
+        padding: 0.75rem 0;
+        font-size: 1.125rem;
+    }
+    .user-link {
+        font-size: 1rem;
+        padding-right: 0;
+    }
+}

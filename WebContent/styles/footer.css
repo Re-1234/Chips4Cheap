@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DFDFDF;
+    min-height: 100%;
+    position: relative;
+    /* 7.5rem equivalgono a circa 120px (7.5 * 16) */
+    padding-bottom: 7.5rem; 
+}
+
+.piede-pagina {
+    background-color: #000080;
+    /* 6.25rem = 100px */
+    min-height: 6.25rem; 
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Larghezza in percentuale */
+}
+
+.blocco-sinistro {
+    float: left;
+    padding-top: 1.5625rem;  /* ~25px */
+    padding-left: 4%;        /* Margine fluido laterale in % */
+    color: #FFFFFF;
+    font-size: 1.375rem;     /* ~22px */
+}
+
+.testo-info {
+    display: block;
+    line-height: 1.2;
+    /* L'em si basa sulla grandezza del font del testo, circa 5px */
+    margin-bottom: 0.25em; 
+}
+
+.collegamento-youtube {
+    float: right;
+    min-height: 6.25rem;
+    padding: 0 4%;           /* Margine fluido laterale in % */
+}
+
+.immagine-youtube {
+    height: 3.75rem;         /* ~60px */
+    width: auto;
+    margin-top: 1.25rem;     /* ~20px */
+    display: block;
+}
+
+
+@media (max-width: 2560px) {
+    .piede-pagina {
+        min-height: 5rem; /* ~80px */
+    }
+    .blocco-sinistro {
+        padding-top: 1.25rem;
+        padding-left: 3%;
+        font-size: 1.0625rem; /* ~17px */
+    }
+    .collegamento-youtube {
+        min-height: 5rem;
+        padding: 0 3%;
+    }
+    .immagine-youtube {
+        height: 2.875rem;
+        margin-top: 1.0625rem;
+    }
+}
+
+
+@media (max-width: 1280px) {
+    .piede-pagina {
+        min-height: 3.75rem; /* ~60px */
+    }
+    .blocco-sinistro {
+        padding-top: 0.875rem;
+        font-size: 0.8125rem; /* ~13px */
+    }
+    .collegamento-youtube {
+        min-height: 3.75rem;
+    }
+    .immagine-youtube {
+        height: 2.25rem;
+        margin-top: 0.75rem;
+    }
+}
+
+
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
+    .piede-pagina {
+        min-height: 4.6875rem; /* ~75px */
+    }
+    .blocco-sinistro {
+        padding-top: 1.125rem;
+        font-size: 1rem;       /* 16px base */
+    }
+    .collegamento-youtube {
+        min-height: 4.6875rem;
+    }
+    .immagine-youtube {
+        height: 2.75rem;
+        margin-top: 0.9375rem;
+    }
+}
+
+
+@media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
+    .piede-pagina {
+        min-height: 4.375rem; /* ~70px */
+    }
+    .blocco-sinistro {
+        padding-top: 1.125rem;
+        font-size: 0.875rem;  /* ~14px */
+    }
+    .collegamento-youtube {
+        min-height: 4.375rem;
+    }
+    .immagine-youtube {
+        height: 2.5rem;
+        margin-top: 0.9375rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 10rem; /* ~160px */
+    }
+    .piede-pagina {
+        min-height: auto;
+        position: absolute;
+        padding: 1.25rem 0; /* padding verticale */
+        text-align: center;
+    }
+    .blocco-sinistro {
+        float: none;
+        padding-top: 0;
+        padding-left: 0;
+        width: 100%; /* Larghezza fissa fluida al 100% */
+    }
+    .collegamento-youtube {
+        float: none;
+        min-height: auto;
+        padding: 0;
+        display: block;
+        width: 100%; /* Larghezza fissa fluida al 100% */
+    }
+    .immagine-youtube {
+        margin: 1rem auto 0 auto;
+    }
+}
