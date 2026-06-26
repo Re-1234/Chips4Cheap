@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import it.unisa.chips4cheap.model.DAO.AccountDAO;
+import it.unisa.chips4cheap.model.DTO.Account;
+
 import java.nio.charset.StandardCharsets;
 
 @WebServlet("/RegistraUtente")
@@ -51,7 +55,7 @@ public class RegistraUtente extends HttpServlet {
             errore = "Il numero civico deve essere un valore numerico.";
         }
 
-        accountDAO dao = new accountDAO();
+        AccountDAO dao = new AccountDAO();
 
         if (errore == null) {
             try {

@@ -1,4 +1,4 @@
-package model.DTO;
+package it.unisa.chips4cheap.model.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDate;

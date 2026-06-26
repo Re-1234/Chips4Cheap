@@ -1,4 +1,4 @@
-package model.DAO;
+package it.unisa.chips4cheap.model.DAO;
 
 import java.util.ArrayList;
 

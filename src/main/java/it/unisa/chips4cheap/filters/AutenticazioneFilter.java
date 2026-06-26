@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
+import it.unisa.chips4cheap.model.DTO.Account;
+
 // Il filtro intercetterà TUTTE le richieste del sito per controllare quali proteggere
 @WebFilter("/*") 
 public class AutenticazioneFilter implements Filter {

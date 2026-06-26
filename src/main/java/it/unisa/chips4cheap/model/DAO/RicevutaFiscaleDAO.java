@@ -1,4 +1,4 @@
-package model.DAO;
+package it.unisa.chips4cheap.model.DAO;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,9 +14,7 @@ import javax.naming.NamingException;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
-import model.DTO.Account;
-import model.DTO.ProdottoRicevuta;
-import model.DTO.RicevutaFiscale;
+import it.unisa.chips4cheap.model.DTO.*;
 
 public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 

@@ -1,4 +1,4 @@
-package model.DAO;
+package it.unisa.chips4cheap.model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import javax.naming.NamingException;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
-import model.DTO.ProdottoRicevuta;
+import it.unisa.chips4cheap.model.DTO.*;
 
 public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 

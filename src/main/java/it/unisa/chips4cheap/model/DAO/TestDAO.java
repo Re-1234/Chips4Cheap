@@ -1,15 +1,12 @@
-package model.DAO;
+package it.unisa.chips4cheap.model.DAO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.DTO.Account;
-import model.DTO.Prodotto;
-import model.DTO.ProdottoRicevuta;
-import model.DTO.RicevutaFiscale;
-
+import it.unisa.chips4cheap.model.DTO.*;
+import it.unisa.chips4cheap.model.DAO.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
