@@ -115,6 +115,8 @@ public class TestDAO extends HttpServlet {
 		System.out.println(prodotto.doSearchElement("Modello Alpha"));
 		
 		prodotto.doDelete(prodotto2);
+	
+	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

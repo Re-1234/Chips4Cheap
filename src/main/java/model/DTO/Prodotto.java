@@ -107,7 +107,7 @@ public class Prodotto implements Cloneable , Serializable{
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo + ", descrizione = " + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
+		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo + ", descrizione = " + descrizione +", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
 	}
 	
 	
