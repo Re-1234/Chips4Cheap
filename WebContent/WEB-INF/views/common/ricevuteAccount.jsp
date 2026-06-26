@@ -25,9 +25,9 @@
                 <ul class="lista-schede">
                     <c:forEach var="ricevuta" items="${requestScope.ricevute}">
                         <li class="scheda">
-                            <span><strong>Ricevuta n°</strong> ${ricevuta.IDRicevutaFiscale}</span>
-                            <span><strong>Emessa il:</strong> ${ricevuta.dataEmissione}</span>
-                            <span><strong>Pagamento:</strong> ${ricevuta.metodoPagamento}</span>
+                            <span>Ricevuta n°: ${ricevuta.IDRicevutaFiscale}</span>
+                            <span>Emessa il: ${ricevuta.dataEmissione}</span>
+                            <span>Pagamento: ${ricevuta.metodoPagamento}</span>
                             
                             <a href="${pageContext.request.contextPath}/common/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}" class="bottone">Apri</a>
                         </li>

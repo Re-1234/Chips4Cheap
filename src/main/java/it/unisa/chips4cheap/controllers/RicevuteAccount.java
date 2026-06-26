@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Servlet implementation class RicevuteAccount
  */
-@WebServlet("/RicevuteAccount")
+@WebServlet("/common/RicevuteAccount")
 public class RicevuteAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
