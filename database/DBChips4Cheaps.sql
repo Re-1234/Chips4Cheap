@@ -31,13 +31,16 @@ create table RicevutaFiscale(
     email varchar(50) not null,
     metodoPagamento varchar(50) not null,
     DataEmissione Date not null,
-    foreign key(email)references Account1(email) on update cascade, 
+    foreign key(email)references Account1(email) on update cascade on delete cascade, 
     primary key(email , IDRicevutaFiscale),
 	Key(IDRicevutaFiscale)
 );
 
+
+
 create table ProdottoRicevuta(
 	Prezzo double not null,
+    Produttore varchar(50) not null,
     IDRicevutaFiscale int not null ,
     email varchar(50) not null,
     NomeModello varchar(50) not null,

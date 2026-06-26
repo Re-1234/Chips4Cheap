@@ -27,7 +27,7 @@ public class TestDAO extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		/*
+		
 		AccountDAO account = new AccountDAO();
 		
 		ProdottoRicevuta prodotto1 = new ProdottoRicevuta(
@@ -83,18 +83,16 @@ public class TestDAO extends HttpServlet {
 		    listaRicevute
 		);
 		
-		account.doSave(account1);
-		*/
 		RicevutaFiscaleDAO ricevutaFiscale = new RicevutaFiscaleDAO();
 		//ricevutaFiscale.doSave();
 		ProdottoDAO prodotto = new ProdottoDAO();
 		
 		ProdottoRicevutaDAO prodottoRicevuta = new ProdottoRicevutaDAO();
-		
+		account.doSave(account1);
 		System.out.println(prodottoRicevuta.doSearchElement("Modello Alpha",1));
 		System.out.println(ricevutaFiscale.doSearchElement(1));
 		
-		Prodotto prodotto2 = new Prodotto(
+		Prodotto prodotto3 = new Prodotto(
 			    "AUT001",                                  // nCAutore
 			    "Modello Alpha",                            // nomeModello
 			    19.99,                                       // prezzo
@@ -104,18 +102,27 @@ public class TestDAO extends HttpServlet {
 			    "alpha.jpg"                                  // imagine
 			);
 		
-		prodotto.doSave(prodotto2);
+		prodotto.doSave(prodotto3);
 		
 		System.out.println(prodotto.doSearchElement("Modello Alpha"));
 		
-		prodotto2.setDescrizione("ciao");
+		prodotto3.setDescrizione("ciao");
 		
-		prodotto.doUpdate(prodotto2);
+		prodotto.doUpdate(prodotto3);
 		
 		System.out.println(prodotto.doSearchElement("Modello Alpha"));
 		
-		prodotto.doDelete(prodotto2);
-	
+		prodotto.doDelete(prodotto3);
+		
+		System.out.println(account.doSearchElement("mario.rossi@email.it"));
+		
+		account1.setCap("98235");
+		account.doUpdate(account1);
+		System.out.println(account.doSearchElement("mario.rossi@email.it"));
+		account.doDelete(account1);
+		
+		
+		
 	
 	}
 	

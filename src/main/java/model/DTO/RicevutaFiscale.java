@@ -22,8 +22,10 @@ public final class RicevutaFiscale implements Serializable{
 	public RicevutaFiscale(int idRicevutaFiscale,String email,ArrayList<ProdottoRicevuta> prodottiRicevuta,String metodoPagamento,LocalDate localDate){
 		this.idRicevutaFiscale = idRicevutaFiscale;
 		this.prodottiRicevuta = new ArrayList<>();
-		for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
-		     this.prodottiRicevuta.add(prodottoRicevuta);	
+		if(prodottiRicevuta != null) {
+			for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
+			     this.prodottiRicevuta.add(prodottoRicevuta);	
+			}
 		}
 		this.email = email;
 		this.metodoPagamento = metodoPagamento;

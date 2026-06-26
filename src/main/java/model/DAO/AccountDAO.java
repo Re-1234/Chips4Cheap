@@ -69,7 +69,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
 			BasicDataSource ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
-			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account where email = ?");
+			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account1 where email = ?");
 			preparedStatement.setString(1,element.getEmail());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -91,14 +91,14 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-		    DataSource	ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+		    BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			try(Connection co = ds.getConnection()){
-				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account where email = ?");
+				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account1 where email = ?");
 				preparedStatement.setString(1,email);
 				ResultSet resultSet = preparedStatement.executeQuery();
 				
 				if(resultSet.next()){
-					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"),null);
+					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password1"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"),null);
 					ArrayList<RicevutaFiscale> ricevuteFiscali = new ArrayList<>();
 					PreparedStatement p = co.prepareStatement("Select * From RicevutaFiscale where email = ?");
 					p.setString(1, account.getEmail());
@@ -136,16 +136,16 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		try{
 			initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource	ds = (DataSource)envCtx.lookup("jdbc/chips4cheap");
+			BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 				try(Connection conn = ds.getConnection()){
-				PreparedStatement pre = conn.prepareStatement("Update Account Set email = ? , username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
-				pre.setString(1, element.getEmail());
-				pre.setString(2,element.getUsername());
-				pre.setString(3,element.getPassword());
+				PreparedStatement pre = conn.prepareStatement("Update Account1 Set username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
+				pre.setString(1,element.getUsername());
+				pre.setString(2,element.getPassword());
+				pre.setString(3,element.getVia());
 				pre.setString(4, element.getCap());
 				pre.setInt(5, element.getNumeroCivico());
-				pre.setString(6,element.getEmail());
-				pre.setBoolean(7,element.isAmministratore());
+				pre.setBoolean(6,element.isAmministratore());
+				pre.setString(7,element.getEmail());
 				
 				pre.executeUpdate();
 				pre.close();
