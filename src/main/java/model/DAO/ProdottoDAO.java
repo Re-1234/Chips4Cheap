@@ -116,7 +116,17 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			Context exl = (Context) init.lookup("java:comp/env");
 			DataSource ds = (DataSource) exl.lookup("jdbc/chips4cheap");
 			Connection con = ds.getConnection();
-			
+			PreparedStatement preparedStatement = con.prepareStatement("Update Prodotto Set NomeModello = ? , Produttore = ? , Prezzo = ? , Descrizione = ? , Tipo = ? , Quantità = ? , Image = ?");
+			preparedStatement.setString(1,element.getNomeModello());
+			preparedStatement.setString(2, element.getnCAutore());
+			preparedStatement.setDouble(3, element.getPrezzo());
+			preparedStatement.setString(4,element.getDescrizione());
+			preparedStatement.setString(5, element.getTipo());
+			preparedStatement.setInt(6,element.getQuantità());
+			preparedStatement.setString(7,element.getImagine());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			con.close();
 		}catch(SQLException c){
 			c.printStackTrace();
 		}catch(NamingException n){

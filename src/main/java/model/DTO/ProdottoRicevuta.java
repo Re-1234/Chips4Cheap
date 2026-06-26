@@ -6,10 +6,11 @@ public final class ProdottoRicevuta implements Serializable{
 	private String nCAutore;
 	private String nomeModello;
 	private double prezzo;
+	private String email;
 	private String tipo;
 	private int quantità;
 	private String imagine;
-	private int IDRicevutaFiscale;
+	private int iDRicevutaFiscale;
 	
 	public final static double EPSILON = 1e9;
 	
@@ -20,15 +21,19 @@ public final class ProdottoRicevuta implements Serializable{
 		tipo = "";
 		quantità = 0;
 		imagine = "";
+		email = "";
+		iDRicevutaFiscale = 0;
 	}
 	
-	public ProdottoRicevuta(String nCAutore,String nomeModello ,double prezzo , String tipo , int quantità , String image) {
+	public ProdottoRicevuta(String nCAutore,int iDRicevutaFiscale,String email,String nomeModello ,double prezzo , String tipo , int quantità , String image) {
 		this.nCAutore = nCAutore;
 		this.nomeModello = nomeModello;
 		this.prezzo = prezzo;
 		this.tipo = tipo;
+		this.email = email;
 		this.quantità = quantità;
 		this.imagine = image; 
+		this.iDRicevutaFiscale = iDRicevutaFiscale;
 	}
 	
 	
@@ -45,6 +50,10 @@ public final class ProdottoRicevuta implements Serializable{
 		return nomeModello;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -79,10 +88,11 @@ public final class ProdottoRicevuta implements Serializable{
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo  + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + ",IDRicevutaFiscale = "+IDRicevutaFiscale+ "]";
+		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo  + ", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + ",IDRicevutaFiscale = "+iDRicevutaFiscale+ "]";
 	}
 
 	public int getIDRicevutaFiscale() {
-		return IDRicevutaFiscale;
+		return iDRicevutaFiscale;
 	}
+
 }
