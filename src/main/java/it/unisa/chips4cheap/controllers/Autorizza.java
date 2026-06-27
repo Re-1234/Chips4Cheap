@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import it.unisa.chips4cheap.model.DAO.AccountDAO;
+import it.unisa.chips4cheap.model.DTO.Account;
+
 import java.nio.charset.StandardCharsets;
 
 @WebServlet("/Autorizza")
