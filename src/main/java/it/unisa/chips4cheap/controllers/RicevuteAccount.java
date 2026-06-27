@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
+
+import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
+import it.unisa.chips4cheap.model.DTO.Account;
+import it.unisa.chips4cheap.model.DTO.RicevutaFiscale;
 /**
  * Servlet implementation class RicevuteAccount
  */

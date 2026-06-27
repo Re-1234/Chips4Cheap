@@ -47,7 +47,7 @@ public class Autorizza extends HttpServlet {
 
         if (errore == null) {
             try {
-                account = dao.doRetrieve(email.trim());
+                account = dao.doSearchElement(email.trim());
                 
                 if (account == null) {
                     errore = "Email o Password errati. Riprova.";
