@@ -21,16 +21,16 @@
 
             <ul class="lista-elementi">
                 <li class="scheda-elemento">
-                    <span><strong>Numero Identificativo:</strong> ${ricevuta.IDRicevutaFiscale}</span>
+                    <span>Numero Identificativo: ${ricevuta.idRicevutaFiscale}</span>
                 </li>
                 <li class="scheda-elemento">
-                    <span><strong>Data di Emissione:</strong> ${ricevuta.dataEmissione}</span>
+                    <span>Data di Emissione: ${ricevuta.localDate}</span>
                 </li>
                 <li class="scheda-elemento">
-                    <span><strong>Metodo di Pagamento:</strong> ${ricevuta.metodoPagamento}</span> <!-- CONTROLLA PER LA NUOVA VERSIONE DEL BEAN -->
+                    <span>Metodo di Pagamento: ${ricevuta.metodoPagamento}</span> <!-- CONTROLLA PER LA NUOVA VERSIONE DEL BEAN -->
                 </li>
                 <li class="scheda-elemento">
-                    <span><strong>Intestatario (Email):</strong> ${ricevuta.email}</span>
+                    <span>Intestatario (Email): ${ricevuta.email}</span>
                 </li>
             </ul>
 
