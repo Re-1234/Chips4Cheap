@@ -146,7 +146,7 @@ function validaModifica() {
     return isEmailValid && isUsernameValid && isVecchiaPasswordValid && isPasswordValid && isViaValid && isCapValid && isCivicoValid;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
     const campi = [
         { id: "email", handler: validaEmail },
         { id: "username", handler: validaUsername },
@@ -160,7 +160,8 @@ document.addEventListener("DOMContentLoaded", function() {
     campi.forEach(campo => {
         const elemento = document.getElementById(campo.id);
         if (elemento) {
-            elemento.addEventListener("change", campo.handler);
+            elemento.addEventListener("blur", campo.handler);
+            elemento.addEventListener("input", campo.handler);
         }
     });
-});
+};

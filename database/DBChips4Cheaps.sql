@@ -7,7 +7,7 @@ use Chips4Cheap;
 create table Account1(
        email  varchar(50) not null,
        username  varchar(50) not null,
-       Password1 varchar(50) not null,
+       Password1 char(128) not null,
        Via  varchar(50) not null,
        Cap  char(5) not null,
 	   NumeroCivico int not null,
