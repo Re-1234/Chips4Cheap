@@ -19,9 +19,9 @@
         <div class="modulo-centrato">
             <h2>Accedi al tuo Account</h2>
             
-            <c:if test="${not empty requestScope.erroreLogin}">
+            <c:if test="${not empty requestScope.erroreServer}">
                 <div class="errore-server">
-                    <p>${requestScope.erroreLogin}</p>
+                    <p>${requestScope.erroreServer}</p>
                 </div>
             </c:if>
 

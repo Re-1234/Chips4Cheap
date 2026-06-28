@@ -160,8 +160,7 @@ window.onload = function() {
     campi.forEach(campo => {
         const elemento = document.getElementById(campo.id);
         if (elemento) {
-            elemento.addEventListener("blur", campo.handler);
-            elemento.addEventListener("input", campo.handler);
+            elemento.addEventListener("change", campo.handler);
         }
     });
 };
