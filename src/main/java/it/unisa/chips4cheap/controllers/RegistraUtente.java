@@ -72,7 +72,7 @@ public class RegistraUtente extends HttpServlet {
 
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/Registrazione").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
         } else {
             try {
                 Account nuovoAccount = new Account();
