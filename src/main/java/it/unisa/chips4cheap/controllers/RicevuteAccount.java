@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
@@ -37,10 +37,10 @@ public class RicevuteAccount extends HttpServlet {
 
         try {
             RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO();
-            List<RicevutaFiscale> listaRicevute = dao.doRetrieveByEmail(accountLoggato.getEmail());
+            ArrayList<RicevutaFiscale> listaRicevute = dao.doRetrieveByEmail(accountLoggato.getEmail());
             
             request.setAttribute("ricevute", listaRicevute);
-            request.getRequestDispatcher("/WEB-INF/common/ricevuteAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);
             
         } catch (Exception e) {
            // Riguarda come usare le pagine di errore nel deployment descriptor

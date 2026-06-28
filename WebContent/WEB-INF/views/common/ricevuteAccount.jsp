@@ -31,7 +31,7 @@
                                 <span>Emessa il:  ${ricevuta.dataEmissione}</span>
                                 <span>Pagamento:  ${ricevuta.metodoPagamento}</span>
                                 
-                                <a href="${pageContext.request.contextPath}/common/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}" class="link-nascosto-elemento">
+                                <a href="${pageContext.request.contextPath}/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}" class="link-nascosto-elemento">
                                     Apri Ricevuta
                                 </a>
                             </li>

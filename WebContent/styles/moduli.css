@@ -22,7 +22,7 @@
     margin-bottom: 1.5rem;
 }
 
-/* Specifico per la suddivisione interna dell'Area Personale */
+/* Specifico per la suddivisione interna di areaPersonale.jsp */
 .sezione-contenuto {
     width: 100%;
     margin-bottom: 2rem;
@@ -106,7 +106,6 @@
     margin-top: 0.75rem;
     box-sizing: border-box;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
 .bottone-azione:hover, 
