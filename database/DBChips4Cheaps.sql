@@ -7,7 +7,7 @@ use Chips4Cheap;
 create table Account1(
        email  varchar(50) not null,
        username  varchar(50) not null,
-       Password1 varchar(50) not null,
+       Password1 char(128) not null,
        Via  varchar(50) not null,
        Cap  char(5) not null,
 	   NumeroCivico int not null,
@@ -37,17 +37,23 @@ create table RicevutaFiscale(
 );
 
 
-
 create table ProdottoRicevuta(
 	Prezzo double not null,
     Produttore varchar(50) not null,
-    IDRicevutaFiscale int not null ,
     email varchar(50) not null,
     NomeModello varchar(50) not null,
-	Quantità int not null,
     image varchar(50) not null,
     tipo varchar(50) not null,
-    foreign key(email , IDRicevutaFiscale) references RicevutaFiscale(email ,IDRicevutaFiscale) on update cascade,
-    primary key(email ,IDRicevutaFiscale, NomeModello),
+    primary key(NomeModello)
+);
+
+
+create table ha(
+	IDRicevutaFiscale int not null auto_increment,
+	Email varchar(50) not null,
+    NomeModello varchar(50) not null,
+    foreign key(Email,IDRicevutaFiscale) references RicevutaFiscale(Email,IDRicevutaFiscale) on update cascade on delete cascade,
+    foreign key(NomeModello)references ProdottoRicevuta(NomeModello) on update cascade on delete cascade,
+    primary key(Email,IDRicevutaFiscale,NomeModello),
     Key(IDRicevutaFiscale)
 );

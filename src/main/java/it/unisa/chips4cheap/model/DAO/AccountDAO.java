@@ -5,28 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DTO.*;
 
-public class AccountDAO implements InterfaceDAO<Account>{
-
+public class AccountDAO implements InterfaceDAO<Account>{	
+	private DataSource ds;
+	
+	public AccountDAO(DataSource ds){
+		this.ds = ds;
+	}
+	
 	@Override
 	public void doSave(Account elemet){
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
-		Context initCtx;
 		try{
-			initCtx = new InitialContext();
-			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-			BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			try(Connection co = ds.getConnection()){
 				PreparedStatement preparedStatement = co.prepareStatement("Insert into Account1(email,username,password1,Via,Cap,NumeroCivico,Amministratore) values (?,?,?,?,?,?,?)");
 				preparedStatement.setString(1,elemet.getEmail());
@@ -37,18 +33,16 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				preparedStatement.setInt(6,elemet.getNumeroCivico());
 				preparedStatement.setBoolean(7,elemet.isAmministratore());
 				preparedStatement.executeUpdate();
-			
 				
-				RicevutaFiscaleDAO ricevutaFiscaleDAO = new RicevutaFiscaleDAO();
+				
+				RicevutaFiscaleDAO ricevutaFiscaleDAO = new RicevutaFiscaleDAO(ds);
 				
 				for(RicevutaFiscale ricevutaFiscale:  elemet.getRicevuteFiscali()){
 					ricevutaFiscaleDAO.doSave(ricevutaFiscale);
 				}
 				preparedStatement.close();
 			}
-			
-		} catch (NamingException e) {
-			e.printStackTrace();
+		
 		} catch(SQLException sqlExe){
 			sqlExe.printStackTrace();
 		}
@@ -63,17 +57,12 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		
 		Context initCtx;
 		try{
-			initCtx = new InitialContext();
-			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account1 where email = ?");
 			preparedStatement.setString(1,element.getEmail());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			c.close();
-		}catch(NamingException c){
-			c.printStackTrace();
 		}catch(SQLException sqlException) {
 			sqlException.printStackTrace();
 		}
@@ -85,11 +74,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			throw new RuntimeException();
 		}
 		String email = (String) o;
-		Context initCtx;
 		try{
-			initCtx = new InitialContext();
-			Context  envCtx = (Context)initCtx.lookup("java:comp/env");
-		    BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 			try(Connection co = ds.getConnection()){
 				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account1 where email = ?");
 				preparedStatement.setString(1,email);
@@ -101,7 +86,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 					PreparedStatement p = co.prepareStatement("Select * From RicevutaFiscale where email = ?");
 					p.setString(1, account.getEmail());
 					ResultSet r =p.executeQuery();
-					RicevutaFiscaleDAO r1 = new RicevutaFiscaleDAO();	
+					RicevutaFiscaleDAO r1 = new RicevutaFiscaleDAO(ds);	
 					while(r.next()){
 						ricevuteFiscali.add(
 									r1.doSearchElement(r.getInt("IDRicevutaFiscale"))
@@ -117,8 +102,6 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				preparedStatement.close();
 			}
 			 return null;
-		}catch(NamingException namingExcep){
-			namingExcep.printStackTrace();
 		}catch(SQLException sqlExecption){
 			sqlExecption.printStackTrace();
 		}
@@ -130,11 +113,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		if(element == null) {
 			throw new NullPointerException();
 		}
-		Context initCtx;
 		try{
-			initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			BasicDataSource	ds = (BasicDataSource)envCtx.lookup("jdbc/chips4cheap");
 				try(Connection conn = ds.getConnection()){
 				PreparedStatement pre = conn.prepareStatement("Update Account1 Set username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
 				pre.setString(1,element.getUsername());
@@ -151,10 +130,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			}
 		}catch (SQLException e){
 				e.printStackTrace();
-		}catch (NamingException e) {
-			    e.printStackTrace();
-		}
-		
+		}		
 		
 	}
 	

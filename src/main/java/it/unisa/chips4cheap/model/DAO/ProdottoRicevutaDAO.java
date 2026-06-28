@@ -6,30 +6,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DTO.*;
 
 public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
-
+	
+	private DataSource ds;
+	
+	public ProdottoRicevutaDAO(DataSource ds){
+		this.ds = ds;
+	}
+	
 	@Override
 	public void doSave(ProdottoRicevuta elemet) {
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
-		Context init;
+		
 		try{
-			init = new InitialContext();
-			Context ext = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource)  ext.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
 			PreparedStatement pre = c.prepareStatement("Insert into ProdottoRicevuta(Prezzo , Produttore , IDRicevutaFiscale , email , NomeModello , Quantità , image , tipo) values (?,?,?,?,?,?,?,?)"); 
 			pre.setDouble(1,elemet.getPrezzo());
 			pre.setString(2, elemet.getnCAutore());
+			System.out.print(elemet.getIDRicevutaFiscale());
 			pre.setInt(3, elemet.getIDRicevutaFiscale());
 			pre.setString(4,elemet.getEmail());
 			pre.setString(5, elemet.getNomeModello());
@@ -42,8 +42,6 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 			c.close();
 		}catch(SQLException e){
 			e.printStackTrace();
-		}catch(NamingException n){
-			n.printStackTrace();
 		}
 		
 	}
@@ -66,9 +64,6 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		
 		Context init;
 		try {
-			init = new InitialContext();
-			Context expt = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) expt.lookup("jdbc/chips4cheap");	
 			Connection c = ds.getConnection();
 			try(PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta Where NomeModello = ? and IDRicevutaFiscale = ?")){
 				p.setString(1, nomeModello);
@@ -85,8 +80,6 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 				
 				return null; 
 			}
-		}catch(NamingException e){
-			e.printStackTrace();
 		}catch(SQLException s){
 			s.printStackTrace();
 		}

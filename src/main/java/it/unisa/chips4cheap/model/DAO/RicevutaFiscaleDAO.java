@@ -7,31 +7,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DTO.*;
 
 public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
-
+	
+	private javax.sql.DataSource ds; 
+	
+	public RicevutaFiscaleDAO(DataSource ds){
+		this.ds = ds;
+	}
 	
 	@Override
 	public void doSave(RicevutaFiscale elemet){
 			try {
-				Context init = new InitialContext();
-				Context exl = (Context) init.lookup("java:comp/env");
-				BasicDataSource ds = (BasicDataSource) exl.lookup("jdbc/chips4cheap");
 				Connection connection = ds.getConnection();
 				PreparedStatement pre = connection.prepareStatement("Insert into RicevutaFiscale(email,metodoPagamento,DataEmissione) Values (?,?,?)");
 				pre.setString(1,elemet.getEmail());
 				pre.setString(2,elemet.getMetodoPagamento());
 				pre.setDate(3,Date.valueOf(elemet.getLocalDate()));
 				pre.executeUpdate();
-				ProdottoRicevutaDAO pro = new ProdottoRicevutaDAO();
+				ProdottoRicevutaDAO pro = new ProdottoRicevutaDAO(ds);
 					
 				for(ProdottoRicevuta prodottoRicevuta : elemet.getprodottiRicevuta()){
 					pro.doSave(prodottoRicevuta);
@@ -40,8 +37,6 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				pre.close();
 				connection.close();
 			}catch(SQLException e) {
-				e.printStackTrace();
-			}catch(NamingException e) {
 				e.printStackTrace();
 			}
 			
@@ -59,10 +54,6 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 		
 		
 		Integer intero = (Integer) o;
-		try {
-			Context init = new InitialContext();
-			Context exl = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) exl.lookup("jdbc/chips4cheap");
 			try(Connection connection = ds.getConnection()){
 				PreparedStatement preparedStatement = connection.prepareStatement("Select * From RicevutaFiscale Where IdRicevutaFiscale = ?");
 				preparedStatement.setInt(1,intero);
@@ -99,9 +90,6 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-		}catch(NamingException e){
-			e.printStackTrace();
-		}
 		
 		
 		return new RicevutaFiscale();

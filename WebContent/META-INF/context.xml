@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<Context>
-		<Resource name="jdbc/chips4cheap"
+		<Resource name="jdbc/Chips4Cheap"
 			auth="Container"
 			type="javax.sql.DataSource"
 			maxTotal="20"
@@ -10,7 +10,7 @@
 			password="1uno_2Due"
 			driverClassName="com.mysql.cj.jdbc.Driver"
 			url="jdbc:mysql://localhost:3306/chips4cheap" />
-</Context>
+	</Context>
 
 
 <!-- RICORDA DI CAMBIARE E RIMUOVERE LA PASSWORD QUANDO TOCCHI GIT-->

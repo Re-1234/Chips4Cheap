@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
+
+
 /**
  * Servlet implementation class TestDAO
  */
@@ -23,9 +27,8 @@ public class TestDAO extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		AccountDAO account = new AccountDAO();
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		AccountDAO account = new AccountDAO(ds);
 		
 		ProdottoRicevuta prodotto1 = new ProdottoRicevuta(
 			    "AUT001",                      // nCAutore
@@ -80,11 +83,11 @@ public class TestDAO extends HttpServlet {
 		    listaRicevute
 		);
 		
-		RicevutaFiscaleDAO ricevutaFiscale = new RicevutaFiscaleDAO();
+		RicevutaFiscaleDAO ricevutaFiscale = new RicevutaFiscaleDAO(ds);
 		//ricevutaFiscale.doSave();
-		ProdottoDAO prodotto = new ProdottoDAO();
+		ProdottoDAO prodotto = new ProdottoDAO(ds);
 		
-		ProdottoRicevutaDAO prodottoRicevuta = new ProdottoRicevutaDAO();
+		ProdottoRicevutaDAO prodottoRicevuta = new ProdottoRicevutaDAO(ds);
 		account.doSave(account1);
 		System.out.println(prodottoRicevuta.doSearchElement("Modello Alpha",1));
 		System.out.println(ricevutaFiscale.doSearchElement(1));

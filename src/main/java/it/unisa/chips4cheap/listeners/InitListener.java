@@ -10,16 +10,16 @@ import jakarta.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 @WebListener
-public class InitListener implements ServletContextListener {
+public class InitListener implements ServletContextListener{
 
-	public void contextInitialized(ServletContextEvent sce) {
+	public void contextInitialized(ServletContextEvent sce){
 		ServletContext context = sce.getServletContext();
 		DataSource ds = null;
-		try {
+		try{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			ds = (DataSource) envCtx.lookup("jdbc/Chips4CheapDB");
-		} catch (NamingException e) {
+			ds = (DataSource) envCtx.lookup("jdbc/Chips4Cheap");
+		}catch(NamingException e){
 			System.out.println("Error:" + e.getMessage());
 		}
 		context.setAttribute("DataSource", ds);

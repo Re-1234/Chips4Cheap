@@ -5,27 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DTO.*;
 
 public class ProdottoDAO implements InterfaceDAO<Prodotto>{
-
+	
+	private DataSource ds;
+	
+	public ProdottoDAO(DataSource ds){
+		this.ds = ds;
+	}
+	
 	@Override
 	public void doSave(Prodotto elemet) {
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
-		Context init;
 		try{
-			init = new InitialContext();
-			Context ext = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) ext.lookup("jdbc/chips4cheap");
 			Connection c = ds.getConnection();
 			PreparedStatement pre = c.prepareStatement("Insert into Prodotto(Prezzo ,Produttore , NomeModello , Descrizione , Quantità , image , tipo) values(?,?,?,?,?,?,?)");
 			pre.setDouble(1, elemet.getPrezzo());
@@ -38,8 +35,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			pre.executeUpdate();
 			pre.close();
 			c.close();
-		}catch(NamingException c) {
-			c.printStackTrace();
 		}catch(SQLException c){
 			c.printStackTrace();
 		}	
@@ -52,19 +47,13 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			throw new NullPointerException();
 		}
 		
-		Context init;
 		try{
-			init = new InitialContext();
-			Context ext = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) ext.lookup("jdbc/chips4cheap");
 			Connection co = (Connection) ds.getConnection();
 			PreparedStatement pr = co.prepareStatement("Delete From Prodotto where NomeModello = ?");
 			pr.setString(1, element.getNomeModello());
 			pr.executeUpdate();
 			pr.close();
 			co.close();
-		}catch(NamingException n){
-			n.printStackTrace();
 		}catch(SQLException s){
 			s.printStackTrace();
 		}
@@ -79,11 +68,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			throw new RuntimeException();
 		}
 		String nomeModello = (String) o;
-		Context init;
 		try {
-			init = new InitialContext();
-			Context exl = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) exl.lookup("jdbc/chips4cheap");
 			Connection con = ds.getConnection();
 			PreparedStatement p = con.prepareStatement("Select * From Prodotto where NomeModello = ?");
 			p.setString(1,nomeModello);
@@ -101,8 +86,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			return null;
 		}catch(SQLException c){
 			c.printStackTrace();
-		}catch(NamingException n){
-			n.printStackTrace();
 		}
 		return null;
 	}
@@ -112,11 +95,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		if(element == null) {
 			throw new NullPointerException();
 		}
-		Context init;
 		try {
-			init = new InitialContext();
-			Context exl = (Context) init.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) exl.lookup("jdbc/chips4cheap");
 			Connection con = ds.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement("Update Prodotto Set NomeModello = ? , Produttore = ? , Prezzo = ? , Descrizione = ? , Tipo = ? , Quantità = ? , Image = ?");
 			preparedStatement.setString(1,element.getNomeModello());
@@ -131,8 +110,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			con.close();
 		}catch(SQLException c){
 			c.printStackTrace();
-		}catch(NamingException n){
-			n.printStackTrace();
 		}
 	}
 
