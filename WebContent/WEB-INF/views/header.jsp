@@ -17,7 +17,7 @@
 
             <a href="/catalogo" class="catalog-btn" title="Vai al Catalogo">Catalogo</a>
             <a href="${pageContext.request.contextPath}/common/AreaPersonale" class="user-link">Account</a>
-            <a href="/carrello" class="user-link">Cart</a> 
+            <a href="/Carrello" class="user-link">Carrello</a> 
       </nav>
 </header>
 

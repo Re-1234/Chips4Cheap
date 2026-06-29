@@ -175,6 +175,31 @@ body {
     border: 1px dashed #000080;
 }
 
+/* ------------- NEW --------------- */
+
+/* Applica il grassetto e il colore blu scuro aziendale a qualsiasi testo */
+.testo-importante {
+    font-weight: bold;
+    color: #000080;
+}
+
+/* Crea una linea di separazione superiore con margine (es. riepiloghi, totali, sezioni) */
+.separatore-alto {
+    border-top: 2px solid #000080;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+}
+
+/* Utility di spaziatura standard per distanziare i blocchi verso il basso */
+.margine-alto {
+    margin-top: 1.5rem;
+}
+
+/* Utility di spaziatura standard per distanziare elementi affiancati (es. bottoni in linea) */
+.margine-sinistra {
+    margin-left: 1rem;
+}
+
 /* ==========================================================================
    5. MEDIA QUERIES (BREAKPOINT MODULI.CSS)
    ========================================================================== */

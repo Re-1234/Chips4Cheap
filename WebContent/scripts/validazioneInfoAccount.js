@@ -157,10 +157,11 @@ window.onload = function() {
         { id: "numeroCivico", handler: validaCivico }
     ];
 
-    campi.forEach(campo => {
-        const elemento = document.getElementById(campo.id);
+    for (var i = 0; i < campi.length; i++) {
+        var campo = campi[i];
+        var elemento = document.getElementById(campo.id);
         if (elemento) {
             elemento.addEventListener("change", campo.handler);
         }
-    });
+    }
 };
