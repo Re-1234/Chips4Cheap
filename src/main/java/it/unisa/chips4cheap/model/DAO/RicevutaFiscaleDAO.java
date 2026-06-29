@@ -49,9 +49,8 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 	
 	public RicevutaFiscale doSearchElement(Object o){
 		if(!(o instanceof Integer) || o == null) {
-			throw new RuntimeException("Mandato un oggetto che non è stringa");
+			throw new RuntimeException("Mandato un oggetto che non è un intero");
 		}
-		
 		
 		Integer intero = (Integer) o;
 			try(Connection connection = ds.getConnection()){
@@ -60,27 +59,9 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				ResultSet resultSet = preparedStatement.executeQuery();
 				ArrayList<ProdottoRicevuta> prodottiRicevuta = new ArrayList<>();
 				if(resultSet.next()){
-					try(PreparedStatement per = connection.prepareStatement("Select * From ProdottoRicevuta where IDRicevutaFiscale = ?")){
-						per.setInt(1 , resultSet.getInt("IDRicevutaFiscale"));
-						ResultSet result = per.executeQuery();
-						while(result.next()){
-							prodottiRicevuta.add(new ProdottoRicevuta(
-									result.getString("Produttore"),
-									result.getInt("IDRicevutaFiscale"),
-									result.getString("email"),								
-									result.getString("Nomemodello"),
-									result.getDouble("Prezzo"),
-									result.getString("tipo"),
-									result.getInt("Quantità"),
-									result.getString("image")
-									));	
-						}
-						
-						result.close();
-						RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),resultSet.getString("email"),prodottiRicevuta,resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate());
+						RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),resultSet.getString("email"),null,resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate());
 						resultSet.close();
 						return ricevuta1;
-					}
 				}else{
 					resultSet.close();
 					return null;
@@ -93,6 +74,22 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 		
 		
 		return new RicevutaFiscale();
+	}
+	
+	public ArrayList<RicevutaFiscale> doSearchByEmail(String email){
+		try(Connection con = ds.getConnection()){
+			PreparedStatement p = con.prepareStatement("Select * From RicevutaFiscale where email = ?");
+			p.setString(1, email);
+			ResultSet r = p.executeQuery();
+			ArrayList<RicevutaFiscale> ricevute = new ArrayList<>();
+			while(r.next()){
+				ricevute.add(new RicevutaFiscale(r.getInt("IDRicevutaFiscale"),r.getString("email"),null,r.getString("metodoPagamento"),r.getDate("DataEmissione").toLocalDate()));
+			}
+			return ricevute;
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+		return null;
 	}
 		
 	public void doUpdate(RicevutaFiscale element){

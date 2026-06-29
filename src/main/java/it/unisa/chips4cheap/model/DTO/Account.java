@@ -11,7 +11,6 @@ public class Account implements Cloneable , Serializable{
 	private int numeroCivico;
 	private String email;
 	private boolean amministratore;
-	private ArrayList<RicevutaFiscale> ricevutaFiscale;
 
 	public Account(){
 		username = "";
@@ -21,10 +20,9 @@ public class Account implements Cloneable , Serializable{
 		numeroCivico = 0;
 		email = "";
 		amministratore = false;
-		ricevutaFiscale = new ArrayList<>();
 	}
 	
-	public Account(String username,String password , String via , String cap , int numeroCivico , String email , boolean amministratore , ArrayList<RicevutaFiscale> ricevuteFiscale){
+	public Account(String username,String password , String via , String cap , int numeroCivico , String email , boolean amministratore){
 		this.username = username;
 		this.password = password;
 		this.via = via;
@@ -32,13 +30,6 @@ public class Account implements Cloneable , Serializable{
 		this.numeroCivico = numeroCivico;
 		this.email = email;
 		this.amministratore = amministratore;
-		this.ricevutaFiscale = new ArrayList<>();
-		if(ricevuteFiscale != null){
-			for(RicevutaFiscale ricevutaFiscale : ricevuteFiscale){
-				this.ricevutaFiscale.add(ricevutaFiscale);
-			}
-		}
-		
 	}
 	
 	public String getUsername() {
@@ -109,20 +100,7 @@ public class Account implements Cloneable , Serializable{
 	public void setAmministratore(boolean amministratore) {
 		this.amministratore = amministratore;
 	}
-	
-	public void setRicevuteFiscali(ArrayList<RicevutaFiscale> ricevutaFiscale){
-		for(RicevutaFiscale ricevuteFiscale: ricevutaFiscale){
-			this.ricevutaFiscale.add(ricevuteFiscale);
-		}
-	}
-	
-	public ArrayList<RicevutaFiscale> getRicevuteFiscali(){
-		ArrayList<RicevutaFiscale> ricev = new ArrayList<>();
-		for(RicevutaFiscale ricevutaFiscale: this.ricevutaFiscale){
-			ricev.add(ricevutaFiscale);
-		}
-		return ricev;
-	}
+
 	
 	 @Override
 	public Account clone(){
@@ -149,23 +127,12 @@ public class Account implements Cloneable , Serializable{
 		 
 		 Account account = (Account) o;
 		 
-		 boolean allTrue = true;
-		 
-		 if(ricevutaFiscale.size() == account.ricevutaFiscale.size()){
-			 for(RicevutaFiscale rF : account.ricevutaFiscale){
-				 if(!ricevutaFiscale.contains(rF)){
-					 allTrue = false;
-				 }
-			 }
-		 }else{
-			 allTrue = false;
-		 }
-		 
 		 return username.equalsIgnoreCase(account.username) && password.equalsIgnoreCase(account.password) && via.equalsIgnoreCase(account.via) && 
-	     this.cap == account.cap && this.numeroCivico == account.numeroCivico && this.email.equalsIgnoreCase(account.email) && this.amministratore == account.amministratore && allTrue; 
+	     this.cap == account.cap && this.numeroCivico == account.numeroCivico && this.email.equalsIgnoreCase(account.email) && this.amministratore == account.amministratore; 
 	 }
+
 	 
 	 public String toString() {
-		 return this.getClass().getName() + "[ username = " + username + ", password = " + password + ", via = " + via + ",cap = " + cap + ", numeroCivico =" + numeroCivico + ", email = " + email + ",amministratore = " + amministratore + ", ricevuteFiscali = " + ricevutaFiscale + "]";
+		 return this.getClass().getName() + "[ username = " + username + ", password = " + password + ", via = " + via + ",cap = " + cap + ", numeroCivico =" + numeroCivico + ", email = " + email + ",amministratore = " + amministratore + ", ricevuteFiscali = " + "]";
 	 }
 }

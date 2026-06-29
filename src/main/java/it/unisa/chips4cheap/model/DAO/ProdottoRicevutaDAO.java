@@ -29,7 +29,6 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 			PreparedStatement pre = c.prepareStatement("Insert into ProdottoRicevuta(Prezzo , Produttore , IDRicevutaFiscale , email , NomeModello , Quantità , image , tipo) values (?,?,?,?,?,?,?,?)"); 
 			pre.setDouble(1,elemet.getPrezzo());
 			pre.setString(2, elemet.getnCAutore());
-			System.out.print(elemet.getIDRicevutaFiscale());
 			pre.setInt(3, elemet.getIDRicevutaFiscale());
 			pre.setString(4,elemet.getEmail());
 			pre.setString(5, elemet.getNomeModello());

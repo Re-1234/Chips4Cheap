@@ -79,8 +79,7 @@ public class TestDAO extends HttpServlet {
 		    "80100",                  // cap
 		    15,                        // numeroCivico
 		    "mario.rossi@email.it",   // email — STESSA email della ricevuta!
-		    false,                     // amministratore
-		    listaRicevute
+		    false                     // amministratore
 		);
 		
 		RicevutaFiscaleDAO ricevutaFiscale = new RicevutaFiscaleDAO(ds);
@@ -89,8 +88,7 @@ public class TestDAO extends HttpServlet {
 		
 		ProdottoRicevutaDAO prodottoRicevuta = new ProdottoRicevutaDAO(ds);
 		account.doSave(account1);
-		System.out.println(prodottoRicevuta.doSearchElement("Modello Alpha",1));
-		System.out.println(ricevutaFiscale.doSearchElement(1));
+		
 		
 		Prodotto prodotto3 = new Prodotto(
 			    "AUT001",                                  // nCAutore

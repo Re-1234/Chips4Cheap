@@ -34,12 +34,6 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				preparedStatement.setBoolean(7,elemet.isAmministratore());
 				preparedStatement.executeUpdate();
 				
-				
-				RicevutaFiscaleDAO ricevutaFiscaleDAO = new RicevutaFiscaleDAO(ds);
-				
-				for(RicevutaFiscale ricevutaFiscale:  elemet.getRicevuteFiscali()){
-					ricevutaFiscaleDAO.doSave(ricevutaFiscale);
-				}
 				preparedStatement.close();
 			}
 		
@@ -81,20 +75,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				ResultSet resultSet = preparedStatement.executeQuery();
 				
 				if(resultSet.next()){
-					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password1"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"),null);
-					ArrayList<RicevutaFiscale> ricevuteFiscali = new ArrayList<>();
-					PreparedStatement p = co.prepareStatement("Select * From RicevutaFiscale where email = ?");
-					p.setString(1, account.getEmail());
-					ResultSet r =p.executeQuery();
-					RicevutaFiscaleDAO r1 = new RicevutaFiscaleDAO(ds);	
-					while(r.next()){
-						ricevuteFiscali.add(
-									r1.doSearchElement(r.getInt("IDRicevutaFiscale"))
-								);
-					}
-							
-					account.setRicevuteFiscali(ricevuteFiscali);
-					resultSet.close();
+					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password1"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"));
 					preparedStatement.close();
 					return account;
 				}
