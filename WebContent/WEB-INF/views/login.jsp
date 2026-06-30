@@ -29,13 +29,13 @@
                 
                 <div class="gruppo-campo">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="${param.email}" required>
+                    <input type="email" id="email" name="email" value="${param.email}" onchange="validaEmail()" required>
                     <p class="messaggio-errore" id="err-email"></p>
                 </div>
 
                 <div class="gruppo-campo">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" onchange="validaPassword()" required>
                     <p class="messaggio-errore" id="err-password"></p>
                 </div>
 
