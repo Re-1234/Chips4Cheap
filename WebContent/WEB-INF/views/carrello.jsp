@@ -40,20 +40,24 @@
             						<img src="${pageContext.request.contextPath}/images/${item.prodotto.imagine}" alt="${item.prodotto.nomeModello}" width="60">
         						</c:if>
         
-        						<span class="testo-importante">${item.prodotto.nomeModello}</span>
+        						<span class="testo-modello">
+                                    <a href="${pageContext.request.contextPath}/Prodotto?id=${item.prodotto.nomeModello}">
+                                        ${item.prodotto.nomeModello}
+                                    </a>
+                                </span>
         						<span>Produttore: ${item.prodotto.nCAutore}</span>
         						<span>Prezzo unitario: ${item.prodotto.prezzo} €</span>
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${item.prodotto.nCAutore}', '${item.prodotto.nomeModello}', 'diminuisci')">-</button>
+            						<button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'diminuisci')">-</button>
             						<span id="quantita-${item.prodotto.nomeModello}">${item.quantita}</span>
-            						<button type="button" onclick="modificaCarrello('${item.prodotto.nCAutore}', '${item.prodotto.nomeModello}', 'aumenta')">+</button>
+            						<button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'aumenta')">+</button>
         						</span>
         
         						<span id="subtotale-${item.prodotto.nomeModello}">Subtotale: ${item.prodotto.prezzo * item.quantita} €</span>
         
-       							 <button type="button" onclick="modificaCarrello('${item.prodotto.nCAutore}', '${item.prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
+       							 <button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
         
     						</li>
                         </c:forEach>
@@ -68,7 +72,7 @@
                         <a href="${pageContext.request.contextPath}/Catalogo" class="link-navigazione-indietro">
                             Continua lo Shopping
                         </a>
-                        <a href="${pageContext.request.contextPath}/common/Checkout" class="link-navigazione-indietro margine-sinistra">
+                        <a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro margine-sinistra">
                             Procedi all'Ordine
                         </a>
                     </div>
