@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class Carrello extends HttpServlet {
 
 	    StringBuilder sb = new StringBuilder();
 	    String linea;
-	    try (java.io.BufferedReader reader = request.getReader()) {
+	    try (BufferedReader reader = request.getReader()) {
 	        while ((linea = reader.readLine()) != null) {
 	            sb.append(linea);
 	        }
@@ -68,7 +69,7 @@ public class Carrello extends HttpServlet {
 
 	    Prodotto prodottoTarget = null;
 	    for (Prodotto p : carrello) {
-	        if (p.getNomeModello().equalsIgnoreCase(modello)) { // ignoreCase è una buona idea? la chiave è case sensitive
+	        if (p.getNomeModello().equalsIgnoreCase(modello)) { // ignoreCase è una buona idea? la chiave è case sensitive nel DB?
 	            prodottoTarget = p;
 	            break;
 	        }

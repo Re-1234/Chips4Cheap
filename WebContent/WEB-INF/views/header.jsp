@@ -12,12 +12,12 @@
 <header>
 
       <nav class="nav-principale">
-            <a href="#" class="logo">Chips4Cheap</a>
+            <a href="${pageContext.request.contextPath}/Home" class="logo">Chips4Cheap</a>
             <a href="${pageContext.request.contextPath}/Registrazione" class="nav-link">Registrati</a>
 
-            <a href="/catalogo" class="catalog-btn" title="Vai al Catalogo">Catalogo</a>
+            <a href="${pageContext.request.contextPath}/Catalogo" class="catalog-btn" title="Vai al Catalogo">Catalogo</a>
             <a href="${pageContext.request.contextPath}/common/AreaPersonale" class="user-link">Account</a>
-            <a href="/Carrello" class="user-link">Carrello</a> 
+            <a href="${pageContext.request.contextPath}/Carrello" class="user-link">Carrello</a> 
       </nav>
 </header>
 

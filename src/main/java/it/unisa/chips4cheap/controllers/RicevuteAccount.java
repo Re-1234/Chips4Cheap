@@ -34,18 +34,12 @@ public class RicevuteAccount extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
         Account accountLoggato = (Account) session.getAttribute("account");
-
-        try {
-            RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO();
-            ArrayList<RicevutaFiscale> listaRicevute = dao.doRetrieveByEmail(accountLoggato.getEmail());
+        
+        RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO();
+        ArrayList<RicevutaFiscale> listaRicevute = dao.doRetrieveByEmail(accountLoggato.getEmail());
             
-            request.setAttribute("ricevute", listaRicevute);
-            request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);
-            
-        } catch (Exception e) {
-           // Riguarda come usare le pagine di errore nel deployment descriptor
-            throw new ServletException("Errore nel recupero delle ricevute fiscali", e);
-        }
+        request.setAttribute("ricevute", listaRicevute);
+        request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);           
 	}
 
 	/**
