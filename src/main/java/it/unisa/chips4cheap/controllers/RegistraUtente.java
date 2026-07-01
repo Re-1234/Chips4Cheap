@@ -27,14 +27,12 @@ public class RegistraUtente extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
+    	String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("Password1");
         String via = request.getParameter("Via");
         String cap = request.getParameter("Cap");
         String numeroCivico = request.getParameter("NumeroCivico");
-
-        String errore = null;
 
         if (email == null || email.trim().isEmpty() ||
             username == null || username.trim().isEmpty() ||
@@ -43,59 +41,48 @@ public class RegistraUtente extends HttpServlet {
             cap == null || cap.trim().isEmpty() ||
             numeroCivico == null || numeroCivico.trim().isEmpty()) {
             
-            errore = "Tutti i campi contrassegnati con l'asterisco sono obbligatori.";
-            
-        } else if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
-            errore = "Il formato dell'email inserito non è valido.";
-            
-        } else if (!cap.matches("^\\d+$")) {
-            errore = "Il CAP deve contenere solo numeri.";
-            
-        } else if (!numeroCivico.matches("^\\d+$")) {
-            errore = "Il numero civico deve essere un valore numerico.";
+            request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
+            request.setAttribute("erroreServer", "Il formato dell'email inserito non è valido.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        if (!cap.trim().matches("^\\d{5}$")) {
+            request.setAttribute("erroreServer", "Il CAP deve essere composto da esattamente 5 cifre numeriche.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        if (!numeroCivico.trim().matches("^\\d+$")) {
+            request.setAttribute("erroreServer", "Il numero civico deve essere un valore numerico.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
         }
 
         AccountDAO dao = new AccountDAO();
 
-        if (errore == null) {
-            try {
-                Account utenteEsistente = dao.doSearchElement(email.trim());
-                
-                if (utenteEsistente != null) {
-                    errore = "Esiste già un account registrato con questa email.";
-                }
-            } catch (Exception e) {
-                errore = "Si è verificato un errore durante la verifica dell'account. Riprova più tardi.";
-                e.printStackTrace();
+            if (dao.doSearchElement(email.trim()) != null) {
+                request.setAttribute("erroreServer", "Questa email è già associata a un account registrato.");
+                request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+                return;
             }
-        }
 
-        if (errore != null) {
-            request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
-        } else {
-            try {
-                Account nuovoAccount = new Account();
-                nuovoAccount.setEmail(email.trim());
-                nuovoAccount.setUsername(username.trim());
-                
-                String hashedPassword = hashPasswordSHA512(password);
-                nuovoAccount.setPassword(hashedPassword);
-                
-                nuovoAccount.setVia(via.trim());
-                nuovoAccount.setCap(cap.trim());
-                nuovoAccount.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
+            Account nuovoAccount = new Account();
+            nuovoAccount.setEmail(email.trim());
+            nuovoAccount.setUsername(username.trim());
+            nuovoAccount.setPassword(hashPasswordSHA512(password));
+            nuovoAccount.setVia(via.trim());
+            nuovoAccount.setCap(cap.trim());
+            nuovoAccount.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
 
-                dao.doSave(nuovoAccount);
-
-                response.sendRedirect(request.getContextPath() + "/Login");
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.setAttribute("erroreServer", "Errore imprevisto durante la registrazione. Riprova.");
-                request.getRequestDispatcher("/Registrazione").forward(request, response);
-            }
-        }
+            dao.doSave(nuovoAccount);
+            
+            response.sendRedirect(request.getContextPath() + "/Login");
     }
 
     private String hashPasswordSHA512(String password) {

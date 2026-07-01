@@ -28,52 +28,34 @@ public class Autorizza extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
+    	String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        String errore = null;
-
-        if (email == null || email.trim().isEmpty() ||
-            password == null || password.isEmpty()) {
-            
-            errore = "Tutti i campi sono obbligatori.";
-            
-        } else if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
-            errore = "Il formato dell'email inserito non è valido.";
+        if (email == null || email.trim().isEmpty() || password == null || password.isEmpty()) { // permettiamo password con spazi vuoti iniziali e finali?
+            request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            return;
+        } 
+        
+        if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
+            request.setAttribute("erroreServer", "Il formato dell'email inserito non è valido.");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            return;
         }
 
         AccountDAO dao = new AccountDAO();
-        Account account = null;
-
-        if (errore == null) {
-            try {
-                account = dao.doSearchElement(email.trim());
-                
-                if (account == null) {
-                    errore = "Email o Password errati. Riprova.";
-                } else {
-                    String hashedPassword = hashPasswordSHA512(password);
-                    if (!hashedPassword.equals(account.getPassword())) {
-                        errore = "Email o Password errati. Riprova.";
-                        account = null;
-                    }
-                }
-            } catch (Exception e) {
-                errore = "Si è verificato un errore durante l'autenticazione. Riprova più tardi.";
-                e.printStackTrace();
-            }
-        }
-
-        if (errore != null) {
-            request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-        } else {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("account", account);
-            // session.setAttribute("role", "user"); utilizziamo direttamente l'oggetto account e controlliamo la sua esistenza in AutentificazioneFilter
+        Account account = dao.doSearchElement(email.trim());
             
+            
+        if (account != null && hashPasswordSHA512(password).equals(account.getPassword())) {
+        	HttpSession session = request.getSession(true);
+            session.setAttribute("account", account);
             request.getRequestDispatcher("/common/AreaPersonale").forward(request, response);
+        } else {
+             request.setAttribute("erroreServer", "Email o Password errati. Riprova.");
+             request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
+            
     }
 
     private String hashPasswordSHA512(String password) {
