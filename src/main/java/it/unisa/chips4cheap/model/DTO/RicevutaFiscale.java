@@ -9,60 +9,34 @@ public final class RicevutaFiscale implements Serializable{
 	private String email;
 	private String metodoPagamento;
 	private LocalDate localDate;
-	private ArrayList<ProdottoRicevuta> prodottiRicevuta;
+	private String via;
+	private String cap;
 	
 	public RicevutaFiscale(){
 		idRicevutaFiscale = 0;
-		prodottiRicevuta = new ArrayList<>();
 		metodoPagamento = "";
 		email = "";
 		localDate = LocalDate.now();
 	}
 	
-	public RicevutaFiscale(int idRicevutaFiscale,String email,ArrayList<ProdottoRicevuta> prodottiRicevuta,String metodoPagamento,LocalDate localDate){
+	public RicevutaFiscale(int idRicevutaFiscale,String email,String metodoPagamento,LocalDate localDate,String via , String cap){
 		this.idRicevutaFiscale = idRicevutaFiscale;
-		this.prodottiRicevuta = new ArrayList<>();
-		if(prodottiRicevuta != null) {
-			for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
-			     this.prodottiRicevuta.add(prodottoRicevuta);	
-			}
-		}
 		this.email = email;
 		this.metodoPagamento = metodoPagamento;
 		this.localDate = localDate;
 	}
 	
-	public double totaleRicevuta(){
-		double tot = 0;
-		for(ProdottoRicevuta prodottoRicevuta : prodottiRicevuta) {
-			tot += prodottoRicevuta.getPrezzo(); 
-		}
-		
-		return tot;
-	}
-	
 	public int getIdRicevutaFiscale() {
 		return idRicevutaFiscale;
-	}
-	
-	public ArrayList<ProdottoRicevuta> getprodottiRicevuta(){
-		ArrayList<ProdottoRicevuta> prodottiRicevuta = new ArrayList<>();
-		for(ProdottoRicevuta prodottoRicevuta : this.prodottiRicevuta) {
-			prodottiRicevuta.add(prodottoRicevuta);
-		}
-		return prodottiRicevuta;
 	}
 
 	public LocalDate getLocalDate() {
 		return localDate;
 	}	
 	
-	
 	public String getMetodoPagamento() {
 		return metodoPagamento;
 	}
-	
-	
 	
 	public String getEmail() {
 		return email;
@@ -85,24 +59,13 @@ public final class RicevutaFiscale implements Serializable{
 		RicevutaFiscale ricevutaFiscale = (RicevutaFiscale) o;
 		boolean allTrue = true;
 		
-		if(this.prodottiRicevuta.size() == ricevutaFiscale.getIdRicevutaFiscale()){
-			for(ProdottoRicevuta prodottiRicevuta : ricevutaFiscale.getprodottiRicevuta()){
-				if(!this.prodottiRicevuta.contains(prodottiRicevuta)){
-					allTrue = false;
-					break;
-				}
-			}
-		}else{
-			allTrue = false;
-		}
-		
 		
 		return ricevutaFiscale.idRicevutaFiscale == idRicevutaFiscale && allTrue && metodoPagamento.equalsIgnoreCase(ricevutaFiscale.metodoPagamento);
 	}
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale + ", prodottiRicevuta = " + prodottiRicevuta.toString() +", metodoPagamento = " + metodoPagamento +  ",email = " + email + ",localDate = " + localDate + "]";
+		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale  + ", metodoPagamento = " + metodoPagamento +  ",email = " + email + ",localDate = " + localDate + "]";
 	}
 
 	

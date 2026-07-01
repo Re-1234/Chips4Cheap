@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 
@@ -33,7 +35,7 @@ public class RegistraUtente extends HttpServlet {
         String via = request.getParameter("Via");
         String cap = request.getParameter("Cap");
         String numeroCivico = request.getParameter("NumeroCivico");
-
+        DataSource data = (DataSource) getServletContext().getAttribute("DataSource");
         String errore = null;
 
         if (email == null || email.trim().isEmpty() ||
@@ -55,7 +57,7 @@ public class RegistraUtente extends HttpServlet {
             errore = "Il numero civico deve essere un valore numerico.";
         }
 
-        AccountDAO dao = new AccountDAO();
+        AccountDAO dao = new AccountDAO(data);
 
         if (errore == null) {
             try {

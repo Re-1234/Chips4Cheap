@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.sql.DataSource;
@@ -53,6 +54,26 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 	@Override
 	public ProdottoRicevuta doSearchElement(Object o) {
 		throw new NonSupportatoException();
+	}
+	
+	public ArrayList<ProdottoRicevuta> doSearchElementByIDRic(int idRicevutaFiscale){
+		
+		try(Connection c = ds.getConnection()){
+			PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta where IDRicevutaFiscale = ?");
+			p.setInt(1 , idRicevutaFiscale);
+			ResultSet s = p.executeQuery();
+			ArrayList<ProdottoRicevuta> prodotti = new ArrayList();
+			
+			while(s.next()){
+				prodotti.add(new ProdottoRicevuta(s.getString("Produttore"),s.getInt("IDRicevutaFiscale"),s.getString("email"),s.getString("NomeModello"),s.getDouble("Prezzo"),s.getString("Tipo"),s.getInt("Quantità"),s.getString("image")));
+			}
+			
+			return prodotti;
+		}catch(SQLException sq){
+			sq.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	
