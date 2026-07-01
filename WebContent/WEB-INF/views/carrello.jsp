@@ -21,7 +21,7 @@
             <h2>Il tuo Carrello</h2>
 
             <c:choose>
-                <c:when test="${empty sessionScope.carrello}"> <!-- SE IL CARRELLO è INIZIALIZZATO MA VUOTO? -->
+                <c:when test="${empty sessionScope.carrello}"> <!-- SE IL CARRELLO è INIZIALIZZATO MA VUOTO? controlla sia se è vuoto sia se non esiste, figo-->
                     <p class="avviso-vuoto">Il tuo carrello è attualmente vuoto.</p>
                     
                     <div class="zona-navigazione">
@@ -72,9 +72,12 @@
                         <a href="${pageContext.request.contextPath}/Catalogo" class="link-navigazione-indietro">
                             Continua lo Shopping
                         </a>
-                        <a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro margine-sinistra">
+                        <a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro">
                             Procedi all'Ordine
                         </a>
+                        <button type="button" class="link-navigazione-indietro" onclick="modificaCarrello('', 'svuota')"> <!-- lo stile funziona con un button? -->
+                            Svuota il Carrello
+                        </button>
                     </div>
                 </c:otherwise>
             </c:choose>

@@ -66,15 +66,22 @@ public class Carrello extends HttpServlet {
 	    boolean rimosso = false;
 	    int nuovaQuantita = 0;
 	    double nuovoSubtotale = 0.0;
-
-	    Prodotto prodottoTarget = null;
-	    for (Prodotto p : carrello) {
-	        if (p.getNomeModello().equalsIgnoreCase(modello)) { // ignoreCase è una buona idea? la chiave è case sensitive nel DB?
-	            prodottoTarget = p;
-	            break;
-	        }
+	    double nuovoTotale = 0.0;
+    	Prodotto prodottoTarget = null;
+	    
+	    if ("svuota".equalsIgnoreCase(azione)) { // aggiunto per permettere di svuotare il carrello in una botta
+	        carrello.clear();
 	    }
-
+	    
+	    else {
+	    	for (Prodotto p : carrello) {
+	    		if (p.getNomeModello().equalsIgnoreCase(modello)) { // ignoreCase è una buona idea? la chiave è case sensitive nel DB?
+	    			prodottoTarget = p;
+	    			break;
+	    		}
+	    	}	
+	    }
+	    
 	    if (prodottoTarget != null) {
 	        if ("rimuovi".equalsIgnoreCase(azione)) {
 	            carrello.remove(prodottoTarget);
@@ -99,12 +106,11 @@ public class Carrello extends HttpServlet {
 	        }
 	    }
 
-	    double nuovoTotale = 0.0;
 	    for (Prodotto p : carrello) {
 	        nuovoTotale += p.getPrezzo() * p.getQuantità();
 	    }
 
-	    boolean carrelloVuoto = carrello.isEmpty();
+	    boolean carrelloVuoto = carrello.isEmpty(); // se è vuoto lo controlliamo qui
 
 	    JSONObject jsonResponse = new JSONObject();
 	    jsonResponse.put("rimosso", rimosso);

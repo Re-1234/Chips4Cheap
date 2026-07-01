@@ -15,7 +15,7 @@ function modificaCarrello(modello, azione) {
 			
                 if (data.rimosso || data.nuovaQuantita <= 0) {
                     var riga = document.getElementById("riga-" + modello);
-                    if (riga) riga.parentNode.removeChild(riga);
+                    if (riga) riga.parentNode.removeChild(riga); //questi if(...) permettono di far funzionare tutto anche se getElementById ritorna null, perche non esiste ad esempio se abbiamo distrutto il carrello
                 } else {
                     var quantitaEl = document.getElementById("quantita-" + modello);
                     var subtotaleEl = document.getElementById("subtotale-" + modello);
