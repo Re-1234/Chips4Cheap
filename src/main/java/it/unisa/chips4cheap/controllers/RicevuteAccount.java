@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
+import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 import it.unisa.chips4cheap.model.DTO.RicevutaFiscale;
@@ -35,8 +38,9 @@ public class RicevuteAccount extends HttpServlet {
 		HttpSession session = request.getSession(false);
         Account accountLoggato = (Account) session.getAttribute("account");
         
-        RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO();
-        ArrayList<RicevutaFiscale> listaRicevute = dao.doRetrieveByEmail(accountLoggato.getEmail());
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO(ds);
+        ArrayList<RicevutaFiscale> listaRicevute = dao.doSearchByEmail(accountLoggato.getEmail());
             
         request.setAttribute("ricevute", listaRicevute);
         request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);           

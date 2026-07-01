@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 
@@ -43,7 +45,8 @@ public class Autorizza extends HttpServlet {
             return;
         }
 
-        AccountDAO dao = new AccountDAO();
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        AccountDAO dao = new AccountDAO(ds);
         Account account = dao.doSearchElement(email.trim());
             
             

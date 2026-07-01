@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.ProdottoRicevutaDAO;
 import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
@@ -49,13 +51,13 @@ public class VisualizzaRicevuta extends HttpServlet {
             
         int idRicevuta = Integer.parseInt(idParam.trim());
              
-        RicevutaFiscaleDAO daoRicevuta = new RicevutaFiscaleDAO();
-        // la singola ricevuta tramite la chiave primaria
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        
+        RicevutaFiscaleDAO daoRicevuta = new RicevutaFiscaleDAO(ds);
         RicevutaFiscale ricevuta = daoRicevuta.doSearchElement(idRicevuta);
             
-        ProdottoRicevutaDAO daoProdottoRicevuta = new ProdottoRicevutaDAO();
-        //trovo i suoi componenti
-        ArrayList<ProdottoRicevuta> lista = daoProdottoRicevuta.doSearchElementById(idRicevuta);
+        ProdottoRicevutaDAO daoProdottoRicevuta = new ProdottoRicevutaDAO(ds);
+        ArrayList<ProdottoRicevuta> lista = daoProdottoRicevuta.doSearchElement(idRicevuta);
             
             /* aggiunta pagina errore, non mi serve questo?
             if (ricevuta == null) {

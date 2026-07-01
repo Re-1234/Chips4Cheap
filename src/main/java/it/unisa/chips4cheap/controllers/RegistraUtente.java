@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 
@@ -64,7 +66,8 @@ public class RegistraUtente extends HttpServlet {
             return;
         }
 
-        AccountDAO dao = new AccountDAO();
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        AccountDAO dao = new AccountDAO(ds);
 
             if (dao.doSearchElement(email.trim()) != null) {
                 request.setAttribute("erroreServer", "Questa email è già associata a un account registrato.");
