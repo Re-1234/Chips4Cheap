@@ -30,6 +30,7 @@
                                 <span>Ricevuta n°:  ${ricevuta.IDRicevutaFiscale}</span>
                                 <span>Emessa il:  ${ricevuta.dataEmissione}</span>
                                 <span>Pagamento:  ${ricevuta.metodoPagamento}</span>
+                                <span>Pagamento:  ${ricevuta.via}</span>	<!-- non faccio vedere numeroCivico, cap, visualizzo il resto nella singola ricevuta -->
                                 
                                 <a href="${pageContext.request.contextPath}/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}" class="link-nascosto-elemento">
                                     Apri Ricevuta

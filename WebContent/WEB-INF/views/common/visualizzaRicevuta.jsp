@@ -32,6 +32,15 @@
                 <li class="scheda-elemento">
                     <span>Intestatario (Email): ${ricevuta.email}</span>
                 </li>
+                <li class="scheda-elemento">
+                    <span>Via: ${ricevuta.via}</span>
+                </li>
+                <li class="scheda-elemento">
+                    <span>CAP: ${ricevuta.cap}</span>
+                </li>
+                <li class="scheda-elemento">
+                    <span>N° Civico: ${ricevuta.numeroCivico}</span>
+                </li>
             </ul>
 
             <h2>Articoli Acquistati</h2>
