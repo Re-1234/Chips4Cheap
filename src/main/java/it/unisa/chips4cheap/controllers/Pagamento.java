@@ -10,23 +10,19 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sql.DataSource;
+import it.unisa.chips4cheap.model.DTO.Prodotto;
 
-import it.unisa.chips4cheap.model.DAO.AccountDAO;
-import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
-import it.unisa.chips4cheap.model.DTO.Account;
-import it.unisa.chips4cheap.model.DTO.RicevutaFiscale;
 /**
- * Servlet implementation class RicevuteAccount
+ * Servlet implementation class Pagamento
  */
-@WebServlet("/common/RicevuteAccount")
-public class RicevuteAccount extends HttpServlet {
+@WebServlet("/common//Pagamento")
+public class Pagamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RicevuteAccount() {
+    public Pagamento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +31,20 @@ public class RicevuteAccount extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession(false);
-        Account accountLoggato = (Account) session.getAttribute("account");
         
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO(ds);
-        ArrayList<RicevutaFiscale> listaRicevute = dao.doSearchByEmail(accountLoggato.getEmail());
-            
-        request.setAttribute("ricevute", listaRicevute);
-        request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);           
+		ArrayList<Prodotto> carrello = null;
+        if (session != null) {
+        	carrello = (ArrayList<Prodotto>) session.getAttribute("carrello");
+        }
+
+        if (carrello == null || carrello.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/Carrello"); // se l'individuo conosciuto anche come utente va al checkout senza niente 
+            return;
+        }
+        
+		request.getRequestDispatcher("/WEB-INF/common/pagamento.jsp").forward(request, response);
 	}
 
 	/**

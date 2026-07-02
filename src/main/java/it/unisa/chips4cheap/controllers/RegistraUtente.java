@@ -29,15 +29,16 @@ public class RegistraUtente extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
+    	String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("Password1");
         String via = request.getParameter("Via");
         String cap = request.getParameter("Cap");
         String numeroCivico = request.getParameter("NumeroCivico");
+
         DataSource data = (DataSource) getServletContext().getAttribute("DataSource");
         String errore = null;
-
+        
         if (email == null || email.trim().isEmpty() ||
             username == null || username.trim().isEmpty() ||
             password == null || password.isEmpty() ||
@@ -74,30 +75,51 @@ public class RegistraUtente extends HttpServlet {
 
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
+
+            request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
+
             request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
-        } else {
-            try {
-                Account nuovoAccount = new Account();
-                nuovoAccount.setEmail(email.trim());
-                nuovoAccount.setUsername(username.trim());
-                
-                String hashedPassword = hashPasswordSHA512(password);
-                nuovoAccount.setPassword(hashedPassword);
-                
-                nuovoAccount.setVia(via.trim());
-                nuovoAccount.setCap(cap.trim());
-                nuovoAccount.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
-
-                dao.doSave(nuovoAccount);
-
-                response.sendRedirect(request.getContextPath() + "/Login");
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.setAttribute("erroreServer", "Errore imprevisto durante la registrazione. Riprova.");
-                request.getRequestDispatcher("/Registrazione").forward(request, response);
-            }
+            return;
         }
+
+        if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
+            request.setAttribute("erroreServer", "Il formato dell'email inserito non è valido.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        if (!cap.trim().matches("^\\d{5}$")) {
+            request.setAttribute("erroreServer", "Il CAP deve essere composto da esattamente 5 cifre numeriche.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        if (!numeroCivico.trim().matches("^\\d+$")) {
+            request.setAttribute("erroreServer", "Il numero civico deve essere un valore numerico.");
+            request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+            return;
+        }
+
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        AccountDAO dao2 = new AccountDAO(ds);
+
+            if (dao.doSearchElement(email.trim()) != null) {
+                request.setAttribute("erroreServer", "Questa email è già associata a un account registrato.");
+                request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
+                return;
+            }
+
+            Account nuovoAccount = new Account();
+            nuovoAccount.setEmail(email.trim());
+            nuovoAccount.setUsername(username.trim());
+            nuovoAccount.setPassword(hashPasswordSHA512(password));
+            nuovoAccount.setVia(via.trim());
+            nuovoAccount.setCap(cap.trim());
+            nuovoAccount.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
+
+            dao.doSave(nuovoAccount);
+            
+            response.sendRedirect(request.getContextPath() + "/Login");
     }
 
     private String hashPasswordSHA512(String password) {

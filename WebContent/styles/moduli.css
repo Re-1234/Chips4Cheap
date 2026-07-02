@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* ==========================================================================
-   1. STRUTTURA E CONTAINER PRINCIPALI (COMUNI)
-   ========================================================================== */
+
 
 .contenitore-pagina {
     padding: 3rem 5%; 
@@ -11,7 +9,7 @@
 
 .modulo-centrato {
     background-color: #dfdfdf; 
-    max-width: 35rem; /* Dimensione ideale bilanciata per tutti e tre i moduli */
+    max-width: 35rem; 
     margin: 0 auto; 
     padding: 2.5rem 6%;
     border-radius: 0.5rem;
@@ -24,7 +22,7 @@
     margin-bottom: 1.5rem;
 }
 
-/* Specifico per la suddivisione interna dell'Area Personale */
+/* Specifico per la suddivisione interna di areaPersonale.jsp */
 .sezione-contenuto {
     width: 100%;
     margin-bottom: 2rem;
@@ -38,9 +36,7 @@
     padding-bottom: 0.25rem;
 }
 
-/* ==========================================================================
-   2. ELEMENTI DEI FORM E CAMPI INFORMATIVI
-   ========================================================================== */
+
 
 .gruppo-campo {
     width: 100%;
@@ -76,9 +72,7 @@
     word-wrap: break-word;
 }
 
-/* ==========================================================================
-   3. STRUTTURA DEL LAYOUT AFFIANCATO (CAP / CIVICO)
-   ========================================================================== */
+
 
 .riga-doppia {
     width: 100%;
@@ -94,9 +88,7 @@
     margin-right: 4%;
 }
 
-/* ==========================================================================
-   4. BOTTONI E LINK DI AZIONE (STILE BOTTONE)
-   ========================================================================== */
+
 
 .bottone-azione, 
 .link-azione {
@@ -114,7 +106,6 @@
     margin-top: 0.75rem;
     box-sizing: border-box;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
 .bottone-azione:hover, 
@@ -122,9 +113,7 @@
     background-color: #000055; 
 }
 
-/* ==========================================================================
-   5. SEZIONE ERRORI E VALIDAZIONE
-   ========================================================================== */
+
 
 .errore-server {
     background-color: #ffe6e6;
@@ -144,9 +133,7 @@
     min-height: 1.25rem; /* Evita il saltellamento del layout alla comparsa dell'errore */
 }
 
-/* ==========================================================================
-   6. SEPARAZIONE LOGICA: REGOLE SPECIFICHE TRAMITE ID
-   ========================================================================== */
+
 
 /* Login: Blocco di rimando alla registrazione */
 #zona-registrazione-alternativa {
@@ -183,9 +170,7 @@
 }
 
 
-/* ==========================================================================
-   7. MEDIA QUERIES (RESPONSIVITÀ ADATTATA AI DISPOSITIVI)
-   ========================================================================== */
+
 
 /* Schermi Ultra-Wide / 2K */
 @media (max-width: 2560px) {

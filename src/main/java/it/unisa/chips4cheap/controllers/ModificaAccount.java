@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 
@@ -58,24 +60,18 @@ public class ModificaAccount extends HttpServlet {
             return;
         }
 
-        try {
             accountLoggato.setUsername(username.trim());
             accountLoggato.setPassword(hashPasswordSHA512(nuovaPassword));
             accountLoggato.setVia(via.trim());
             accountLoggato.setCap(cap.trim());
             accountLoggato.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
 
-            AccountDAO dao = new AccountDAO();
+            DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+            AccountDAO dao = new AccountDAO(ds);
             dao.doUpdate(accountLoggato);
 
             session.setAttribute("account", accountLoggato);
             response.sendRedirect(request.getContextPath() + "/common/AreaPersonale");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("erroreServer", "Errore durante l'aggiornamento dei dati. Riprova.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
-        }
     }
 
     private String hashPasswordSHA512(String password) {

@@ -8,25 +8,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.sql.DataSource;
-
-import it.unisa.chips4cheap.model.DAO.AccountDAO;
-import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
-import it.unisa.chips4cheap.model.DTO.Account;
-import it.unisa.chips4cheap.model.DTO.RicevutaFiscale;
 /**
- * Servlet implementation class RicevuteAccount
+ * Servlet implementation class Logout
  */
-@WebServlet("/common/RicevuteAccount")
-public class RicevuteAccount extends HttpServlet {
+@WebServlet("/common/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RicevuteAccount() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +29,12 @@ public class RicevuteAccount extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-        Account accountLoggato = (Account) session.getAttribute("account");
         
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        RicevutaFiscaleDAO dao = new RicevutaFiscaleDAO(ds);
-        ArrayList<RicevutaFiscale> listaRicevute = dao.doSearchByEmail(accountLoggato.getEmail());
-            
-        request.setAttribute("ricevute", listaRicevute);
-        request.getRequestDispatcher("/WEB-INF/views/common/ricevuteAccount.jsp").forward(request, response);           
+        if (session != null) {
+            session.removeAttribute("account");
+        }
+        
+        response.sendRedirect(request.getContextPath() + "/Home");
 	}
 
 	/**

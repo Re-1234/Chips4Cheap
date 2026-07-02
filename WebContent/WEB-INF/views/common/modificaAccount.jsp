@@ -32,45 +32,45 @@
                     
                     <div class="gruppo-campo">
                         <label for="email">Email (Identificativo Account)</label>
-                        <input type="email" id="email" name="email" value="${sessionScope.account.email}" readonly style="background-color: #e9ecef; cursor: not-allowed; color: #666;">
+                        <input type="email" id="email" name="email" value="${sessionScope.account.email}" readonly >
                         <p class="messaggio-errore" id="err-email"></p>
                     </div>
 
                     <div class="gruppo-campo">
                         <label for="username">Username *</label>
-                        <input type="text" id="username" name="username" value="${sessionScope.account.username}" maxlength="30" required>
+                        <input type="text" id="username" name="username" value="${sessionScope.account.username}" maxlength="30" onchange="validaUsername()" required>
                         <p class="messaggio-errore" id="err-username"></p>
                     </div>
 
                     <div class="gruppo-campo">
                         <label for="vecchiaPassword">Vecchia Password *</label>
-                        <input type="password" id="vecchiaPassword" name="vecchiaPassword" maxlength="16" required>
+                        <input type="password" id="vecchiaPassword" name="vecchiaPassword" maxlength="16" onchange="validaVecchiaPassword()" required>
                         <p class="messaggio-errore" id="err-vecchiaPassword"></p>
                     </div>
 
                     <div class="gruppo-campo">
                         <label for="password">Nuova Password *</label>
-                        <input type="password" id="password" name="password" maxlength="16" required>
+                        <input type="password" id="password" name="password" maxlength="16" onchange="validaPassword()" required>
                         <p class="messaggio-errore" id="err-password"></p>
                     </div>
 
                     <div class="gruppo-campo">
                         <label for="via">Via / Indirizzo *</label>
-                        <input type="text" id="via" name="Via" value="${sessionScope.account.via}" maxlength="50" required>
+                        <input type="text" id="via" name="Via" value="${sessionScope.account.via}" maxlength="50" onchange="validaVia()" required>
                         <p class="messaggio-errore" id="err-via"></p>
                     </div>
 
                     <div class="riga-doppia">
+                    	<div class="gruppo-campo meta-larghezza">
+                            <label for="cap">CAP *</label>
+                            <input type="number" id="cap" name="Cap" value="${sessionScope.account.cap}" onchange="validaCap()" required>
+                            <p class="messaggio-errore" id="err-cap"></p>
+                        </div>
+                        
                         <div class="gruppo-campo meta-larghezza">
                             <label for="numeroCivico">N° Civico *</label>
-                            <input type="number" id="numeroCivico" name="NumeroCivico" value="${sessionScope.account.numeroCivico}" required>
+                            <input type="number" id="numeroCivico" name="NumeroCivico" value="${sessionScope.account.numeroCivico}" onchange="validaCivico()" required>
                             <p class="messaggio-errore" id="err-civico"></p>
-                        </div>
-
-                        <div class="gruppo-campo meta-larghezza">
-                            <label for="cap">CAP *</label>
-                            <input type="number" id="cap" name="Cap" value="${sessionScope.account.cap}" required>
-                            <p class="messaggio-errore" id="err-cap"></p>
                         </div>
                     </div>
                 </div>
