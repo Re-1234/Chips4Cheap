@@ -22,7 +22,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Specifico per la suddivisione interna di areaPersonale.jsp */
 .sezione-contenuto {
     width: 100%;
     margin-bottom: 2rem;
@@ -43,17 +42,16 @@
     margin-bottom: 1rem;
 }
 
-/* Stile per le etichette dei form e per i testi descrittivi dell'area personale */
+
 .gruppo-campo label, 
 .etichetta-fissa {
     display: block;
     font-weight: bold;
-    color: #333333;
+    color: #666666;	/* invece di 333333 cosi è visibbile sia normalmente che da admin? */
     margin-bottom: 0.375rem; 
     font-size: 1rem;
 }
 
-/* Input editabili (Login/Registrazione) e Spazi di testo fisso (Area Personale) */
 .gruppo-campo input, 
 .valore-fisso {
     display: block;
@@ -67,7 +65,7 @@
     box-sizing: border-box;
 }
 
-/* Impedisce al testo fisso molto lungo (es. email) di strabordare su schermi piccoli */
+/* Impedisco al testo molto lungo di strabordare su schermi piccoli */
 .valore-fisso {
     word-wrap: break-word;
 }
@@ -102,7 +100,7 @@
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 0.25rem;
+    border-radius: 0.25rem; /* anche se non ha bordo posso arrotondarlo*/
     margin-top: 0.75rem;
     box-sizing: border-box;
     cursor: pointer;
@@ -130,12 +128,13 @@
     color: #cc0000;
     font-size: 0.875rem;
     margin-top: 0.25rem;
-    min-height: 1.25rem; /* Evita il saltellamento del layout alla comparsa dell'errore */
+    min-height: 1.25rem; /* Mi serve per evitare che salta il layout quando c'è errore e modifichi il DOM */
 }
 
 
 
-/* Login: Blocco di rimando alla registrazione */
+/* ID speciali per login, registrazione e modifica cosi non sono esattamente identici*/
+/* Login, se non sei registrato */
 #zona-registrazione-alternativa {
     text-align: center;
     margin-top: 1.5rem;
@@ -170,9 +169,23 @@
 }
 
 
+/* --------------------------- Per Visualizzazzione Admin (Arancione e nero) --------------------------------*/
+.modulo-admin-bg {
+    background-color: #2a2a2a;
+}
+
+.titolo-admin-color {
+    color: #ff8c00;
+}
+
+.azione-admin-color {
+    background-color: #000000;
+    color: #ff8c00;
+}
+/* --------------------------------------Vanno qui cosi sovrascrivono i colori definiti sopra------------------------------------------- */
 
 
-/* Schermi Ultra-Wide / 2K */
+
 @media (max-width: 2560px) {
     .contenitore-pagina {
         padding: 2.5rem 5%;
@@ -182,7 +195,7 @@
     }
 }
 
-/* Laptop e Desktop Standard */
+
 @media (max-width: 1280px) {
     .contenitore-pagina {
         padding: 2rem 5%;
@@ -208,7 +221,7 @@
     }
 }
 
-/* Tablet e Schermi Medi in Landscape (Orizzontale) */
+
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
     .contenitore-pagina {
         padding: 2rem 5%;
@@ -218,7 +231,7 @@
     }
 }
 
-/* Tablet in Portrait (Verticale) */
+
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
     .contenitore-pagina {
         padding: 2rem 4%;
@@ -231,7 +244,7 @@
     }
 }
 
-/* Smartphone e Dispositivi Mobili (Sotto i 768px) */
+
 @media (max-width: 768px) {
     .contenitore-pagina {
         padding: 1.5rem 4%;
@@ -243,7 +256,6 @@
         font-size: 1.5rem; 
     }
     
-    /* Annulliamo l'affiancamento di CAP e Civico portandoli a tutta larghezza verticalmente */
     .meta-larghezza {
         width: 100%;
         float: none;
