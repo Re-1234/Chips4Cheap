@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.sql.DataSource;
 import it.unisa.chips4cheap.model.DTO.Annuncio;
 
@@ -16,20 +18,26 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 	}
 
 	@Override
-	public void doSave(Annuncio elemet) {
+	public int doSave(Annuncio elemet){
 		try(Connection c = ds.getConnection()){
-			PreparedStatement p = c.prepareStatement("Insert into Annuncio(Titolo,Data_Pubblicazione,Descrizione) values (?,?,?)");
+			PreparedStatement p = c.prepareStatement("Insert into Annuncio(Titolo,Data_Pubblicazione,Descrizione) values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			p.setString(1, elemet.getTitolo());
 			p.setDate(2,Date.valueOf(elemet.getDataPublicazione()));
 			p.setString(3, elemet.getText());
 			
 			p.executeUpdate();
 			
+			ResultSet r = p.getGeneratedKeys();
+			
+			int res = r.getInt("IDAnnuncio");
+			
+			r.close();
 			p.close();
+			return res;
 		}catch(SQLException s) {
 			s.printStackTrace();
 		}
-		
+		return -1;
 	}
 
 	@Override
@@ -58,14 +66,14 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 			p.setInt(1,f);
 			ResultSet s = p.executeQuery();
 			if(s.next()){
-				 new Annuncio(
+				return new Annuncio(
 							s.getInt("IDAnnuncio"),
 							s.getString("Titolo"),
 							s.getDate("Data_Pubblicazione").toLocalDate(),
 							s.getString("Descrizione")
 						);
 			}
-			return 			
+			return null; 	
 		}catch(SQLException c){
 			c.printStackTrace();
 		}
@@ -74,9 +82,15 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 
 	@Override
 	public void doUpdate(Annuncio element) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
+		try(Connection c = ds.getConnection()){
+			PreparedStatement p = c.prepareStatement("Update Annoucio Set Titolo = ? , Data_Pubblicazione = ? , Descrizione = ? where IDAnnuncio = ?");
+			p.setString(1, element.getTitolo());
+			p.setDate(2,Date.valueOf(element.getDataPublicazione()));
+			p.setString(3, element.getText());
+			p.setInt(4, element.getIdAnnuncio());
+			p.executeUpdate();
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+	}	
 }

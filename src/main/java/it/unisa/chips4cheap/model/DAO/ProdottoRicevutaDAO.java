@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.Context;
 import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DTO.*;
@@ -20,7 +19,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 	}
 	
 	@Override
-	public void doSave(ProdottoRicevuta elemet) {
+	public int doSave(ProdottoRicevuta elemet) {
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
@@ -37,13 +36,14 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 			pre.setString(7,elemet.getImagine());
 			pre.setString(8,elemet.getTipo());
 			
-			pre.executeUpdate();
+			int d = pre.executeUpdate();
 			pre.close();
 			c.close();
+			return d;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		
+		return -1;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 			PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta where IDRicevutaFiscale = ?");
 			p.setInt(1 , idRicevutaFiscale);
 			ResultSet s = p.executeQuery();
-			ArrayList<ProdottoRicevuta> prodotti = new ArrayList();
+			ArrayList<ProdottoRicevuta> prodotti = new ArrayList<>();
 			
 			while(s.next()){
 				prodotti.add(new ProdottoRicevuta(s.getString("Produttore"),s.getInt("IDRicevutaFiscale"),s.getString("email"),s.getString("NomeModello"),s.getDouble("Prezzo"),s.getString("Tipo"),s.getInt("Quantità"),s.getString("image")));
@@ -81,8 +81,6 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		if(nomeModello == null) {
 			throw new RuntimeException("nomeModello è uguale a null");
 		}
-		
-		Context init;
 		try {
 			Connection c = ds.getConnection();
 			try(PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta Where NomeModello = ? and IDRicevutaFiscale = ?")){

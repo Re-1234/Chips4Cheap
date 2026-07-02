@@ -18,7 +18,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 	}
 	
 	@Override
-	public void doSave(Account elemet){
+	public int doSave(Account elemet){
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
@@ -32,15 +32,16 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				preparedStatement.setString(5,elemet.getCap());
 				preparedStatement.setInt(6,elemet.getNumeroCivico());
 				preparedStatement.setBoolean(7,elemet.isAmministratore());
-				preparedStatement.executeUpdate();
+				
+				int y = preparedStatement.executeUpdate();
 				
 				preparedStatement.close();
+				return y;
 			}
-		
 		} catch(SQLException sqlExe){
 			sqlExe.printStackTrace();
 		}
-		
+		return -1;
 	}
 
 	@Override

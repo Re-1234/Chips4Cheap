@@ -9,6 +9,7 @@ public final class RicevutaFiscale implements Serializable{
 	private String email;
 	private String metodoPagamento;
 	private LocalDate localDate;
+	private int numeroCivico;
 	private String via;
 	private String cap;
 	
@@ -24,12 +25,18 @@ public final class RicevutaFiscale implements Serializable{
 		this.email = email;
 		this.metodoPagamento = metodoPagamento;
 		this.localDate = localDate;
+		this.via = via;
+		this.cap = cap;
 	}
 	
 	public int getIdRicevutaFiscale() {
 		return idRicevutaFiscale;
 	}
 
+	public int getNumeroCivico() {
+		return numeroCivico;
+	}
+	
 	public LocalDate getLocalDate() {
 		return localDate;
 	}	
@@ -41,6 +48,14 @@ public final class RicevutaFiscale implements Serializable{
 	public String getEmail() {
 		return email;
 	}	
+	
+	public String getVia() {
+		return via;
+	}
+	
+	public String getCap() {
+		return cap;
+	}
 	
 	@Override
 	public boolean equals(Object o){
@@ -65,8 +80,6 @@ public final class RicevutaFiscale implements Serializable{
 	
 	@Override
 	public String toString(){
-		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale  + ", metodoPagamento = " + metodoPagamento +  ",email = " + email + ",localDate = " + localDate + "]";
+		return getClass().getName() + "[ idRicevutaFiscale = " + idRicevutaFiscale  + ", metodoPagamento = " + metodoPagamento +  ",email = " + email + ",localDate = " + localDate + ", numeroCivico = "+numeroCivico + ", via = "+via + "cap = "+cap+"]";
 	}
-
-	
 }

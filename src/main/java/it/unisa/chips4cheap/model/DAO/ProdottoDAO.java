@@ -18,7 +18,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 	}
 	
 	@Override
-	public void doSave(Prodotto elemet) {
+	public int doSave(Prodotto elemet) {
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
@@ -32,12 +32,14 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			pre.setInt(5,elemet.getQuantità());
 			pre.setString(6, elemet.getImagine());
 			pre.setString(7,elemet.getTipo());
-			pre.executeUpdate();
+			int y = pre.executeUpdate();
 			pre.close();
 			c.close();
+			return y;
 		}catch(SQLException c){
 			c.printStackTrace();
 		}	
+		return -1;
 	}
 
 	
