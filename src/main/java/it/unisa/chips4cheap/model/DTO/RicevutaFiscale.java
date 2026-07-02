@@ -18,15 +18,19 @@ public final class RicevutaFiscale implements Serializable{
 		metodoPagamento = "";
 		email = "";
 		localDate = LocalDate.now();
+		numeroCivico = 0;
+		via = "";
+		cap = "";
 	}
 	
-	public RicevutaFiscale(int idRicevutaFiscale,String email,String metodoPagamento,LocalDate localDate,String via , String cap){
+	public RicevutaFiscale(int idRicevutaFiscale,String email,String metodoPagamento,LocalDate localDate,String via , String cap, int numeroCivico){
 		this.idRicevutaFiscale = idRicevutaFiscale;
 		this.email = email;
 		this.metodoPagamento = metodoPagamento;
 		this.localDate = localDate;
 		this.via = via;
 		this.cap = cap;
+		this.numeroCivico = numeroCivico;
 	}
 	
 	public int getIdRicevutaFiscale() {

@@ -57,7 +57,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				preparedStatement.setInt(1,intero);
 				ResultSet resultSet = preparedStatement.executeQuery();
 				if(resultSet.next()){
-						RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),resultSet.getString("email"),resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate(),resultSet.getString("via"),resultSet.getString("Cap"));
+						RicevutaFiscale ricevuta1 = new RicevutaFiscale(resultSet.getInt("IDRicevutaFiscale"),resultSet.getString("email"),resultSet.getString("metodoPagamento"),resultSet.getDate("DataEmissione").toLocalDate(),resultSet.getString("via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"));
 						resultSet.close();
 						return ricevuta1;
 				}else{
@@ -79,7 +79,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 			ResultSet r = p.executeQuery();
 			ArrayList<RicevutaFiscale> ricevute = new ArrayList<>();
 			while(r.next()){
-				ricevute.add(new RicevutaFiscale(r.getInt("IDRicevutaFiscale"),r.getString("email"),r.getString("metodoPagamento"),r.getDate("DataEmissione").toLocalDate(),r.getString("via"),r.getString("Cap")));
+				ricevute.add(new RicevutaFiscale(r.getInt("IDRicevutaFiscale"),r.getString("email"),r.getString("metodoPagamento"),r.getDate("DataEmissione").toLocalDate(),r.getString("via"),r.getString("Cap"),r.getInt("NumeroCivico")));
 			}
 			return ricevute;
 		}catch(SQLException s){

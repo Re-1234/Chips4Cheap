@@ -1,7 +1,6 @@
 drop database Chips4Cheap;
 create database Chips4Cheap;
 
-
 use Chips4Cheap;
 
 create table Account1(
@@ -26,34 +25,38 @@ create table Prodotto(
 	primary key(NomeModello)
 );
 
+create table Annuncio(
+		Titolo varchar(100) not null,
+        IDAnnuncio int not null auto_increment,
+		Data_Pubblicazione date not null,
+		Descrizione text not null,
+		primary key(IDAnnuncio)
+);
+
+
 create table RicevutaFiscale(
 	IDRicevutaFiscale int not null auto_increment,
     email varchar(50) not null,
     metodoPagamento varchar(50) not null,
     DataEmissione Date not null,
+    NumeroCivico int not null,
+    via varchar(50) not null,
+    Cap char(5) not null,
     foreign key(email)references Account1(email) on update cascade on delete cascade, 
     primary key(email , IDRicevutaFiscale),
 	Key(IDRicevutaFiscale)
 );
 
-
 create table ProdottoRicevuta(
 	Prezzo double not null,
+    Quantità int not null,
     Produttore varchar(50) not null,
+    IDRicevutaFiscale int not null ,
     email varchar(50) not null,
     NomeModello varchar(50) not null,
     image varchar(50) not null,
     tipo varchar(50) not null,
-    primary key(NomeModello)
-);
-
-
-create table ha(
-	IDRicevutaFiscale int not null auto_increment,
-	Email varchar(50) not null,
-    NomeModello varchar(50) not null,
-    foreign key(Email,IDRicevutaFiscale) references RicevutaFiscale(Email,IDRicevutaFiscale) on update cascade on delete cascade,
-    foreign key(NomeModello)references ProdottoRicevuta(NomeModello) on update cascade on delete cascade,
-    primary key(Email,IDRicevutaFiscale,NomeModello),
+    foreign key(email , IDRicevutaFiscale) references RicevutaFiscale(email ,IDRicevutaFiscale) on update cascade on delete cascade,
+    primary key(email ,IDRicevutaFiscale, NomeModello),
     Key(IDRicevutaFiscale)
 );
