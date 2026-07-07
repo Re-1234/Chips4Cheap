@@ -211,6 +211,22 @@ devo vedere ora per questo secondo body */
     margin-left: 1rem;
 }
 
+/* ---------------------------------- */
+
+/* --------------------------- Per Visualizzazzione Admin (Arancione e nero) --------------------------------*/
+.modulo-admin-bg {
+    background-color: #2a2a2a;
+}
+
+.titolo-admin-color {
+    color: #ff8c00;
+}
+
+.azione-admin-color {
+    background-color: #000000;
+    color: #ff8c00;
+}
+/* --------------------------------------Vanno qui cosi sovrascrivono i colori definiti sopra------------------------------------------- */
 
 
 @media (max-width: 2560px) {
