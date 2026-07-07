@@ -15,7 +15,7 @@ import it.unisa.chips4cheap.model.DTO.Prodotto;
 /**
  * Servlet implementation class Pagamento
  */
-@WebServlet("/common//Pagamento")
+@WebServlet("/common/Pagamento")
 public class Pagamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class Pagamento extends HttpServlet {
             return;
         }
         
-		request.getRequestDispatcher("/WEB-INF/common/pagamento.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/common/pagamento.jsp").forward(request, response);
 	}
 
 	/**

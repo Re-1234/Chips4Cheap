@@ -49,26 +49,26 @@ public class ModificaAccount extends HttpServlet {
             numeroCivico == null || !numeroCivico.trim().isEmpty()) {
             
             request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
 
         if (!cap.trim().matches("^\\d{5}$")) {
             request.setAttribute("erroreServer", "Il CAP deve essere composto da esattamente 5 cifre numeriche.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
 
         if (!numeroCivico.trim().matches("^\\d+$")) {
             request.setAttribute("erroreServer", "Il numero civico deve essere un valore numerico.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
         
         String hashedVecchia = hashPasswordSHA512(vecchiaPassword);
         if (!hashedVecchia.equals(accountLoggato.getPassword())) {
             request.setAttribute("erroreServer", "La vecchia password inserita non è corretta.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
 
