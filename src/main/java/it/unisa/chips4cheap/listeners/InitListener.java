@@ -18,7 +18,7 @@ public class InitListener implements ServletContextListener{
 		try{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			ds = (DataSource) envCtx.lookup("jdbc/Chips4Cheap");
+			ds = (DataSource) envCtx.lookup("jdbc/Chips4CheapDB");
 		}catch(NamingException e){
 			System.out.println("Error:" + e.getMessage());
 		}
