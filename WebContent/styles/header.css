@@ -1,17 +1,8 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #DFDFDF;
-}
+@charset "UTF-8";
 
 header {
     background-color: #000080;
-    min-height: 6.25rem; /* ~100px */
+    min-height: 6.25rem; 
     overflow: hidden; 
 }
 
@@ -23,13 +14,13 @@ header {
 .nav-principale a {
     text-decoration: none;
     display: inline-block;
-    line-height: 6.25rem; /* Stessa altezza del contenitore per centrare in verticale */
+    line-height: 6.25rem; 
 }
 
 .logo {
     float: left;
     color: #FFCA00;
-    font-size: 2rem; /* ~32px */
+    font-size: 2rem; 
     font-weight: bold;
     padding-left: 4%;
     padding-right: 3%;
@@ -38,7 +29,7 @@ header {
 .nav-link {
     float: left;
     color: #FFFFFF;
-    font-size: 1.375rem; /* ~22px */
+    font-size: 1.375rem; 
     font-weight: 500;
 }
 
@@ -51,7 +42,7 @@ header {
     background-color: #FFCA00;
     color: #000000;
     padding: 0 4%;
-    font-size: 1.5rem; /* ~24px */
+    font-size: 1.5rem; 
     font-weight: bold;
 }
 
@@ -62,7 +53,7 @@ header {
 .user-link {
     float: right;
     color: #FFFFFF;
-    font-size: 1.375rem; /* ~22px */
+    font-size: 1.375rem; 
     padding-right: 3%;
 }
 
@@ -73,22 +64,22 @@ header {
 
 @media (max-width: 2560px) {
     header {
-        min-height: 5rem; /* ~80px */
+        min-height: 5rem; 
     }
     .nav-principale a {
         line-height: 5rem;
     }
     .logo {
-        font-size: 1.625rem; /* ~26px */
+        font-size: 1.625rem; 
         padding-left: 3%;
         padding-right: 2%;
     }
     .nav-link {
-        font-size: 1.125rem; /* ~18px */
+        font-size: 1.125rem; 
     }
     .catalog-btn {
         padding: 0 3%;
-        font-size: 1.25rem; /* ~20px */
+        font-size: 1.25rem; 
     }
     .user-link {
         font-size: 1.125rem;
@@ -99,22 +90,22 @@ header {
 
 @media (max-width: 1280px) {
     header {
-        min-height: 3.75rem; /* ~60px */
+        min-height: 3.75rem; 
     }
     .nav-principale a {
         line-height: 3.75rem;
     }
     .logo {
-        font-size: 1.375rem; /* ~22px */
+        font-size: 1.375rem; 
         padding-left: 2%;
         padding-right: 2%;
     }
     .nav-link {
-        font-size: 0.9375rem; /* ~15px */
+        font-size: 0.9375rem; 
     }
     .catalog-btn {
         padding: 0 2%;
-        font-size: 1.125rem; /* ~18px */
+        font-size: 1.125rem;
     }
     .user-link {
         font-size: 0.9375rem;
@@ -125,22 +116,22 @@ header {
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
     header {
-        min-height: 4.375rem; /* ~70px */
+        min-height: 4.375rem; 
     }
     .nav-principale a {
         line-height: 4.375rem;
     }
     .logo {
-        font-size: 1.5rem; /* ~24px */
+        font-size: 1.5rem; 
         padding-left: 2.5%;
         padding-right: 2.5%;
     }
     .nav-link {
-        font-size: 1rem; /* ~16px */
+        font-size: 1rem; 
     }
     .catalog-btn {
         padding: 0 3%;
-        font-size: 1.1875rem; /* ~19px */
+        font-size: 1.1875rem; 
     }
     .user-link {
         font-size: 1rem;
@@ -151,22 +142,22 @@ header {
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
     header {
-        min-height: 4.0625rem; /* ~65px */
+        min-height: 4.0625rem; 
     }
     .nav-principale a {
         line-height: 4.0625rem;
     }
     .logo {
-        font-size: 1.25rem; /* ~20px */
+        font-size: 1.25rem; 
         padding-left: 2%;
         padding-right: 2%;
     }
     .nav-link {
-        font-size: 0.875rem; /* ~14px */
+        font-size: 0.875rem; 
     }
     .catalog-btn {
         padding: 0 2%;
-        font-size: 1rem; /* ~16px */
+        font-size: 1rem; 
     }
     .user-link {
         font-size: 0.875rem;
@@ -178,7 +169,7 @@ header {
 @media (max-width: 768px) {
     header {
         min-height: auto;
-        padding: 1rem 0; /* padding verticale */
+        padding: 1rem 0; 
     }
     .nav-principale a {
         float: none;
@@ -186,7 +177,7 @@ header {
         width: 100%;
         text-align: center;
         line-height: normal;
-        padding: 0.625rem 0; /* ~10px di spazio tra i link */
+        padding: 0.625rem 0; /
     }
     .logo {
         padding: 0.3125rem 0;
@@ -197,7 +188,7 @@ header {
     }
     .catalog-btn {
         width: 90%;
-        margin: 0.625rem auto; /* centratura del bottone */
+        margin: 0.625rem auto; 
         padding: 0.75rem 0;
         font-size: 1.125rem;
     }
