@@ -24,8 +24,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 			throw new NullPointerException();
 		}
 		
-		try{
-			Connection c = ds.getConnection();
+		try(Connection c = ds.getConnection()){
 			PreparedStatement pre = c.prepareStatement("Insert into ProdottoRicevuta(Prezzo , Produttore , IDRicevutaFiscale , email , NomeModello , Quantità , image , tipo) values (?,?,?,?,?,?,?,?)"); 
 			pre.setDouble(1,elemet.getPrezzo());
 			pre.setString(2, elemet.getnCAutore());
@@ -81,8 +80,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		if(nomeModello == null) {
 			throw new RuntimeException("nomeModello è uguale a null");
 		}
-		try {
-			Connection c = ds.getConnection();
+		try(Connection c = ds.getConnection()){
 			try(PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta Where NomeModello = ? and IDRicevutaFiscale = ?")){
 				p.setString(1, nomeModello);
 				p.setInt(2 , idRicevutaFiscale);

@@ -22,15 +22,20 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 	
 	@Override
 	public int doSave(RicevutaFiscale elemet){
-			try {
-				Connection connection = ds.getConnection();
-				PreparedStatement pre = connection.prepareStatement("Insert into RicevutaFiscale(email,metodoPagamento,DataEmissione) Values (?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			try(Connection connection = ds.getConnection()){
+				PreparedStatement pre = connection.prepareStatement("Insert into RicevutaFiscale(email,metodoPagamento,DataEmissione,NumeroCivico,via,Cap) Values (?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 				pre.setString(1,elemet.getEmail());
 				pre.setString(2,elemet.getMetodoPagamento());
 				pre.setDate(3,Date.valueOf(elemet.getLocalDate()));
+				pre.setInt(4,elemet.getNumeroCivico());
+				pre.setString(5,elemet.getVia());
+				pre.setString(6,elemet.getCap());
 				pre.executeUpdate();
 				ResultSet r = pre.getGeneratedKeys();
-				int id = r.getInt("IDRicevutaFiscale");
+				int id = 0;
+				if(r.next()){
+					id = r.getInt("IDRicevutaFiscale");
+				}
 				r.close();
 				pre.close();
 				connection.close();

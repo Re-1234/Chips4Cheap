@@ -9,8 +9,9 @@ public class Prodotto implements Cloneable , Serializable{
 	private String descrizione;
 	private String tipo;
 	private int quantità;
+	private int sconto;
 	private String imagine;
-	public final static double EPSILON = 1e9; 
+	public final static double EPSILON = 1e-9; 
 	
 	public Prodotto(){
 		this.nCAutore = "";
@@ -108,6 +109,14 @@ public class Prodotto implements Cloneable , Serializable{
 	@Override
 	public String toString(){
 		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo + ", descrizione = " + descrizione +", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
+	}
+
+	public int getSconto() {
+		return sconto;
+	}
+
+	public void setSconto(int sconto) {
+		this.sconto = sconto;
 	}
 	
 	

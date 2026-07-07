@@ -128,7 +128,7 @@ public class Account implements Cloneable , Serializable{
 		 Account account = (Account) o;
 		 
 		 return username.equalsIgnoreCase(account.username) && password.equalsIgnoreCase(account.password) && via.equalsIgnoreCase(account.via) && 
-	     this.cap == account.cap && this.numeroCivico == account.numeroCivico && this.email.equalsIgnoreCase(account.email) && this.amministratore == account.amministratore; 
+	     cap.equalsIgnoreCase(account.cap) && this.numeroCivico == account.numeroCivico && this.email.equalsIgnoreCase(account.email) && this.amministratore == account.amministratore; 
 	 }
 
 	 
