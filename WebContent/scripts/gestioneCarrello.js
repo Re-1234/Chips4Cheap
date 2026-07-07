@@ -5,7 +5,7 @@ function modificaCarrello(modello, azione) {
 
     setTimeout(function () {
 		if(xhr.readyState < 4){
-			request.abort();
+			xhr.abort();	// non request.abort() giusto?
 		}
 	}, 10000);
 

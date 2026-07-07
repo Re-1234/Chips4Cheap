@@ -33,31 +33,31 @@
                 
                 <c:otherwise>
                     <ul class="lista-elementi">
-                        <c:forEach var="item" items="${sessionScope.carrello}">
-                            <li class="scheda-elemento" id="riga-${item.prodotto.nomeModello}">
+                        <c:forEach var="prodotto" items="${sessionScope.carrello}">
+                            <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
         
-        						<c:if test="${not empty item.prodotto.imagine}">
-            						<img src="${pageContext.request.contextPath}/images/${item.prodotto.imagine}" alt="${item.prodotto.nomeModello}" width="60">
+        						<c:if test="${not empty prodotto.imagine}">
+            						<img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
         						</c:if>
         
         						<span class="testo-modello">
-                                    <a href="${pageContext.request.contextPath}/Prodotto?id=${item.prodotto.nomeModello}">
-                                        ${item.prodotto.nomeModello}
+                                    <a href="${pageContext.request.contextPath}/Prodotto?id=${prodotto.nomeModello}">
+                                        ${prodotto.nomeModello}
                                     </a>
                                 </span>
-        						<span>Produttore: ${item.prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${item.prodotto.prezzo} €</span>
+        						<span>Produttore: ${prodotto.nCAutore}</span>
+        						<span>Prezzo unitario: ${prodotto.prezzo} €</span>
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'diminuisci')">-</button>
-            						<span id="quantita-${item.prodotto.nomeModello}">${item.quantita}</span>
-            						<button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'aumenta')">+</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci')">-</button>
+            						<span id="quantita-${prodotto.nomeModello}">${prodotto.quantità}</span>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta')">+</button>
         						</span>
         
-        						<span id="subtotale-${item.prodotto.nomeModello}">Subtotale: ${item.prodotto.prezzo * item.quantita} €</span>
+        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.prezzo * prodotto.quantità} €</span>
         
-       							 <button type="button" onclick="modificaCarrello('${item.prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
+       							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
         
     						</li>
                         </c:forEach>
