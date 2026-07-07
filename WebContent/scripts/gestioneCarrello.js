@@ -5,7 +5,7 @@ function modificaCarrello(modello, azione) {
 
     setTimeout(function () {
 		if(xhr.readyState < 4){
-			request.abort();
+			xhr.abort();	// non request.abort() giusto?
 		}
 	}, 10000);
 
@@ -27,14 +27,13 @@ function modificaCarrello(modello, azione) {
                 var totaleEl = document.getElementById("totale-carrello-dinamico");
                 if (totaleEl) totaleEl.innerText = data.nuovoTotale + " €";
 
-                if (data.carrelloVuoto){/* window.location.reload();  Ricarico cosi tutta la pagina e mando un altra richiesta? (facendo vedere il messaggio che il carrello è vuoto) */
+                if (data.carrelloVuoto){/* Ricarico cosi tutta la pagina e mando un altra richiesta? (facendo vedere il messaggio che il carrello è vuoto) */
 					var pagina = document.getElementById("blocco-contenuto");
-					var contextPath = "${pageContext.request.contextPath}"; // Mi serve per l'hyperlink
 					pagina.innerHTML =
 						'<h2>Il tuo Carrello</h2>' +
 						'<p class="avviso-vuoto">Il tuo carrello è attualmente vuoto.</p>' +
 					    '<div class="zona-navigazione">' +
-					    '    <a href=' + contextPath + '/Catalogo class="link-navigazione-indietro">' +
+					    '    <a href="/Chips4Cheap/Catalogo" class="link-navigazione-indietro">' +	// non posso fare "${pageContext.request.contextPath}" in un JS esterno potrei passarlo da JSP
 					    '        Torna al Catalogo prodotti' +
 					   	'    </a>' +
 					   	'</div>'; // evito di rimandare una richiesta al server cosi, anche se è bruttissimo per via dei new-line characters

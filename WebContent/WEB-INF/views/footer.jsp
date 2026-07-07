@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
 </head>
 
-<footer class="piede-pagina">
+<footer>
         
         <div class="blocco-sinistro">
             <span class="testo-info"> Sede Legale: Via dei Chip 4, Milano</span>

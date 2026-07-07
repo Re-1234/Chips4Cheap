@@ -105,7 +105,7 @@ public class CreaRicevuta extends HttpServlet {
                         idRicevutaGenerato,
                         accountLoggato.getEmail(),
                         p.getNomeModello(),
-                        p.getPrezzo(),
+                        p.getPrezzo(),	// devo contrllare lo sconto quando lo mettiamo
                         p.getTipo(),
                         p.getQuantità(),
                         p.getImagine()
