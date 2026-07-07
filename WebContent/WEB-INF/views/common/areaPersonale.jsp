@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
-<body>
+<body class="${sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">	<!-- un po brutto per applicare la vista admin ma funziona, senza avre strisce per via del padding -->
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-pagina ${sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">	<!-- un po brutto per applicare la vista admin ma funziona -->
+    <main class="contenitore-pagina">
         <div class="modulo-centrato">
             
             <h2 class="${sessionScope.account.amministratore ? 'titolo-admin-color' : ''}">

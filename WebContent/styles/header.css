@@ -1,16 +1,5 @@
 @charset "UTF-8";
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    /* background-color: #DFDFDF;	ripara il problema ma ho definizioni di * html e body dappertutto */
-}
-
 header {
     background-color: #000080;
     min-height: 6.25rem; 

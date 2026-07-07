@@ -1,13 +1,32 @@
 @charset "UTF-8";
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+html {
+    height: 100%;
+    background-color: #dfdfdf; /* Colore grigio di base per tutta l'applicazione */
+}
 
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 7.5rem; /* Rilascia lo spazio per il footer absolute */
+    background-color: transparent; /* Evita conflitti di colore con html */
+}
+
+/*
 body {
     background-color: #dfdfdf;
     color: #333333;
     margin: 0;
     padding: 0;
 }
+devo vedere ora per questo secondo body */
 
 .contenitore-generico {
     padding: 3rem 5%; 

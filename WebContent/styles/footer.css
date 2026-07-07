@@ -1,22 +1,5 @@
 @charset "UTF-8";
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    /* background-color: #DFDFDF;	ripara il problema ma ho definizioni di * html e body dappertutto */
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 7.5rem; 
-}
 
 footer {
     background-color: #000080;
