@@ -16,7 +16,7 @@ body {
     min-height: 100%;
     position: relative;
     padding-bottom: 7.5rem; /* Rilascia lo spazio per il footer absolute */
-    background-color: transparent; /* Evita conflitti di colore con html */
+    background-color: transparent; /* ??? */
 }
 
 /*
@@ -28,32 +28,33 @@ body {
 }
 devo vedere ora per questo secondo body */
 
-.contenitore-generico {
+main {
     padding: 3rem 5%; 
     display: block;
-    max-width: 75rem;
+    max-width: 100rem;
     margin: 0 auto;
     box-sizing: border-box;
+    
+    overflow: hidden; /* mi serve? */ 
 }
 
-.blocco-contenuto {
+section {
     width: 100%;
-    background-color: #ffffff; 
     padding: 2rem;
     border-radius: 0.5rem;
     box-sizing: border-box;
     overflow: hidden;
-    border: 1px solid #cccccc;
+    border: 3px solid #cccccc;
 }
 
-.blocco-contenuto h1 {
+section h1 {
     color: #000080;
     font-size: 2.25rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
 }
 
-.blocco-contenuto h2 {
+section h2 {
     color: #000080;
     font-size: 1.75rem;
     margin-bottom: 1.25rem;
@@ -61,7 +62,7 @@ devo vedere ora per questo secondo body */
     padding-bottom: 0.5rem;
 }
 
-.blocco-contenuto p {
+section p {
     font-size: 1.05rem;
     line-height: 1.6;
     color: #333333;
@@ -69,29 +70,23 @@ devo vedere ora per questo secondo body */
 }
 
 
-
-.area-bicolonna {
-    width: 100%;
-    overflow: hidden;
-}
-
-.testo-principale {
+.pagina-bicolonna {
     width: 68%;
     float: left;
     box-sizing: border-box;
 }
 
-.barra-laterale {
+aside {
     width: 28%;
     float: right;
-    background-color: #f5f5f5; 
+    background-color: #ffffff; 
     padding: 1.5rem;
     border-radius: 0.375rem;
     box-sizing: border-box;
     border-left: 4px solid #000080;
 }
 
-.barra-laterale h3 {
+aside h3 {
     color: #000080;
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -101,7 +96,7 @@ devo vedere ora per questo secondo body */
 
 
 
-.blocco-contenuto h1.titolo-errore {
+section h1.titolo-errore {
     color: #cc0000;
     text-align: center;
 }
@@ -136,7 +131,7 @@ devo vedere ora per questo secondo body */
     display: inline-block;
     margin-right: 2rem;
     font-size: 1rem;
-    color: #333333;
+    color: #cccccc;
 }
 
 
@@ -147,7 +142,7 @@ devo vedere ora per questo secondo body */
 }
 
 .link-navigazione-indietro,
-.link-nascosto-elemento {
+.link-nascosto-elemento {	/* non è tanto nascosto */
     display: inline-block;
     background-color: #000080; 
     color: #FFCA00; 
@@ -177,8 +172,7 @@ devo vedere ora per questo secondo body */
 }
 
 .avviso-vuoto {
-    background-color: #ffffff;
-    color: #666666;
+    color: #cccccc;
     padding: 1.5rem;
     border-radius: 0.25rem;
     text-align: center;
@@ -188,25 +182,21 @@ devo vedere ora per questo secondo body */
 
 /* ------------- NEW --------------- */
 
-/* Applica il grassetto e il colore blu scuro aziendale a qualsiasi testo */
 .testo-importante {
     font-weight: bold;
     color: #000080;
 }
 
-/* Crea una linea di separazione superiore con margine (es. riepiloghi, totali, sezioni) */
 .separatore-alto {
     border-top: 2px solid #000080;
     margin-top: 1.5rem;
     padding-top: 1rem;
 }
 
-/* Utility di spaziatura standard per distanziare i blocchi verso il basso */
 .margine-alto {
     margin-top: 1.5rem;
 }
 
-/* Utility di spaziatura standard per distanziare elementi affiancati (es. bottoni in linea) */
 .margine-sinistra {
     margin-left: 1rem;
 }
@@ -230,22 +220,22 @@ devo vedere ora per questo secondo body */
 
 
 @media (max-width: 2560px) {
-    .contenitore-generico {
+    main {
         padding: 2.5rem 5%;
     }
 }
 
 @media (max-width: 1280px) {
-    .contenitore-generico {
+    main {
         padding: 2rem 5%;
     }
-    .blocco-contenuto h1 {
+    section h1 {
         font-size: 2rem;
     }
-    .blocco-contenuto h2 {
+    section h2 {
         font-size: 1.5rem;
     }
-    .blocco-contenuto p,
+    section p,
     .scheda-elemento span {
         font-size: 0.95rem;
     }
@@ -255,42 +245,42 @@ devo vedere ora per questo secondo body */
 }
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
-    .testo-principale {
+    .pagina-bicolonna {
         width: 65%;
     }
-    .barra-laterale {
+    aside {
         width: 31%;
     }
 }
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
-    .contenitore-generico {
+    main {
         padding: 2rem 4%;
     }
-    .testo-principale {
+    .pagina-bicolonna {
         width: 60%;
     }
-    .barra-laterale {
+    aside {
         width: 36%;
         padding: 1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .contenitore-generico {
+    main {
         padding: 1.5rem 4%;
     }
-    .blocco-contenuto {
+    section {
         padding: 1.25rem;
     }
     
-    .testo-principale {
+    .pagina-bicolonna {
         width: 100%;
         float: none;
         margin-bottom: 2rem; 
     }
     
-    .barra-laterale {
+    aside {
         width: 100%;
         float: none;
         border-left: none;

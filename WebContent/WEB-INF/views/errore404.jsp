@@ -13,11 +13,19 @@
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore testo-centrato">
-        <h1>Errore 404</h1>
-        <p>Ci dispiace, ma la pagina che stai cercando non esiste o è stata spostata.</p>
+    <main>
+    	<section class="pagina-bicolonna">
+    	
+        	<h1>Errore 404</h1>
+        	<p>Ci dispiace, ma la pagina che stai cercando non esiste o è stata spostata.</p>
         
-        <a href="${pageContext.request.contextPath}/" class="bottone">Torna alla Home</a>
+        	<a href="${pageContext.request.contextPath}/" class="bottone">Torna alla Home</a>
+        
+        </section>
+        <aside>
+        	<h3>Per favore funziona</h3>
+        	<p> non ci riesco più <p>
+        </aside>
     </main>
 
     <jsp:include page="footer.jsp" />
