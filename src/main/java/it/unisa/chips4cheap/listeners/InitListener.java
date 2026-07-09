@@ -1,5 +1,7 @@
 package it.unisa.chips4cheap.listeners;
 
+import java.util.ArrayList;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,6 +10,9 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import javax.sql.DataSource;
+
+import it.unisa.chips4cheap.model.DAO.AnnuncioDAO;
+import it.unisa.chips4cheap.model.DTO.Annuncio;
 
 @WebListener
 public class InitListener implements ServletContextListener{
@@ -23,6 +28,17 @@ public class InitListener implements ServletContextListener{
 			System.out.println("Error:" + e.getMessage());
 		}
 		context.setAttribute("DataSource", ds);
+		
+		if (ds != null) {
+			AnnuncioDAO annuncioDAO = new AnnuncioDAO(ds);
+			ArrayList<Annuncio> listaAnnunci = annuncioDAO.doRetrieveAll();
+			
+			// per l'aside lo metto nel contesto globale
+			context.setAttribute("tuttiAnnunci", listaAnnunci);
+			System.out.println("[InitListener] " + listaAnnunci.size() + " annunci caricati correttamente in memoria.");
+		} else {
+			System.out.println("[InitListener] Impossibile caricare gli annunci: DataSource nullo.");
+		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {

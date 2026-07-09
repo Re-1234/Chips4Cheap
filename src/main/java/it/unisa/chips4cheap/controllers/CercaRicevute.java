@@ -22,7 +22,7 @@ import it.unisa.chips4cheap.model.DTO.RicevutaFiscale;
 /**
  * Servlet implementation class CercaRicevute
  */
-@WebServlet("/CercaRicevute")
+@WebServlet("/admin/CercaRicevute")
 public class CercaRicevute extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

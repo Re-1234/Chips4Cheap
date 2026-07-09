@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
 </head>
-<body>
+<body class="${sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">
 
     <jsp:include page="../header.jsp" />
 
     <main>
         <section>
             
-            <h2>Dettaglio Ricevuta Fiscale n° ${ricevuta.IDRicevutaFiscale}</h2>
+            <h2 class="${sessionScope.account.amministratore ? 'titolo-admin-color' : ''}">
+                Dettaglio Ricevuta Fiscale n° ${ricevuta.idRicevutaFiscale}
+            </h2>
 
             <ul class="lista-elementi">
                 <li class="scheda-elemento">
@@ -27,7 +29,7 @@
                     <span>Data di Emissione: ${ricevuta.localDate}</span>
                 </li>
                 <li class="scheda-elemento">
-                    <span>Metodo di Pagamento: ${ricevuta.metodoPagamento}</span> <!-- CONTROLLA PER LA NUOVA VERSIONE DEL BEAN -->
+                    <span>Metodo di Pagamento: ${ricevuta.metodoPagamento}</span>
                 </li>
                 <li class="scheda-elemento">
                     <span>Intestatario (Email): ${ricevuta.email}</span>
@@ -43,7 +45,9 @@
                 </li>
             </ul>
 
-            <h2>Articoli Acquistati</h2>
+            <h2 class="${sessionScope.account.amministratore ? 'titolo-admin-color' : ''}">
+                Articoli Acquistati
+            </h2>
 
             <ul class="lista-elementi">
                 <c:forEach var="prodotto" items="${requestScope.listaProdotti}">
@@ -58,9 +62,18 @@
             </ul>
 
             <div class="zona-navigazione">
-                <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-navigazione-indietro">
-                    Torna allo Storico Ricevute
-                </a>
+                <c:choose>
+                    <c:when test="${sessionScope.account.amministratore}">
+                        <a href="${pageContext.request.contextPath}/admin/CercaRicevute" class="link-navigazione-indietro azione-admin-color">
+                            Torna alla Ricerca Ricevute
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-navigazione-indietro">
+                            Torna allo Storico Ricevute
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </div>
             
         </section>

@@ -8,7 +8,7 @@
 
 html {
     height: 100%;
-    background-color: #dfdfdf; /* Colore grigio di base per tutta l'applicazione */
+    background-color: #dfdfdf; 
 }
 
 body {
@@ -16,7 +16,7 @@ body {
     min-height: 100%;
     position: relative;
     padding-bottom: 7.5rem; /* Rilascia lo spazio per il footer absolute */
-    background-color: transparent; /* Evita conflitti di colore con html */
+    background-color: transparent; /* ??? */
 }
 
 main {
@@ -81,16 +81,25 @@ main {
     box-sizing: border-box;
 }
 
-/* Impedisco al testo molto lungo di strabordare su schermi piccoli */
+.gruppo-campo textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical; /*solo verso il basso */
+}
+
+/* testo molto lungo puo strabordare su schermi piccoli */
 .valore-fisso {
     word-wrap: break-word;
 }
 
-
-
 .riga-doppia {
     width: 100%;
-    overflow: hidden; /* Clearfix automatico per i float dei figli */
+    overflow: hidden; /* per i float dei figli */
 }
 
 .meta-larghezza {
