@@ -15,8 +15,8 @@
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-pagina">
-        <div class="modulo-centrato">
+    <main>
+        <section class="modulo-centrato">
             
             <h2>Completamento Ordine</h2>
             
@@ -74,7 +74,7 @@
 
             </form>
             
-        </div>
+        </section>
     </main>
 
     <jsp:include page="../footer.jsp" />

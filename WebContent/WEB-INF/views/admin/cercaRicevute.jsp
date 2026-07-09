@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
 <body class="modulo-admin-bg" data-context="${pageContext.request.contextPath}">
 
