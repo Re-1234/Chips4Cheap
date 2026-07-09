@@ -1,53 +1,54 @@
 function filtraRicevute() {
-    // Recupera il contextPath impostato dinamicamente come data-attribute sul body della JSP
-    var contextPath = document.body.getAttribute("data-context");
-    
-    var cliente = document.getElementById("filtro-cliente").value;
+    var emailCliente = document.getElementById("filtro-cliente").value;
     var dataInizio = document.getElementById("data-inizio").value;
     var dataFine = document.getElementById("data-fine").value;
-    var lista = document.getElementById("lista-ricevute");
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", contextPath + "/admin/CercaRicevute", true);
+    xhr.open("POST", "CercaRicevute", true); 
     xhr.setRequestHeader("Content-Type", "application/json");
 
     setTimeout(function () {
-        if (xhr.readyState < 4) {
+        if(xhr.readyState < 4){
             xhr.abort();
         }
     }, 10000);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var ricevute = JSON.parse(xhr.responseText);
-            lista.innerHTML = "";
-
-            if (ricevute.length === 0) {
-                lista.innerHTML = '<p class="avviso-vuoto">Nessuna ricevuta fiscale trovata con i filtri selezionati.</p>';
+            var data = JSON.parse(xhr.responseText);
+            var listaRicevute = document.getElementById("lista-ricevute");
+            
+            listaRicevute.innerHTML = ""; 
+            
+            if (!data || data.length === 0) {
+                listaRicevute.innerHTML = '<li class="avviso-vuoto">Nessuna ricevuta trovata per i filtri selezionati.</li>';
             } else {
-                for (var i = 0; i < ricevute.length; i++) {
-                    var r = ricevute[i];
-                    var li = document.createElement("li");
-                    li.className = "scheda-elemento";
+                var risultatiHTML = "";
+                
+                for (var i = 0; i < data.length; i++) {
+                    var r = data[i];
                     
-                    li.innerHTML = 
-                        '<span><strong class="testo-importante">ID Ordine:</strong> #' + r.idOrdine + '</span>' +
-                        '<span><strong>Cliente:</strong> ' + r.usernameCliente + '</span>' +
-                        '<span><strong>Data:</strong> ' + r.dataEmissione + '</span>' +
-                        '<span><strong class="testo-importante">Totale:</strong> ' + r.totale.toFixed(2) + ' €</span>' +
-                        '<a href="' + contextPath + '/admin/DettaglioRicevuta?id=' + r.idOrdine + '" class="link-nascosto-elemento azione-admin-color">Dettagli</a>';
-                    
-                    lista.appendChild(li);
+                    risultatiHTML += 
+                        '<li class="scheda-elemento">' +
+                        '    <span>Ricevuta n°: ' + r.IDRicevutaFiscale + '</span>' +
+                        '    <span>Utente: ' + r.emailUtente + '</span>' +
+                        '    <span>Emessa il: ' + r.dataEmissione + '</span>' +
+                        '    <span>Pagamento: ' + r.metodoPagamento + '</span>' +
+                        '    <span>Via: ' + r.via + '</span>' +
+                        '    <a href="/Chips4Cheap/VisualizzaRicevuta?id=' + r.IDRicevutaFiscale + '">Apri Ricevuta</a>' +
+                        '</li>';
                 }
+                
+                listaRicevute.innerHTML = risultatiHTML;
             }
         }
     };
 
-    var datiFiltro = {
-        cliente: cliente,
-        dataInizio: dataInizio,
-        dataFine: dataFine
+    var dati = { 
+        emailCliente: emailCliente, 
+        dataInizio: dataInizio, 
+        dataFine: dataFine 
     };
-
-    xhr.send(JSON.stringify(datiFiltro));
+    
+    xhr.send(JSON.stringify(dati));
 }

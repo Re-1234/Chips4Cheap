@@ -16,7 +16,7 @@
     <main>
     	<section class="pagina-bicolonna">
     	
-        	<h1>Errore 404</h1>
+        	<h1 class="titolo-errore">Errore 404</h1>
         	<p>Ci dispiace, ma la pagina che stai cercando non esiste o è stata spostata.</p>
         
         	<a href="${pageContext.request.contextPath}/Home" class="link-navigazione-indietro">Torna alla Home</a>

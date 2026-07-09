@@ -37,7 +37,7 @@
             
             <div>
                 <label for="filtro-cliente" class="testo-importante">Username Cliente:</label>
-                <input type="text" id="filtro-cliente" placeholder="Es. utente99">
+                <input type="email" id="filtro-cliente" placeholder="Es. john.smith@gmail.com">
             </div>
             
             <div class="margine-alto">

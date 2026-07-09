@@ -66,8 +66,8 @@ public class VisualizzaRicevuta extends HttpServlet {
             }
             */
             
-        // è tua la ricevuta?
-        if (!ricevuta.getEmail().equals(accountLoggato.getEmail())) {
+        // è tua la ricevuta? AGGIUNTO: sei admin?
+        if (!ricevuta.getEmail().equals(accountLoggato.getEmail()) && !accountLoggato.isAmministratore()) {
             response.sendError(404); // dovrebbe funzionare?
             return;
         }
