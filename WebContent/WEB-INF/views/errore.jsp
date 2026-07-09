@@ -13,15 +13,15 @@
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore-generico">
-    	<div class="blocco-contenuto">
+    <main>
+    	<section>
     	
         	<h1>Si è verificato un errore</h1>
         	<p>Spiacenti, si è verificato un problema interno al server. I nostri tecnici sono stati informati.</p>
         
         	<a href="${pageContext.request.contextPath}/" class="bottone">Torna alla Home</a>
         
-        </div>
+        </section>
     </main>
 
     <jsp:include page="footer.jsp" />

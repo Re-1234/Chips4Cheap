@@ -14,8 +14,8 @@
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-generico">
-        <div class="blocco-contenuto">
+    <main>
+        <section>
             
             <h2>Dettaglio Ricevuta Fiscale n° ${ricevuta.IDRicevutaFiscale}</h2>
 
@@ -63,7 +63,7 @@
                 </a>
             </div>
             
-        </div>
+        </section>
     </main>
 
     <jsp:include page="../footer.jsp" />
