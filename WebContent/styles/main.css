@@ -47,14 +47,14 @@ section {
     border: 3px solid #cccccc;
 }
 
-section h1 {
+h1 {
     color: #000080;
     font-size: 2.25rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
 }
 
-section h2 {
+h2 {
     color: #000080;
     font-size: 1.75rem;
     margin-bottom: 1.25rem;
@@ -62,7 +62,7 @@ section h2 {
     padding-bottom: 0.5rem;
 }
 
-section p {
+p {
     font-size: 1.05rem;
     line-height: 1.6;
     color: #333333;
@@ -70,7 +70,7 @@ section p {
 }
 
 
-.pagina-bicolonna {
+.pagina-bicolonna { /* lo metto al section ogni volta che c'è un aside */
     width: 68%;
     float: left;
     box-sizing: border-box;
@@ -86,7 +86,7 @@ aside {
     border-left: 4px solid #000080;
 }
 
-aside h3 {
+h3 {
     color: #000080;
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -96,7 +96,7 @@ aside h3 {
 
 
 
-section h1.titolo-errore {
+.titolo-errore {
     color: #cc0000;
     text-align: center;
 }
@@ -229,14 +229,13 @@ section h1.titolo-errore {
     main {
         padding: 2rem 5%;
     }
-    section h1 {
+    h1 {
         font-size: 2rem;
     }
-    section h2 {
+    h2 {
         font-size: 1.5rem;
     }
-    section p,
-    .scheda-elemento span {
+    p, .scheda-elemento span {
         font-size: 0.95rem;
     }
     .link-navigazione-indietro {

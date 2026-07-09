@@ -6,9 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amministrazione - Ricerca Ricevute</title>
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
 <body class="modulo-admin-bg" data-context="${pageContext.request.contextPath}">
 
@@ -58,5 +60,6 @@
     <jsp:include page="../footer.jsp" />
 
     <script src="${pageContext.request.contextPath}/scripts/cercaRicevute.js"></script>
+    
 </body>
 </html>
