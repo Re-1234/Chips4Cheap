@@ -31,7 +31,7 @@ devo vedere ora per questo secondo body */
 main {
     padding: 3rem 5%; 
     display: block;
-    max-width: 100rem;
+    max-width: 125rem;
     margin: 0 auto;
     box-sizing: border-box;
     
@@ -107,13 +107,13 @@ section h1.titolo-errore {
     margin: 1.5rem 0;
 }
 
-.lista-elementi {
+.lista-elementi { /* insieme a scheda-elemento posso mantenere la struttura standard di ul e ol se li voglio usare normalmente invece di come una "lista logica" */
     list-style: none;
     padding: 0;
     margin: 1.5rem 0;
 }
 
-.scheda-elemento {
+.scheda-elemento {	/* stessa storia di sopra ma con i <li> */
     background-color: #ffffff;
     border: 1px solid #cccccc;
     border-radius: 0.375rem;
