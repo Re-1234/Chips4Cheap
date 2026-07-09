@@ -35,9 +35,8 @@ public class InitListener implements ServletContextListener{
 			
 			// per l'aside lo metto nel contesto globale
 			context.setAttribute("tuttiAnnunci", listaAnnunci);
-			System.out.println("[InitListener] " + listaAnnunci.size() + " annunci caricati correttamente in memoria.");
 		} else {
-			System.out.println("[InitListener] Impossibile caricare gli annunci: DataSource nullo.");
+			System.out.println("Impossibile caricare gli annunci: DataSource nullo.");
 		}
 	}
 

@@ -191,6 +191,22 @@ h3 {
     margin-top: -0.25rem;
 }
 
+/* Stile per i bottoni di eliminazione/azioni distruttive */
+.bottone-pericolo {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.bottone-pericolo:hover {
+    background-color: #aa0000; /* Scuriscilo un po quando hover */
+}
+
 .avviso-vuoto {
     color: #444444;
     padding: 1.5rem;

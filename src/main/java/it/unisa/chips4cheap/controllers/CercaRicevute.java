@@ -58,7 +58,7 @@ public class CercaRicevute extends HttpServlet {
 		
 		JSONObject jsonRequest = new JSONObject(sb.toString());
 		
-		String emailCliente = jsonRequest.optString("emailCliente", "");
+		String emailCliente = jsonRequest.optString("emailCliente", ""); // dovrebbe prendere il valore di emailCliente se esiste, senno null invece di esplodere come con getString e possiamo lavorare con null qui
 		String dataInizio = jsonRequest.optString("dataInizio", "");
 		String dataFine = jsonRequest.optString("dataFine", "");
 		
