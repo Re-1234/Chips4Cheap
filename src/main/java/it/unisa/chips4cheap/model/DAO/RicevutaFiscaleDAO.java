@@ -6,10 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import it.unisa.chips4cheap.controllers.RicevuteAccount;
 import it.unisa.chips4cheap.model.DTO.*;
 
 public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
@@ -95,5 +98,138 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 		
 	public void doUpdate(RicevutaFiscale element){
 		throw new NonSupportatoException();
+	}
+	
+	
+	public ArrayList<RicevutaFiscale> doFilter(String email , String metodoPagamento , LocalDate dataInizio ,LocalDate dataFine){
+		
+		String s = "Select * From RicevutaFiscale";
+		
+		boolean [] barray = new boolean[4];
+			barray[0] = email != null && email != "";
+			barray[1] = metodoPagamento != null && metodoPagamento != "";
+			barray[2] = dataInizio != null;
+			barray[3] = dataFine != null;
+				
+			int elemet = 0;
+			if(barray[0]){
+				elemet +=1;
+			}
+			if(barray[1]){
+				elemet +=1;
+			}
+			if(barray[2] && barray[3]){
+				if(dataInizio.getYear() > dataFine.getYear()){
+					throw new DateTimeException("l'anno della data di inizio suppera l'anno della data di fine");
+				}else {
+					if(dataInizio.getYear() == dataFine.getYear()){
+						if(dataInizio.getMonthValue() > dataFine.getMonthValue()){
+							throw new DateTimeException("il mese della data di inizio suppera quella della data di fine");
+						}else {
+							if(dataInizio.getMonthValue() == dataFine.getMonthValue()){
+								if(dataInizio.getDayOfMonth() <= dataFine.getDayOfMonth()){
+									elemet += 2;
+								}else{
+									throw new DateTimeException("il giorno della data di inizio suppera quella della data di fine");
+								}
+							}else{
+								elemet += 2;
+							}
+						}
+					}else{
+						elemet += 2;
+					}
+				}
+			}else{
+				if(barray[2]){
+					elemet +=1;
+				}
+				if(barray[3]) {
+					elemet +=1;
+				}
+			}
+		if(elemet != 0) {
+			s += "where ";
+			for(int i = 0;i < 4;i++){
+				if(barray[i] && i == 0){
+					if(elemet != 1){
+						--elemet;
+						s += "email = ? ,";
+					}else {
+						s += "email = ?";
+					}
+				}
+				if(barray[i] && i == 1){
+					if(elemet != 1){
+						--elemet;
+						s += "metodoPagamento = ? ,";
+					}else {
+						s += "metodoPagamento = ?";
+					}
+				}
+				if(barray[i] && i == 2) {
+					if(elemet != 1){
+						--elemet;
+						s += "DataEmissione >= ?,";
+					}else {
+						s += "DataEmissione >= ?";
+					}
+				}
+				if(barray[i] && i == 3){
+					if(elemet != 1){
+						--elemet;
+						s += "DataEmissione <= ? ,";
+					}else {
+						s += "DataEmissione <= ?";
+					}
+				}
+			}
+		}
+		int j = 1;
+		try(Connection c = ds.getConnection()){
+			ArrayList<RicevutaFiscale> ri = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement(s);
+			if(barray[0]){
+				p.setString(j,email);
+				j++;
+			}
+			if(barray[1]){
+				p.setString(j,metodoPagamento);
+				j++;
+			}
+			if(barray[2]){
+				p.setDate(j, Date.valueOf(dataInizio));
+				j++;
+			}
+			if(barray[3]){
+				p.setDate(j, Date.valueOf(dataFine));
+			}
+			ResultSet r = p.executeQuery();
+			while(r.next()){
+				ri.add(new RicevutaFiscale(r.getInt("IDRicevutaFiscale"),r.getString("email"),r.getString("metodoPagamento"),r.getDate("DataEmissione").toLocalDate(),r.getString("via"),r.getString("Cap"),r.getInt("NumeroCivico")));
+			}
+			return ri;
+		}catch(SQLException d){
+			d.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+	
+	@Override
+	public ArrayList<RicevutaFiscale> doRetryByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<RicevutaFiscale> ricevuteFiscali = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From RicevutaFiscale");
+			ResultSet s = p.executeQuery();
+			while(s.next()) {
+				ricevuteFiscali.add(new RicevutaFiscale(s.getInt("IDRicevutaFiscale"),s.getString("email"),s.getString("metodoPagamento"),s.getDate("DataEmissione").toLocalDate(),s.getString("via"),s.getString("Cap"),s.getInt("NumeroCivico")));
+			}
+			return ricevuteFiscali;
+		}catch(SQLException s){
+			
+		}
+		return null;
 	}
 }
