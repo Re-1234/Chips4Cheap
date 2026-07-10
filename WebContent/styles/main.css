@@ -127,6 +127,18 @@ h3 {
     margin: 1.5rem 0;
 }
 
+/* uguale a moduli.css */
+.errore-server {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    padding: 1rem;
+    border: 1px solid #cc0000;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 .lista-elementi { /* insieme a scheda-elemento posso mantenere la struttura standard di ul e ol se li voglio usare normalmente invece di come una "lista logica" */
     list-style: none;
     padding: 0;

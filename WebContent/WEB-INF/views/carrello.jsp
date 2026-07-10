@@ -19,7 +19,13 @@
         <section>
             
             <h2>Il tuo Carrello</h2>
-
+			
+			<c:if test="${not empty requestScope.erroreServer}">
+                <div class="errore-server">
+                    <p>${requestScope.erroreServer}</p>
+                </div>
+            </c:if>
+			
             <c:choose>
                 <c:when test="${empty sessionScope.carrello}"> <!-- SE IL CARRELLO è INIZIALIZZATO MA VUOTO? controlla sia se è vuoto sia se non esiste, figo-->
                     <p class="avviso-vuoto">Il tuo carrello è attualmente vuoto.</p>
