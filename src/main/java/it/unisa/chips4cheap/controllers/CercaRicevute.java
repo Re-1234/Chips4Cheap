@@ -48,7 +48,6 @@ public class CercaRicevute extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
-		// 1. Lettura del JSON in ingresso
 		StringBuilder sb = new StringBuilder();
 		BufferedReader reader = request.getReader();
 		String line;

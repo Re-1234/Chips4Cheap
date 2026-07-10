@@ -1,32 +1,32 @@
-function filtraRicevute() {
-    var emailCliente = document.getElementById("filtro-cliente").value;
-    var dataInizio = document.getElementById("data-inizio").value;
-    var dataFine = document.getElementById("data-fine").value;
+function cercaRicevute(contextPath) {
+    let emailCliente = document.getElementById("filtro-cliente").value;
+    let dataInizio = document.getElementById("data-inizio").value;
+    let dataFine = document.getElementById("data-fine").value;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "CercaRicevute", true); 
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", contextPath + "/admin/CercaRicevute", true); 
     xhr.setRequestHeader("Content-Type", "application/json");
 
     setTimeout(function () {
-        if(xhr.readyState < 4){
+        if (xhr.readyState < 4) {
             xhr.abort();
         }
     }, 10000);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            var listaRicevute = document.getElementById("lista-ricevute");
+            let data = JSON.parse(xhr.responseText);
+            let listaRicevute = document.getElementById("lista-ricevute");
             
             listaRicevute.innerHTML = ""; 
             
             if (!data || data.length === 0) {
-                listaRicevute.innerHTML = '<li class="avviso-vuoto">Nessuna ricevuta trovata per i filtri selezionati.</li>';
+                listaRicevute.innerHTML = '<li class="avviso-vuoto">Nessuna ricevuta trouvata per i filtri selezionati.</li>';
             } else {
-                var risultatiHTML = "";
+                let risultatiHTML = "";
                 
-                for (var i = 0; i < data.length; i++) {
-                    var r = data[i];
+                for (let i = 0; i < data.length; i++) {
+                    let r = data[i];
                     
                     risultatiHTML += 
                         '<li class="scheda-elemento">' +
@@ -35,7 +35,7 @@ function filtraRicevute() {
                         '    <span>Emessa il: ' + r.dataEmissione + '</span>' +
                         '    <span>Pagamento: ' + r.metodoPagamento + '</span>' +
                         '    <span>Via: ' + r.via + '</span>' +
-                        '    <a href="/Chips4Cheap/VisualizzaRicevuta?id=' + r.IDRicevutaFiscale + '">Apri Ricevuta</a>' +
+                        '    <a href="' + contextPath + 'VisualizzaRicevuta?id=' + r.IDRicevutaFiscale + '">Apri Ricevuta</a>' +
                         '</li>';
                 }
                 
@@ -44,11 +44,11 @@ function filtraRicevute() {
         }
     };
 
-    var dati = { 
+    let dati = { 
         emailCliente: emailCliente, 
         dataInizio: dataInizio, 
         dataFine: dataFine 
     };
-    
+
     xhr.send(JSON.stringify(dati));
 }

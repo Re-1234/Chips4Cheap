@@ -50,7 +50,7 @@
                 <input type="date" id="data-fine">
             </div>
             
-            <button type="button" class="link-navigazione-indietro azione-admin-color margine-alto" onclick="filtraRicevute()">
+            <button type="button" class="link-navigazione-indietro azione-admin-color margine-alto" onclick="cercaRicevute('${pageContext.request.contextPath}')"> <!-- alla fine il contextPath basta che lo passo ed è dinamico cosi -->
                 Applica Filtri
             </button>
         </aside>

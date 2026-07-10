@@ -1,7 +1,6 @@
 function eliminaAnnuncio(idAnnuncio, contextPath) {
-    if (confirm("Sei sicuro di voler eliminare definitivamente questo annuncio?")) {
         
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open("POST", contextPath + "/admin/CancellaAnnunci", true); 
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -13,15 +12,15 @@ function eliminaAnnuncio(idAnnuncio, contextPath) {
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
+                let data = JSON.parse(xhr.responseText);
                 
                 if (data.successo) {
-                    var riga = document.getElementById("riga-annuncio-" + idAnnuncio);
+                    let riga = document.getElementById("riga-annuncio-" + idAnnuncio);
                     if (riga) {
                         riga.remove();
                     }
                     
-                    var lista = document.getElementById("lista-annunci");
+                    let lista = document.getElementById("lista-annunci");
                     if (lista && lista.children.length === 0) {
                         lista.outerHTML = '<p class="avviso-vuoto">Non ci sono annunci o comunicazioni pubblicate nel sistema.</p>';
                     }
@@ -29,6 +28,5 @@ function eliminaAnnuncio(idAnnuncio, contextPath) {
             }
         };
 
-        xhr.send("idAnnuncio=" + idAnnuncio); // posso evitare Json per un ID
-    }
+        xhr.send("idAnnuncio=" + idAnnuncio);
 }

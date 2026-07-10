@@ -50,14 +50,14 @@
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci')">-</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci', '${pageContext.request.contextPath}')">-</button>
             						<span id="quantita-${prodotto.nomeModello}">${prodotto.quantità}</span>
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta')">+</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
         						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.prezzo * prodotto.quantità} €</span>
         
-       							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
+       							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi', '${pageContext.request.contextPath}')">Rimuovi</button>
         
     						</li>
                         </c:forEach>
