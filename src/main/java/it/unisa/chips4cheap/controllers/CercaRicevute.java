@@ -77,7 +77,7 @@ public class CercaRicevute extends HttpServlet {
 					jsonRicevuta.put("IDRicevutaFiscale", r.getIdRicevutaFiscale());
 					jsonRicevuta.put("emailUtente", r.getEmail()); 
 					
-					jsonRicevuta.put("dataEmissione", r.getLocalDate() != null ? r.getLocalDate().toString() : "");
+					jsonRicevuta.put("dataEmissione", r.getLocalDate());
 					
 					jsonRicevuta.put("metodoPagamento", r.getMetodoPagamento());
 					jsonRicevuta.put("via", r.getVia());
