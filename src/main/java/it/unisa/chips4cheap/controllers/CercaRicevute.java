@@ -58,32 +58,26 @@ public class CercaRicevute extends HttpServlet {
 		
 		JSONObject jsonRequest = new JSONObject(sb.toString());
 		
-		String emailCliente = jsonRequest.optString("emailCliente", ""); // dovrebbe prendere il valore di emailCliente se esiste, senno null invece di esplodere come con getString e possiamo lavorare con null qui
+		String emailCliente = jsonRequest.optString("emailCliente", ""); //  da null invece di esplodere come con getString, cosi non filtriamo per quello;
 		String dataInizio = jsonRequest.optString("dataInizio", "");
 		String dataFine = jsonRequest.optString("dataFine", "");
 		
 		JSONArray jsonArrayResponse = new JSONArray();
 		
 		try {
-			// 2. Recupero il DataSource dal contesto applicativo
 			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 			
-			// 3. Istanzio il DAO passandogli il DataSource
 			RicevutaFiscaleDAO ricevutaDAO = new RicevutaFiscaleDAO(ds);
 			
-			// 4. Chiamo un metodo di ricerca (vedi il punto 2 sotto per l'implementazione nel DAO)
 			ArrayList<RicevutaFiscale> listaRicevute = ricevutaDAO.doSearchByFilters(emailCliente, dataInizio, dataFine);
 			
-			// 5. Mappatura DTO -> JSON
 			if (listaRicevute != null) {
 				for (RicevutaFiscale r : listaRicevute) {
 					JSONObject jsonRicevuta = new JSONObject();
 					
-					// Uso i getter corretti del tuo DTO RicevutaFiscale.java
 					jsonRicevuta.put("IDRicevutaFiscale", r.getIdRicevutaFiscale());
 					jsonRicevuta.put("emailUtente", r.getEmail()); 
 					
-					// Assicurati che la data sia convertita in stringa (es. "2023-10-25")
 					jsonRicevuta.put("dataEmissione", r.getLocalDate() != null ? r.getLocalDate().toString() : "");
 					
 					jsonRicevuta.put("metodoPagamento", r.getMetodoPagamento());
@@ -97,10 +91,9 @@ public class CercaRicevute extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// 6. Invio la risposta JSON al JavaScript
 		PrintWriter out = response.getWriter();
 		out.print(jsonArrayResponse.toString());
-		out.flush();
+		// out.flush();
 	}
 
 }

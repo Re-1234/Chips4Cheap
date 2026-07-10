@@ -50,13 +50,13 @@ public class CancellaAnnunci extends HttpServlet {
 	    DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	    AnnuncioDAO dao = new AnnuncioDAO(ds);
 	        
-	    Annuncio annuncioDaEliminare = new Annuncio();
+	    Annuncio annuncioDaEliminare = new Annuncio(); // devo creare un pupazzo per cancellare per via del doDelete che accetta soltanto il DTO
 	    annuncioDaEliminare.setIdAnnuncio(idAnnuncio);
 	        
 	    dao.doDelete(annuncioDaEliminare);
 	       
 	    getServletContext().setAttribute("tuttiAnnunci", dao.doRetrieveAll());  
-	    jsonResponse.put("success", true);
+	    jsonResponse.put("successo", true);
 	    
 	    response.getWriter().write(jsonResponse.toString());
 	}

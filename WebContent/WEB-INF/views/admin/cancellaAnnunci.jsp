@@ -24,7 +24,7 @@
                     <p class="avviso-vuoto">Non ci sono annunci o comunicazioni pubblicate nel sistema.</p>
                 </c:when>
                 <c:otherwise>
-                    <ul class="lista-elementi">
+                    <ul class="lista-elementi" id="lista-annunci">
                         <c:forEach var="annuncio" items="${applicationScope.tuttiAnnunci}">
                             <li class="scheda-elemento" id="riga-annuncio-${annuncio.idAnnuncio}">
                                 <span>Titolo: ${annuncio.titolo}</span>
