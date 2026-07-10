@@ -40,13 +40,13 @@
             						<img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
         						</c:if>
         
-        						<span class="testo-modello">
+        						<span class=testo-importante>
                                     <a href="${pageContext.request.contextPath}/Prodotto?id=${prodotto.nomeModello}">
                                         ${prodotto.nomeModello}
                                     </a>
                                 </span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${prodotto.prezzo} €</span>
+        						<span>Prezzo unitario: ${prodotto.prezzoscontato} €</span>
         
         						<span>
             						Quantità: 
@@ -55,7 +55,7 @@
             						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
-        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.prezzo * prodotto.quantità} €</span>
+        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.subtotale} €</span>
         
        							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi', '${pageContext.request.contextPath}')">Rimuovi</button>
         

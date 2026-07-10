@@ -94,7 +94,8 @@ public class Carrello extends HttpServlet {
 	            int q = prodottoTarget.getQuantità() + 1;
 	            prodottoTarget.setQuantità(q);
 	            nuovaQuantita = q;
-	            nuovoSubtotale = prodottoTarget.getPrezzo() * q;
+	            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	            nuovoSubtotale = prodottoTarget.getSubtotale(); 
 	        } 
 	        else if ("sottrai".equalsIgnoreCase(azione)) {
 	            int q = prodottoTarget.getQuantità() - 1;
@@ -104,13 +105,15 @@ public class Carrello extends HttpServlet {
 	            } else {
 	                prodottoTarget.setQuantità(q);
 	                nuovaQuantita = q;
-	                nuovoSubtotale = prodottoTarget.getPrezzo() * q;
+		            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	                nuovoSubtotale = prodottoTarget.getSubtotale(); 
 	            }
 	        }
 	    }
 
 	    	for (Prodotto p : carrello) {
-	    		nuovoTotale += p.getPrezzo() * p.getQuantità();
+	            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	    		nuovoTotale += p.getSubtotale(); 
 	    	}
 	    	
 	    	
