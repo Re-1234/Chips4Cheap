@@ -121,8 +121,10 @@ public class Prodotto implements Cloneable , Serializable{
 	}
 
 	public void setSconto(int sconto) {
-		this.sconto = sconto;
+		if(sconto >= 0 && sconto <= 100){
+			this.sconto = sconto;
+		}else{
+			throw new RuntimeException("lo sconto deve stare in questo range di valori 0 e 100");
+		}
 	}
-	
-	
 }
