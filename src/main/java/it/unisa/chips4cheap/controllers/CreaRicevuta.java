@@ -132,6 +132,13 @@ public class CreaRicevuta extends HttpServlet {
                     
                     prodRicevutaDAO.doSave(prodRicevuta);
                     prodottiSalvati.add(prodRicevuta);
+                    
+                    //rimuovi pure dal DB 
+                    Prodotto prodottoInMagazzino = prodottoDAO.doSearchElement(p.getNomeModello());
+                    if(prodottoInMagazzino != null) {
+                    	prodottoInMagazzino.setQuantità(prodottoInMagazzino.getQuantità() - p.getQuantità());
+                    	prodottoDAO.doUpdate(prodottoInMagazzino);
+                    }
                 }
 
                 session.removeAttribute("carrello"); // a questo punto buttalo nel Monte Fato, in futuro lo ricreiamo da zero se ci serve
