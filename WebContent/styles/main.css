@@ -92,13 +92,13 @@ input {
 /* --------------- logica bi-colonna ---------------------- */
 .pagina-bicolonna { /* lo metto al section ogni volta che c'è un aside */
     width: 68%;
-    float: left;
+    float: right;
     box-sizing: border-box;
 }
 
 aside {
     width: 28%;
-    float: right;
+    float: left;
     background-color: #ffffff; 
     padding: 1.5rem;
     border-radius: 0.375rem;
