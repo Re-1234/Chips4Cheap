@@ -113,7 +113,22 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		}catch (SQLException e){
 				e.printStackTrace();
 		}		
-		
+	}
+
+	@Override
+	public ArrayList<Account> doRetryByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<Account> c1 = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From Account1");
+			ResultSet s = p.executeQuery();
+			while(s.next()) {
+				c1.add(new Account(s.getString("username"),s.getString("Password1"),s.getString("Via"),s.getString("Cap"),s.getInt("NumeroCivico"),s.getString("email"),s.getBoolean("Amministratore")));
+			}
+			return c1; 
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+		return null;
 	}
 	
 }

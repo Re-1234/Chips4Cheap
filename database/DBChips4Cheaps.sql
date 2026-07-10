@@ -19,6 +19,7 @@ create table Prodotto(
     Produttore varchar(50) not null,
     Prezzo double not null,
 	Descrizione varchar(5000) not null,
+    Sconto int not null,
     Tipo varchar(50) not null,
     Quantità int not null,
     Image varchar(50) not null,

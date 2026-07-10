@@ -23,7 +23,7 @@ public class Prodotto implements Cloneable , Serializable{
 		this.imagine = "";
 	}
 	
-	public Prodotto(String nCAutore , String nomeModello , double prezzo , String descrizione , String tipo , int quantità , String imagine){
+	public Prodotto(String nCAutore , String nomeModello , double prezzo , String descrizione , String tipo , int quantità ,int sconto, String imagine){
 		this.nCAutore = nCAutore;
 		this.nomeModello = nomeModello;
 		this.prezzo = prezzo;

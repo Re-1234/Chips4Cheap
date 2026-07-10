@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 import it.unisa.chips4cheap.model.DTO.Annuncio;
@@ -92,5 +93,21 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 		}catch(SQLException s){
 			s.printStackTrace();
 		}
+	}
+
+	@Override
+	public ArrayList<Annuncio> doRetryByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<Annuncio> annunci = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From Annuncio");
+			ResultSet r = p.executeQuery(); 
+			while(r.next()){
+				annunci.add(new Annuncio(r.getInt("IDAnnuncio"),r.getString("Titolo"),r.getDate("Data_Pubblicazione").toLocalDate(),r.getString("Descrizione")));
+			}
+			return annunci;
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+		return null;
 	}	
 }
