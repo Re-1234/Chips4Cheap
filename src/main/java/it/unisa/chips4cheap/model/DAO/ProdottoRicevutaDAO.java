@@ -109,4 +109,20 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		throw new NonSupportatoException();
 	}
 
+	@Override
+	public ArrayList<ProdottoRicevuta> doRetryByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<ProdottoRicevuta> c1 = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta");
+			ResultSet r = p.executeQuery();
+			while(r.next()){
+				c1.add(new ProdottoRicevuta(r.getString("Produttore"),r.getInt("IDRicevutaFiscale"),r.getString("email"),r.getString("NomeModello"),r.getDouble("Prezzo"),r.getString("tipo"),r.getInt("Quantità"),r.getString("image")));
+			}
+			return c1;
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+		return null;
+	}
+
 }

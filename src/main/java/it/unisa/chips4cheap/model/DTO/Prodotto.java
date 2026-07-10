@@ -31,6 +31,11 @@ public class Prodotto implements Cloneable , Serializable{
 		this.tipo = tipo;
 		this.quantità = quantità;
 		this.imagine = imagine;
+		if(sconto >= 0 && sconto <= 100){
+			this.sconto = sconto;
+		}else {
+			this.sconto = 0;
+		}
 	}
 	
 	public String getnCAutore() {

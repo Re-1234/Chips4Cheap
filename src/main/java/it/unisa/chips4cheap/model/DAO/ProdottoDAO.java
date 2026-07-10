@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -76,7 +77,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			p.setString(1,nomeModello);
 			ResultSet result = p.executeQuery();
 			if(result.next()){
-				Prodotto p1 = new Prodotto(result.getString("Produttore"),result.getString("NomeModello"),result.getDouble("Prezzo"),result.getString("Descrizione"),result.getString("Tipo"),result.getInt("Quantità"),result.getString("Image"));
+				Prodotto p1 = new Prodotto(result.getString("Produttore"),result.getString("NomeModello"),result.getDouble("Prezzo"),result.getString("Descrizione"),result.getString("Tipo"),result.getInt("Quantità"),result.getInt("Sconto"),result.getString("Image"));
 				result.close();
 				p.close();
 				con.close();
@@ -113,6 +114,22 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		}catch(SQLException c){
 			c.printStackTrace();
 		}
+	}
+
+	@Override
+	public ArrayList<Prodotto> doRetryByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<Prodotto> prodotti = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From Prodotto");
+			ResultSet r = p.executeQuery();
+			while(r.next()) {
+				prodotti.add(new Prodotto(r.getString("Produttore"),r.getString("NomeModello"),r.getDouble("Prezzo"),r.getString("Descrizione"),r.getString("Tipo"),r.getInt(""),r.getInt(0),r.getString(0)));
+			}
+			return prodotti;
+		}catch(SQLException c){
+			c.printStackTrace();
+		}
+		return null;
 	}
 
 }
