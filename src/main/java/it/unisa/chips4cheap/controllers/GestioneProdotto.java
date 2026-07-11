@@ -61,11 +61,11 @@ public class GestioneProdotto extends HttpServlet {
             errore = "La Descrizione non può essere vuota.";
         } else if (tipo == null || tipo.trim().isEmpty() || tipo.length() > 50) {
             errore = "Il Tipo (Categoria) non può essere vuoto o superare i 50 caratteri.";
-        } else if (prezzoStr == null || !prezzoStr.matches("^\\d+(\\.\\d+)?$")) {
+        } else if (prezzoStr == null || !prezzoStr.matches("^\\d+(\\.\\d+)?$")) { // numero positivo . numero positivo senno ti ammazzo
             errore = "Il prezzo inserito non è valido. Usa solo numeri positivi.";
         } else if (quantitaStr == null || !quantitaStr.matches("^\\d+$")) {
             errore = "La quantità in magazzino deve essere un numero intero positivo o zero.";
-        } else if (scontoStr == null || !scontoStr.matches("^([0-9]|[1-9][0-9]|100)$")) {
+        } else if (scontoStr == null || !scontoStr.matches("^([0-9]|[1-9][0-9]|100)$")) { // o 1 da 0 a 9 o 2 digits una da 1 a 9 l'altra da 0 a 9 senno ti ammazzo di nuovo
             errore = "Lo sconto deve essere una percentuale intera compresa tra 0 e 100.";
         }
 
@@ -79,7 +79,7 @@ public class GestioneProdotto extends HttpServlet {
 
         // manda errore se ce
         if (errore != null) {
-            request.setAttribute("erroreInserimento", errore);
+            request.setAttribute("erroreServer", errore);
             
             if ("add".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("/admin/aggiungiProdotto.jsp").forward(request, response);
