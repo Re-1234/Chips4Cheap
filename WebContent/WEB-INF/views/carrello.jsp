@@ -43,7 +43,7 @@
                             <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
         
         						<c:if test="${not empty prodotto.imagine}">
-            						<img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
+            						<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60"> <!-- SERVE IL SEPARATORE QUI / tra le 2 EL no? -->
         						</c:if>
         
         						<span class=testo-importante>

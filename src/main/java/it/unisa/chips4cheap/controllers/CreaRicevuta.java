@@ -133,7 +133,7 @@ public class CreaRicevuta extends HttpServlet {
                     prodRicevutaDAO.doSave(prodRicevuta);
                     prodottiSalvati.add(prodRicevuta);
                     
-                    //rimuovi pure dal DB 
+                    //rimuovo pure dal DB 
                     Prodotto prodottoInMagazzino = prodottoDAO.doSearchElement(p.getNomeModello());
                     if(prodottoInMagazzino != null) {
                     	prodottoInMagazzino.setQuantità(prodottoInMagazzino.getQuantità() - p.getQuantità());
