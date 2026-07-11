@@ -125,9 +125,9 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		String s = "Select * From Prodotto";
 		boolean [] bArray  = new boolean [3];
 		
-		bArray[0] = nomeModello != null && nomeModello == "";
-		bArray[1] = produttore != null && produttore == "";
-		bArray[2] = tipo != null && tipo == "";
+		bArray[0] = nomeModello != null && !nomeModello.equals("");
+		bArray[1] = produttore != null && !produttore.equals("");
+		bArray[2] = tipo != null && !tipo.equals("");
 		int elemet = 0;
 		
 		if(bArray[0]){

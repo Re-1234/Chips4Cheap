@@ -106,8 +106,8 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 		String s = "Select * From RicevutaFiscale";
 		
 		boolean [] barray = new boolean[4];
-			barray[0] = email != null && email != "";
-			barray[1] = metodoPagamento != null && metodoPagamento != "";
+			barray[0] = email != null && email.equals("");
+			barray[1] = metodoPagamento != null && !metodoPagamento.equals("");
 			barray[2] = dataInizio != null;
 			barray[3] = dataFine != null;
 				
