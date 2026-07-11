@@ -96,8 +96,9 @@ public class ControlloImmagini extends HttpServlet {
                     Prodotto prodotto = prodottoDAO.doSearchElement(nomeModello);
                     if (prodotto != null) {
                         // Rimuovo la vecchia immagine per evitare spazzatura
-                        eliminaFileFisico(prodotto.getImagine());
-                        
+                    	if(!prodotto.getImagine().equalsIgnoreCase("images/productImages/default.svg")) {
+                    		eliminaFileFisico(prodotto.getImagine());	// UPDATE: elimino soltanto se non è il placeholder
+                    	}
                         part.write(uploadPath);
                         prodotto.setImagine("images/productImages/" + uniqueFileName); // non posso usare upload-dir, la jsp impazzisce se ha \ come separatore, tipo windows
                         prodottoDAO.doUpdate(prodotto);
@@ -127,7 +128,7 @@ public class ControlloImmagini extends HttpServlet {
 
     private void eliminaFileFisico(String relativePath) {
         if (relativePath != null && !relativePath.isEmpty()) {
-            String absolutePath = getServletContext().getRealPath("/" + relativePath);
+            String absolutePath = getServletContext().getRealPath("/" + relativePath);	// perchè non va con File.Separator?
             if (absolutePath != null) {
                 File file = new File(absolutePath);
                 if (file.exists()) {

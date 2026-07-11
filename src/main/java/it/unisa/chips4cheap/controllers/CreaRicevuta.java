@@ -103,7 +103,7 @@ public class CreaRicevuta extends HttpServlet {
             	
             	
                 RicevutaFiscale ricevuta = new RicevutaFiscale(
-                    0, 
+                    0, // l' ID è autogenerato da SQL lo devo prendere dopo e qua posso mettere qualsiasi cosa
                     accountLoggato.getEmail(), 
                     metodoPagamento.trim(),  // non dovrebbe essere necessario il trim ma non si sa mai
                     LocalDate.now(),

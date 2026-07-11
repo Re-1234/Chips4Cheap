@@ -18,19 +18,18 @@ import javax.sql.DataSource;
 import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
 import it.unisa.chips4cheap.model.DTO.Prodotto;
 
-@WebServlet("/admin/ModificaProdotto")
+@WebServlet("/admin/GestioneProdotto")
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2, // Uguali a ControlloImmagini
     maxFileSize = 1024 * 1024 * 10,
     maxRequestSize = 1024 * 1024 * 50
 )
-public class ModificaProdotto extends HttpServlet {
+public class GestioneProdotto extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    // Nome della cartella di destinazione come da tue indicazioni
     private static final String UPLOAD_DIR = "images" + File.separator + "productImages";
 
-    public ModificaProdotto() {
+    public GestioneProdotto() {
         super();
     }
 
@@ -45,28 +44,44 @@ public class ModificaProdotto extends HttpServlet {
         String tipo = request.getParameter("tipo");
         int quantita = Integer.parseInt(request.getParameter("quantita"));
         int sconto = Integer.parseInt(request.getParameter("sconto"));
+        String action = request.getParameter("action"); // hey cosi faccio sia update che save di un prodotto
 
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         ProdottoDAO prodottoDAO = new ProdottoDAO(ds);
         
-        // 2. Recupero e aggiornamento dei campi testuali del prodotto
-        Prodotto prodotto = prodottoDAO.doSearchElement(nomeModello);
-        
-        if (prodotto != null) {
-            prodotto.setPrezzo(prezzo);
-            prodotto.setDescrizione(descrizione);
-            prodotto.setTipo(tipo);
-            prodotto.setQuantità(quantita);
-            prodotto.setSconto(sconto);
+        if ("add".equalsIgnoreCase(action)) {
+
+        	Prodotto nuovoProdotto = new Prodotto();
+            nuovoProdotto.setNomeModello(nomeModello);
+            nuovoProdotto.setPrezzo(prezzo);
+            nuovoProdotto.setDescrizione(descrizione);
+            nuovoProdotto.setTipo(tipo);
+            nuovoProdotto.setQuantità(quantita);
+            nuovoProdotto.setSconto(sconto);
+            nuovoProdotto.setImagine("images/productImages/default.svg"); // Placeholder
             
-            prodottoDAO.doUpdate(prodotto);
+            prodottoDAO.doSave(nuovoProdotto);
+            
+        } else if ("edit".equalsIgnoreCase(action)) {
+
+        	Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
+            
+            if (prodottoEsistente != null) { // non permettiamo di modificare il nome?
+                prodottoEsistente.setPrezzo(prezzo);
+                prodottoEsistente.setDescrizione(descrizione);
+                prodottoEsistente.setTipo(tipo);
+                prodottoEsistente.setQuantità(quantita);
+                prodottoEsistente.setSconto(sconto);
+                
+                prodottoDAO.doUpdate(prodottoEsistente);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Catalogo");
+                return;
+            }
+        }
             
          // Outsorced il controllo delle immagini
             request.getRequestDispatcher("/ControlloImmagini?action=upload").include(request, response); // già c'è in richiesta nomeModello
             response.sendRedirect(request.getContextPath() + "/Prodotto?nomeModello=" + nomeModello); // USA IL CONTROLLER EUGENIO
-        } else {
-            // Se non esiste torna al catalogo
-            response.sendRedirect(request.getContextPath() + "/Catalogo");
-        }
     }
 }
