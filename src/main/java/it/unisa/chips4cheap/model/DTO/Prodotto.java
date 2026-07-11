@@ -9,6 +9,7 @@ public class Prodotto implements Cloneable , Serializable{
 	private String descrizione;
 	private String tipo;
 	private int quantità;
+	private double sconto;
 	private String imagine;
 	public final static double EPSILON = 1e9; 
 	
@@ -73,6 +74,19 @@ public class Prodotto implements Cloneable , Serializable{
 	}
 	public void setImagine(String imagine) {
 		this.imagine = imagine;
+	}
+	
+	public double getScontoInEuro(){
+		if(sconto == 0){
+			return 0;
+		}
+		double result = -1;
+		
+		if(sconto > 0) {
+			 result = (prezzo * sconto) / 100;
+		}
+		
+		return result;
 	}
 	
 	@Override
