@@ -154,7 +154,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				if(barray[i] && i == 0){
 					if(elemet != 1){
 						--elemet;
-						s += "email = ? ,";
+						s += "email = ? and";
 					}else {
 						s += "email = ?";
 					}
@@ -162,7 +162,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				if(barray[i] && i == 1){
 					if(elemet != 1){
 						--elemet;
-						s += "metodoPagamento = ? ,";
+						s += "metodoPagamento = ? and";
 					}else {
 						s += "metodoPagamento = ?";
 					}
@@ -170,7 +170,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				if(barray[i] && i == 2) {
 					if(elemet != 1){
 						--elemet;
-						s += "DataEmissione >= ?,";
+						s += "DataEmissione >= ? and";
 					}else {
 						s += "DataEmissione >= ?";
 					}
@@ -178,7 +178,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				if(barray[i] && i == 3){
 					if(elemet != 1){
 						--elemet;
-						s += "DataEmissione <= ? ,";
+						s += "DataEmissione <= ? and";
 					}else {
 						s += "DataEmissione <= ?";
 					}
