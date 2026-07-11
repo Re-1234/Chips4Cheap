@@ -38,17 +38,64 @@ public class GestioneProdotto extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String action = request.getParameter("action"); 
         String nomeModello = request.getParameter("nomeModello");
-        double prezzo = Double.parseDouble(request.getParameter("prezzo"));
         String descrizione = request.getParameter("descrizione");
         String tipo = request.getParameter("tipo");
-        int quantita = Integer.parseInt(request.getParameter("quantita"));
-        int sconto = Integer.parseInt(request.getParameter("sconto"));
-        String action = request.getParameter("action"); // hey cosi faccio sia update che save di un prodotto
+        
+        String prezzoStr = request.getParameter("prezzo");
+        String quantitaStr = request.getParameter("quantita");
+        String scontoStr = request.getParameter("sconto");
+
+        String errore = null;
 
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         ProdottoDAO prodottoDAO = new ProdottoDAO(ds);
         
+        // solito bloccomonolitico di rejex
+        if (action == null || (!action.equalsIgnoreCase("add") && !action.equalsIgnoreCase("edit"))) {
+            errore = "Azione di sistema non valida.";
+        } else if (nomeModello == null || nomeModello.trim().isEmpty() || nomeModello.length() > 50) {
+            errore = "Il Nome Modello non può essere vuoto o superare i 50 caratteri.";
+        } else if (descrizione == null || descrizione.trim().isEmpty()) {
+            errore = "La Descrizione non può essere vuota.";
+        } else if (tipo == null || tipo.trim().isEmpty() || tipo.length() > 50) {
+            errore = "Il Tipo (Categoria) non può essere vuoto o superare i 50 caratteri.";
+        } else if (prezzoStr == null || !prezzoStr.matches("^\\d+(\\.\\d+)?$")) {
+            errore = "Il prezzo inserito non è valido. Usa solo numeri positivi.";
+        } else if (quantitaStr == null || !quantitaStr.matches("^\\d+$")) {
+            errore = "La quantità in magazzino deve essere un numero intero positivo o zero.";
+        } else if (scontoStr == null || !scontoStr.matches("^([0-9]|[1-9][0-9]|100)$")) {
+            errore = "Lo sconto deve essere una percentuale intera compresa tra 0 e 100.";
+        }
+
+        // esiste già e stiamo provando ad aggiungere?
+        if (errore == null && "add".equalsIgnoreCase(action)) {
+            Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
+            if (prodottoEsistente != null) {
+                errore = "Esiste già un prodotto nel catalogo con il codice '" + nomeModello + "'.";
+            }
+        }
+
+        // manda errore se ce
+        if (errore != null) {
+            request.setAttribute("erroreInserimento", errore);
+            
+            if ("add".equalsIgnoreCase(action)) {
+                request.getRequestDispatcher("/admin/aggiungiProdotto.jsp").forward(request, response);
+            } else {
+                Prodotto prodottoDaModificare = prodottoDAO.doSearchElement(nomeModello);
+                request.setAttribute("prodotto", prodottoDaModificare);
+                request.getRequestDispatcher("/admin/modificaProdotto.jsp").forward(request, response);
+            }
+            return; 
+        }
+
+        double prezzo = Double.parseDouble(prezzoStr);
+        int quantita = Integer.parseInt(quantitaStr);
+        int sconto = Integer.parseInt(scontoStr);
+        
+        // NOTA non sto facendo trimming o modifiche ai altri campi
         if ("add".equalsIgnoreCase(action)) {
 
         	Prodotto nuovoProdotto = new Prodotto();
