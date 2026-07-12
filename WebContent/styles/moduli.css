@@ -8,7 +8,7 @@
 
 html {
     height: 100%;
-    background-color: #dfdfdf; /* Colore grigio di base per tutta l'applicazione */
+    background-color: #dfdfdf; 
 }
 
 body {
@@ -16,16 +16,15 @@ body {
     min-height: 100%;
     position: relative;
     padding-bottom: 7.5rem; /* Rilascia lo spazio per il footer absolute */
-    background-color: transparent; /* Evita conflitti di colore con html */
+    background-color: transparent; /* ??? */
 }
 
-.contenitore-pagina {
+main {
     padding: 3rem 5%; 
     display: block;
 }
 
 .modulo-centrato {
-    background-color: #dfdfdf; 
     max-width: 35rem; 
     margin: 0 auto; 
     padding: 2.5rem 6%;
@@ -82,16 +81,25 @@ body {
     box-sizing: border-box;
 }
 
-/* Impedisco al testo molto lungo di strabordare su schermi piccoli */
+.gruppo-campo textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical; /*solo verso il basso */
+}
+
+/* testo molto lungo puo strabordare su schermi piccoli */
 .valore-fisso {
     word-wrap: break-word;
 }
 
-
-
 .riga-doppia {
     width: 100%;
-    overflow: hidden; /* Clearfix automatico per i float dei figli */
+    overflow: hidden; /* per i float dei figli */
 }
 
 .meta-larghezza {
@@ -199,12 +207,12 @@ body {
     background-color: #000000;
     color: #ff8c00;
 }
-/* --------------------------------------Vanno qui cosi sovrascrivono i colori definiti sopra------------------------------------------- */
+/* --------------------------------------Vanno qui cosi sovrascrivo i colori definiti sopra------------------------------------------- */
 
 
 
 @media (max-width: 2560px) {
-    .contenitore-pagina {
+    main {
         padding: 2.5rem 5%;
     }
     .modulo-centrato h2 {
@@ -214,7 +222,7 @@ body {
 
 
 @media (max-width: 1280px) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 5%;
     }
     .modulo-centrato h2 {
@@ -240,7 +248,7 @@ body {
 
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 5%;
     }
     .modulo-centrato h2 {
@@ -250,7 +258,7 @@ body {
 
 
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 4%;
     }
     .modulo-centrato {
@@ -263,7 +271,7 @@ body {
 
 
 @media (max-width: 768px) {
-    .contenitore-pagina {
+    main {
         padding: 1.5rem 4%;
     }
     .modulo-centrato {

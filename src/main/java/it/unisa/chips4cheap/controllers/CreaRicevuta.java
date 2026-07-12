@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
 import it.unisa.chips4cheap.model.DAO.ProdottoRicevutaDAO;
 import it.unisa.chips4cheap.model.DAO.RicevutaFiscaleDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
@@ -81,8 +82,28 @@ public class CreaRicevuta extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/pagamento.jsp").forward(request, response);
         } else {
             try {
+            	
+            	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+                
+            	// ABBIAMO EFFETTIVAMENTE QUESTE COSE IN STOCK?
+                ProdottoDAO prodottoDAO = new ProdottoDAO(ds);
+                for (Prodotto pInCarrello : carrello) {
+                    Prodotto prodottoNelDB = prodottoDAO.doSearchElement(pInCarrello.getNomeModello());
+                    if (prodottoNelDB == null || pInCarrello.getQuantità() > prodottoNelDB.getQuantità()) {
+                        
+                        String msgErrore = "Siamo spiacenti, la quantità richiesta per l'articolo '" 
+                                         + pInCarrello.getNomeModello() + "' non è attualmente disponibile in magazzino.";
+                        
+                        request.setAttribute("erroreServer", msgErrore);
+                        request.getRequestDispatcher("/WEB-INF/views/carrello.jsp").forward(request, response);
+                        
+                        return; // NON LO ABBIAMO, FERMATI QUI
+                    }
+                }
+            	
+            	
                 RicevutaFiscale ricevuta = new RicevutaFiscale(
-                    0, 
+                    0, // l' ID è autogenerato da SQL lo devo prendere dopo e qua posso mettere qualsiasi cosa
                     accountLoggato.getEmail(), 
                     metodoPagamento.trim(),  // non dovrebbe essere necessario il trim ma non si sa mai
                     LocalDate.now(),
@@ -90,10 +111,8 @@ public class CreaRicevuta extends HttpServlet {
                     cap.trim(),
                     Integer.parseInt(numeroCivicoStr.trim())
                 );
-
-                DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-                RicevutaFiscaleDAO ricevutaDAO = new RicevutaFiscaleDAO(ds);
                 
+                RicevutaFiscaleDAO ricevutaDAO = new RicevutaFiscaleDAO(ds);
                 int idRicevutaGenerato = ricevutaDAO.doSave(ricevuta);
                 RicevutaFiscale ricevutaEffettiva = ricevutaDAO.doSearchElement(idRicevutaGenerato); // l'aggiungo alla request per mostrarlo dopo
 
@@ -105,7 +124,7 @@ public class CreaRicevuta extends HttpServlet {
                         idRicevutaGenerato,
                         accountLoggato.getEmail(),
                         p.getNomeModello(),
-                        p.getPrezzo(),	// devo contrllare lo sconto quando lo mettiamo
+                        p.getPrezzoScontato(),  // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
                         p.getTipo(),
                         p.getQuantità(),
                         p.getImagine()
@@ -113,6 +132,13 @@ public class CreaRicevuta extends HttpServlet {
                     
                     prodRicevutaDAO.doSave(prodRicevuta);
                     prodottiSalvati.add(prodRicevuta);
+                    
+                    //rimuovo pure dal DB 
+                    Prodotto prodottoInMagazzino = prodottoDAO.doSearchElement(p.getNomeModello());
+                    if(prodottoInMagazzino != null) {
+                    	prodottoInMagazzino.setQuantità(prodottoInMagazzino.getQuantità() - p.getQuantità());
+                    	prodottoDAO.doUpdate(prodottoInMagazzino);
+                    }
                 }
 
                 session.removeAttribute("carrello"); // a questo punto buttalo nel Monte Fato, in futuro lo ricreiamo da zero se ci serve
@@ -122,7 +148,7 @@ public class CreaRicevuta extends HttpServlet {
 
                 request.getRequestDispatcher("/WEB-INF/views/common/visualizzaRicevuta.jsp").forward(request, response); 
 
-            } catch (Exception e) {		// potevo rimuovere il try-catch?
+            } catch (Exception e) {		// potevo rimuovere il try-catch? dopo il testing
                 e.printStackTrace();
                 throw new ServletException("Errore critico durante la finalizzazione dell'ordine nel database.", e);
             }

@@ -15,8 +15,8 @@
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore-pagina">
-        <div class="modulo-centrato">
+    <main>
+        <section class="modulo-centrato">
             <h2>Crea il tuo Account</h2>
             
             <c:if test="${not empty requestScope.erroreServer}">
@@ -68,7 +68,7 @@
                 <button type="submit" class="bottone-azione">Registrati</button>
                 
             </form>
-        </div>
+        </section>
     </main>
 
     <jsp:include page="footer.jsp" />

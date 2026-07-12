@@ -68,6 +68,9 @@ public class Carrello extends HttpServlet {
 	    double nuovoSubtotale = 0.0;
 	    double nuovoTotale = 0.0;
     	Prodotto prodottoTarget = null;
+    	boolean carrelloVuoto = false;
+    	
+    	synchronized(carrello) { // deve essere syncronized altrimenti hai race conditions su ad esempio il numero di un prodotto in carrello
 	    
 	    if ("svuota".equalsIgnoreCase(azione)) { // aggiunto per permettere di svuotare il carrello in una botta
 	        carrello.clear();
@@ -91,7 +94,8 @@ public class Carrello extends HttpServlet {
 	            int q = prodottoTarget.getQuantità() + 1;
 	            prodottoTarget.setQuantità(q);
 	            nuovaQuantita = q;
-	            nuovoSubtotale = prodottoTarget.getPrezzo() * q;
+	            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	            nuovoSubtotale = prodottoTarget.getSubtotale(); 
 	        } 
 	        else if ("sottrai".equalsIgnoreCase(azione)) {
 	            int q = prodottoTarget.getQuantità() - 1;
@@ -101,17 +105,21 @@ public class Carrello extends HttpServlet {
 	            } else {
 	                prodottoTarget.setQuantità(q);
 	                nuovaQuantita = q;
-	                nuovoSubtotale = prodottoTarget.getPrezzo() * q;
+		            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	                nuovoSubtotale = prodottoTarget.getSubtotale(); 
 	            }
 	        }
 	    }
 
-	    for (Prodotto p : carrello) {
-	        nuovoTotale += p.getPrezzo() * p.getQuantità();
-	    }
-
-	    boolean carrelloVuoto = carrello.isEmpty(); // se è vuoto lo controlliamo qui
-
+	    	for (Prodotto p : carrello) {
+	            // MODIFICATO: PRodotto ha getSubtotale e getPrezzoScontato
+	    		nuovoTotale += p.getSubtotale(); 
+	    	}
+	    	
+	    	
+	    	carrelloVuoto = carrello.isEmpty(); // se è vuoto lo controlliamo qui, deve stare dentro al blocco sincronized?
+    	}
+    	
 	    JSONObject jsonResponse = new JSONObject();
 	    jsonResponse.put("rimosso", rimosso);
 	    jsonResponse.put("nuovaQuantita", nuovaQuantita);

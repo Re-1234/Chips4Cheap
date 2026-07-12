@@ -14,8 +14,8 @@
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-generico">
-        <div class="blocco-contenuto">
+    <main>
+        <section>
             
             <h2>Storico Ricevute Fiscali</h2>
 
@@ -32,7 +32,7 @@
                                 <span>Pagamento:  ${ricevuta.metodoPagamento}</span>
                                 <span>Pagamento:  ${ricevuta.via}</span>	<!-- non faccio vedere numeroCivico, cap, visualizzo il resto nella singola ricevuta -->
                                 
-                                <a href="${pageContext.request.contextPath}/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}" class="link-nascosto-elemento">
+                                <a href="${pageContext.request.contextPath}/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}"> <!-- RIMOSSO "link-nascosto-elemento" -->
                                     Apri Ricevuta
                                 </a>
                             </li>
@@ -47,7 +47,7 @@
                 </a>
             </div>
             
-        </div>
+        </section>
     </main>
 
     <jsp:include page="../footer.jsp" />

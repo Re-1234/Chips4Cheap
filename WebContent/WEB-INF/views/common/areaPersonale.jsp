@@ -15,8 +15,8 @@
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-pagina">
-        <div class="modulo-centrato">
+    <main>
+        <section class="modulo-centrato">
             
             <h2 class="${sessionScope.account.amministratore ? 'titolo-admin-color' : ''}">
                 <c:choose>
@@ -75,7 +75,7 @@
                 
                 <a href="${pageContext.request.contextPath}/common/Logout" class="link-azione" id="link-logout">Logout</a>
             </div>
-        </div>
+        </section>
     </main>
 
     <jsp:include page="../footer.jsp" />

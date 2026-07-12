@@ -15,11 +15,17 @@
 
     <jsp:include page="header.jsp" />
 
-    <main class="contenitore-generico">
-        <div class="blocco-contenuto">
+    <main>
+        <section>
             
             <h2>Il tuo Carrello</h2>
-
+			
+			<c:if test="${not empty requestScope.erroreServer}">
+                <div class="errore-server">
+                    <p>${requestScope.erroreServer}</p>
+                </div>
+            </c:if>
+			
             <c:choose>
                 <c:when test="${empty sessionScope.carrello}"> <!-- SE IL CARRELLO è INIZIALIZZATO MA VUOTO? controlla sia se è vuoto sia se non esiste, figo-->
                     <p class="avviso-vuoto">Il tuo carrello è attualmente vuoto.</p>
@@ -37,27 +43,27 @@
                             <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
         
         						<c:if test="${not empty prodotto.imagine}">
-            						<img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
+            						<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60"> <!-- SERVE IL SEPARATORE QUI / tra le 2 EL no? -->
         						</c:if>
         
-        						<span class="testo-modello">
+        						<span class=testo-importante>
                                     <a href="${pageContext.request.contextPath}/Prodotto?id=${prodotto.nomeModello}">
                                         ${prodotto.nomeModello}
                                     </a>
                                 </span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${prodotto.prezzo} €</span>
+        						<span>Prezzo unitario: ${prodotto.prezzoscontato} €</span>
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci')">-</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci', '${pageContext.request.contextPath}')">-</button>
             						<span id="quantita-${prodotto.nomeModello}">${prodotto.quantità}</span>
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta')">+</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
-        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.prezzo * prodotto.quantità} €</span>
+        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.subtotale} €</span>
         
-       							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi')">Rimuovi</button>
+       							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi', '${pageContext.request.contextPath}')">Rimuovi</button>
         
     						</li>
                         </c:forEach>
@@ -82,7 +88,7 @@
                 </c:otherwise>
             </c:choose>
             
-        </div>
+        </section>
     </main>
 
     <jsp:include page="footer.jsp" />
