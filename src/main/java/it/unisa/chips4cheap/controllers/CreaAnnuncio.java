@@ -55,7 +55,7 @@ public class CreaAnnuncio extends HttpServlet {
 					AnnuncioDAO dao = new AnnuncioDAO(ds);
 					dao.doSave(nuovoAnnuncio);
 					
-					ArrayList<Annuncio> listaAggiornata = dao.doRetrieveAll(); // posso permettermi di fare il do retrieve all ogni volta, pochi annunci e 1 solo admin
+					ArrayList<Annuncio> listaAggiornata = dao.doRetrieveByAll(); // posso permettermi di fare il do retrieve all ogni volta, pochi annunci e 1 solo admin
 					getServletContext().setAttribute("tuttiAnnunci", listaAggiornata);
 					
 					// lo butto nella sua area Personale

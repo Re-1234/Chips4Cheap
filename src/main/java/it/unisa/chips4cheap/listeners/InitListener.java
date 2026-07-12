@@ -31,7 +31,7 @@ public class InitListener implements ServletContextListener{
 		
 		if (ds != null) {
 			AnnuncioDAO annuncioDAO = new AnnuncioDAO(ds);
-			ArrayList<Annuncio> listaAnnunci = annuncioDAO.doRetrieveAll();
+			ArrayList<Annuncio> listaAnnunci = annuncioDAO.doRetrieveByAll();
 			
 			// per l'aside lo metto nel contesto globale
 			context.setAttribute("tuttiAnnunci", listaAnnunci);

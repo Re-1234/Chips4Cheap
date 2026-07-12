@@ -55,7 +55,7 @@ public class CancellaAnnunci extends HttpServlet {
 	        
 	    dao.doDelete(annuncioDaEliminare);
 	       
-	    getServletContext().setAttribute("tuttiAnnunci", dao.doRetrieveAll());  
+	    getServletContext().setAttribute("tuttiAnnunci", dao.doRetrieveByAll());  
 	    jsonResponse.put("successo", true);
 	    
 	    response.getWriter().write(jsonResponse.toString());

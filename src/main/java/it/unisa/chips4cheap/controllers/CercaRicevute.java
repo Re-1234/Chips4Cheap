@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
@@ -58,8 +59,18 @@ public class CercaRicevute extends HttpServlet {
 		JSONObject jsonRequest = new JSONObject(sb.toString());
 		
 		String emailCliente = jsonRequest.optString("emailCliente", ""); //  da null invece di esplodere come con getString, cosi non filtriamo per quello;
-		String dataInizio = jsonRequest.optString("dataInizio", "");
-		String dataFine = jsonRequest.optString("dataFine", "");
+		String jSONdataInizio = jsonRequest.optString("dataInizio", "");
+		String jSONdataFine = jsonRequest.optString("dataFine", "");
+		
+		LocalDate dataInizio = null;
+		LocalDate dataFine = null;
+		
+		if(!jSONdataInizio.equals("")) {	// potenzialmente serve controlli per errori
+			dataInizio = LocalDate.parse(jSONdataInizio);
+		}
+		if(!jSONdataFine.equals("")) {
+			dataFine = LocalDate.parse(jSONdataFine);
+		}
 		
 		JSONArray jsonArrayResponse = new JSONArray();
 		
@@ -68,7 +79,7 @@ public class CercaRicevute extends HttpServlet {
 			
 			RicevutaFiscaleDAO ricevutaDAO = new RicevutaFiscaleDAO(ds);
 			
-			ArrayList<RicevutaFiscale> listaRicevute = ricevutaDAO.doSearchByFilters(emailCliente, dataInizio, dataFine);
+			ArrayList<RicevutaFiscale> listaRicevute = ricevutaDAO.doFilter(emailCliente, "", dataInizio, dataFine); // stringa vuota perchè la jsp non filtra al momento per metodo pagamento
 			
 			if (listaRicevute != null) {
 				for (RicevutaFiscale r : listaRicevute) {
