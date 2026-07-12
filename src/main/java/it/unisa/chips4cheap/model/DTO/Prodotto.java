@@ -76,14 +76,16 @@ public class Prodotto implements Cloneable , Serializable{
 		this.imagine = imagine;
 	}
 	
-	public double getScontoInEuro(){
+	public double prezzoSconto(){
 		if(sconto == 0){
-			return 0;
+			return prezzo;
 		}
 		double result = -1;
 		
 		if(sconto > 0) {
-			 result = (prezzo * sconto) / 100;
+			 result = (prezzo * (100 - sconto))/ 100;
+		}else {
+			throw new RuntimeException("Lo Sconto è negativo");
 		}
 		
 		return result;
