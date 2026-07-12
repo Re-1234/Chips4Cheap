@@ -116,7 +116,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 	}
 
 	@Override
-	public ArrayList<Account> doRetryByAll() {
+	public ArrayList<Account> doRetrieveByAll() {
 		try(Connection c = ds.getConnection()){
 			ArrayList<Account> c1 = new ArrayList<>();
 			PreparedStatement p = c.prepareStatement("Select * From Account1");

@@ -218,7 +218,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 	}
 	
 	@Override
-	public ArrayList<RicevutaFiscale> doRetryByAll() {
+	public ArrayList<RicevutaFiscale> doRetrieveByAll() {
 		try(Connection c = ds.getConnection()){
 			ArrayList<RicevutaFiscale> ricevuteFiscali = new ArrayList<>();
 			PreparedStatement p = c.prepareStatement("Select * From RicevutaFiscale");

@@ -217,7 +217,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 	}
 	
 	@Override
-	public ArrayList<Prodotto> doRetryByAll() {
+	public ArrayList<Prodotto> doRetrieveByAll() {
 		try(Connection c = ds.getConnection()){
 			ArrayList<Prodotto> prodotti = new ArrayList<>();
 			PreparedStatement p = c.prepareStatement("Select * From Prodotto");

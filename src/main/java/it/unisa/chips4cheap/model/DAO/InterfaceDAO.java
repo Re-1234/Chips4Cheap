@@ -7,5 +7,5 @@ public interface InterfaceDAO<T>{
 	void doDelete(T element);
 	T doSearchElement(Object o);
 	void doUpdate(T element);
-	ArrayList<T> doRetryByAll();
+	ArrayList<T> doRetrieveByAll();
 }

@@ -110,7 +110,7 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 	}
 
 	@Override
-	public ArrayList<ProdottoRicevuta> doRetryByAll() {
+	public ArrayList<ProdottoRicevuta> doRetrieveByAll() {
 		try(Connection c = ds.getConnection()){
 			ArrayList<ProdottoRicevuta> c1 = new ArrayList<>();
 			PreparedStatement p = c.prepareStatement("Select * From ProdottoRicevuta");

@@ -96,7 +96,7 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 	}
 
 	@Override
-	public ArrayList<Annuncio> doRetryByAll() {
+	public ArrayList<Annuncio> doRetrieveByAll() {
 		try(Connection c = ds.getConnection()){
 			ArrayList<Annuncio> annunci = new ArrayList<>();
 			PreparedStatement p = c.prepareStatement("Select * From Annuncio");
