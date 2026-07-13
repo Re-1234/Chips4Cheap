@@ -9,9 +9,12 @@ public class Prodotto implements Cloneable , Serializable{
 	private String descrizione;
 	private String tipo;
 	private int quantità;
-	private double sconto;
+	private int sconto;
 	private String imagine;
-	public final static double EPSILON = 1e9; 
+	private String mimeType;
+	
+	public final static double EPSILON = 1e-9; 
+	 
 	
 	public Prodotto(){
 		this.nCAutore = "";
@@ -20,10 +23,12 @@ public class Prodotto implements Cloneable , Serializable{
 		this.descrizione = "";
 		this.tipo = "";
 		this.quantità = 0;
+		this.sconto = 0;
 		this.imagine = "";
+		this.mimeType = "";
 	}
 	
-	public Prodotto(String nCAutore , String nomeModello , double prezzo , String descrizione , String tipo , int quantità , String imagine){
+	public Prodotto(String nCAutore , String nomeModello , double prezzo , String descrizione , String tipo , int quantità ,int sconto, String imagine,String mimeType){
 		this.nCAutore = nCAutore;
 		this.nomeModello = nomeModello;
 		this.prezzo = prezzo;
@@ -31,6 +36,12 @@ public class Prodotto implements Cloneable , Serializable{
 		this.tipo = tipo;
 		this.quantità = quantità;
 		this.imagine = imagine;
+		if(sconto >= 0 && sconto <= 100){
+			this.sconto = sconto;
+		}else {
+			this.sconto = 0;
+		}
+		this.mimeType = mimeType;
 	}
 	
 	public String getnCAutore() {
@@ -76,19 +87,44 @@ public class Prodotto implements Cloneable , Serializable{
 		this.imagine = imagine;
 	}
 	
-	public double prezzoSconto(){
-		if(sconto == 0){
-			return prezzo;
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+	
+	public int getSconto() {
+		return sconto;
+	}
+
+	public void setSconto(int sconto) {
+		if(sconto >= 0 && sconto <= 100){
+			this.sconto = sconto;
+		}else{
+			throw new RuntimeException("lo sconto deve stare in questo range di valori 0 e 100");
 		}
-		double result = -1;
-		
-		if(sconto > 0) {
-			 result = (prezzo * (100 - sconto))/ 100;
-		}else {
-			throw new RuntimeException("Lo Sconto è negativo");
-		}
-		
-		return result;
+	}
+	
+	public double getPrezzoScontato(){
+        if(sconto == 0){
+            return prezzo;
+        }
+        double result = -1;
+
+        if(sconto > 0) {
+             result = (prezzo * (100 - sconto))/ 100;
+        }else {
+            throw new RuntimeException("Lo Sconto è negativo");
+        }
+
+        return result;
+    } 
+
+	
+	public double getSubtotale() {
+		return getPrezzoScontato() * this.quantità;
 	}
 	
 	@Override
@@ -125,6 +161,4 @@ public class Prodotto implements Cloneable , Serializable{
 	public String toString(){
 		return getClass().getName() + "[ nCAutore = " + nCAutore + ", nomeModello = " + nomeModello + ", prezzo =" + prezzo + ", descrizione = " + descrizione +", tipo = " + tipo + ",quantità = " + quantità + "imagine = " + imagine + "]";
 	}
-	
-	
 }

@@ -18,7 +18,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 	}
 	
 	@Override
-	public void doSave(Account elemet){
+	public int doSave(Account elemet){
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
@@ -32,15 +32,16 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				preparedStatement.setString(5,elemet.getCap());
 				preparedStatement.setInt(6,elemet.getNumeroCivico());
 				preparedStatement.setBoolean(7,elemet.isAmministratore());
-				preparedStatement.executeUpdate();
+				
+				int y = preparedStatement.executeUpdate();
 				
 				preparedStatement.close();
+				return y;
 			}
-		
 		} catch(SQLException sqlExe){
 			sqlExe.printStackTrace();
 		}
-		
+		return -1;
 	}
 
 	@Override
@@ -112,7 +113,22 @@ public class AccountDAO implements InterfaceDAO<Account>{
 		}catch (SQLException e){
 				e.printStackTrace();
 		}		
-		
+	}
+
+	@Override
+	public ArrayList<Account> doRetrieveByAll() {
+		try(Connection c = ds.getConnection()){
+			ArrayList<Account> c1 = new ArrayList<>();
+			PreparedStatement p = c.prepareStatement("Select * From Account1");
+			ResultSet s = p.executeQuery();
+			while(s.next()) {
+				c1.add(new Account(s.getString("username"),s.getString("Password1"),s.getString("Via"),s.getString("Cap"),s.getInt("NumeroCivico"),s.getString("email"),s.getBoolean("Amministratore")));
+			}
+			return c1; 
+		}catch(SQLException s){
+			s.printStackTrace();
+		}
+		return null;
 	}
 	
 }

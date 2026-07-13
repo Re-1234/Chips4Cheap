@@ -7,10 +7,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
+import it.unisa.chips4cheap.model.DTO.Prodotto;
 
 /**
  * Servlet implementation class prodotti
@@ -33,12 +35,18 @@ public class prodotti extends HttpServlet {
 		String nomeModello = request.getParameter("nomeModello");
 		String produttore = request.getParameter("produttore");
 		String tipo = request.getParameter("tipo");
-		String minInt = request.getParameter("prezzoMinSlider");
-		String maxInt = request.getParameter("prezzoMaxSlider");
+		String minPrezzo = request.getParameter("prezzoMinSlider");
+		String maxPrezzo = request.getParameter("prezzoMaxSlider");
+		
+		
+		int minprezz = Integer.valueOf(minPrezzo);
+		int maxprezz = Integer.valueOf(maxPrezzo);
 		
 		ProdottoDAO prodotto = new ProdottoDAO(da);
 		
-		prodotto.
+		ArrayList<Prodotto> prodotti =	prodotto.doFilter(nomeModello, produttore, tipo,minprezz,maxprezz);
+		
+		
 		
 		
 	}
