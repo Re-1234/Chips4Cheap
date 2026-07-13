@@ -107,6 +107,26 @@ public class Prodotto implements Cloneable , Serializable{
 		}
 	}
 	
+	public double getPrezzoScontato(){
+        if(sconto == 0){
+            return prezzo;
+        }
+        double result = -1;
+
+        if(sconto > 0) {
+             result = (prezzo * (100 - sconto))/ 100;
+        }else {
+            throw new RuntimeException("Lo Sconto è negativo");
+        }
+
+        return result;
+    } 
+
+	
+	public double getSubtotale() {
+		return getPrezzoScontato() * this.quantità;
+	}
+	
 	@Override
 	public Prodotto clone(){
 		try {
