@@ -7,9 +7,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.logging.LogManager;
 
 import javax.sql.DataSource;
+
+import com.mysql.cj.log.Log;
 
 import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
 import it.unisa.chips4cheap.model.DTO.Prodotto;
@@ -17,11 +22,11 @@ import it.unisa.chips4cheap.model.DTO.Prodotto;
 /**
  * Servlet implementation class prodotti
  */
-@WebServlet("/prodotti")
-public class prodotti extends HttpServlet {
+@WebServlet("/RicercaProdotti")
+public class RicercaProdotti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public prodotti() {
+    public RicercaProdotti() {
         super();
     }
 
@@ -35,9 +40,14 @@ public class prodotti extends HttpServlet {
 		String nomeModello = request.getParameter("nomeModello");
 		String produttore = request.getParameter("produttore");
 		String tipo = request.getParameter("tipo");
-		String minPrezzo = request.getParameter("prezzoMinSlider");
-		String maxPrezzo = request.getParameter("prezzoMaxSlider");
+		String minPrezzo = request.getParameter("prezzoMin");
+		String maxPrezzo = request.getParameter("prezzoMax");
 		
+		System.out.println("nomeModello : " + nomeModello);
+		System.out.println("produttore : " + produttore);
+		System.out.println("tipo : " + tipo);
+		System.out.println("minPrezzo : " + minPrezzo);
+		System.out.println("maxPrezzo : " + maxPrezzo);
 		
 		int minprezz = Integer.valueOf(minPrezzo);
 		int maxprezz = Integer.valueOf(maxPrezzo);
@@ -46,9 +56,10 @@ public class prodotti extends HttpServlet {
 		
 		ArrayList<Prodotto> prodotti =	prodotto.doFilter(nomeModello, produttore, tipo,minprezz,maxprezz);
 		
+		request.setAttribute("prodotti",prodotti);
 		
-		
-		
+		RequestDispatcher re = request.getRequestDispatcher("WEB-INF\\views\\Catalogo.jsp");
+		re.forward(request, response);
 	}
 
 }

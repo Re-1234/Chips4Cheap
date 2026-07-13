@@ -172,7 +172,7 @@
             <div class="zona-filtri">
 
                 <!-- FORM 2: Filtro per produttore -->
-                <form class="scheda-filtro" action="${pageContext.request.contextPath}/Catalogo" method="post">
+                <form class="scheda-filtro" action="${pageContext.request.contextPath}/RicercaProdotti" method="post">
                 	<label for = "nomeModello" style = "text-align: left;">Nome del Modello</label>
                		<input type="text" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
                     <label for="produttore">Produttore:</label>
@@ -212,14 +212,8 @@
 
                     <button type="submit">Search</button>
                 </form>
-
-                <!-- FORM 3: Filtro per tipo -->
-
-                <!-- RANGE PREZZO: slider a doppia maniglia -->
-               
-
             </div>
-
+            	
             <c:choose>
                 <c:when test="${empty prodotti}">
                     <p class="avviso-vuoto">Nessun prodotto trovato con i filtri selezionati.</p>
