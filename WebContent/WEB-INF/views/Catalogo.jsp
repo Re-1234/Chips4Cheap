@@ -12,77 +12,153 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
 
     <style>
-        /* --- Slider prezzo a doppia maniglia --- */
-        .slider-prezzo-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 320px;
-            height: 40px;
-            margin-top: 8px;
-        }
+    .zona-filtri {
+        margin-bottom: 24px;
+    }
 
-        .slider-prezzo-track {
-            position: absolute;
-            top: 18px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #ddd;
-            border-radius: 2px;
-        }
+    .scheda-filtro {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px 24px;
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        width: 900px;          /* card ancora più larga */
+        max-width: 100%;
+    }
 
-        .slider-prezzo-range {
-            position: absolute;
-            top: 18px;
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
-        }
+    .riga-campo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;              /* gap quasi zero tra label e input */
+        width: 100%;
+    }
 
-        .slider-prezzo-wrapper input[type="range"] {
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 100%;
-            height: 18px;
-            margin: 0;
-            background: none;
-            pointer-events: none;
-            -webkit-appearance: none;
-            appearance: none;
-        }
+    .riga-campo label {
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
 
-        .slider-prezzo-wrapper input[type="range"]::-webkit-slider-thumb {
-            pointer-events: auto;
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #333;
-            cursor: pointer;
-            border: 2px solid #fff;
-            box-shadow: 0 0 2px rgba(0,0,0,0.4);
-        }
+    .riga-campo input[type="text"],
+    .riga-campo select {
+        width: 320px;
+        max-width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 0.95em;
+        box-sizing: border-box;
+    }
 
-        .slider-prezzo-wrapper input[type="range"]::-moz-range-thumb {
-            pointer-events: auto;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #333;
-            cursor: pointer;
-            border: 2px solid #fff;
-            box-shadow: 0 0 2px rgba(0,0,0,0.4);
-        }
+    .scheda-filtro button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 6px;
+        background: #333;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
 
-        .valori-prezzo-selezionati {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9em;
-            margin-top: 4px;
-        }
-    </style>
+    .scheda-filtro button:hover {
+        background: #555;
+    }
+
+    /* --- Slider prezzo a doppia maniglia --- */
+    .slider-prezzo-wrapper {
+        position: relative;
+        width: 320px;
+        max-width: 100%;
+        height: 40px;
+        margin-top: 2px;
+    }
+
+    .slider-prezzo-track {
+        position: absolute;
+        top: 18px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+    }
+
+    .slider-prezzo-range {
+        position: absolute;
+        top: 18px;
+        height: 4px;
+        background: #333;
+        border-radius: 2px;
+    }
+
+    .slider-prezzo-wrapper input[type="range"] {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 100%;
+        height: 18px;
+        margin: 0;
+        background: transparent !important;
+        pointer-events: none;
+    }
+
+    .slider-prezzo-wrapper input[type="range"]::-webkit-slider-runnable-track {
+        background: transparent !important;
+        border: none !important;
+        height: 4px;
+    }
+
+    .slider-prezzo-wrapper input[type="range"]::-moz-range-track {
+        background: transparent !important;
+        border: none !important;
+        height: 4px;
+    }
+
+    .slider-prezzo-wrapper input[type="range"]::-webkit-slider-thumb {
+        pointer-events: auto;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #333 !important;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 0 2px rgba(0,0,0,0.4);
+    }
+
+    .slider-prezzo-wrapper input[type="range"]::-moz-range-thumb {
+        pointer-events: auto;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #333 !important;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 0 2px rgba(0,0,0,0.4);
+    }
+
+    .valori-prezzo-selezionati {
+        position: relative;
+        width: 320px;
+        max-width: 100%;
+        height: 20px;
+        font-size: 0.9em;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    .valori-prezzo-selezionati span[id^="etichetta"] {
+        position: absolute;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+</style>
 </head>
 <body>
 
@@ -95,22 +171,14 @@
 
             <div class="zona-filtri">
 
-                <!-- FORM 1: Ricerca per nome modello -->
-                <form class="scheda-filtro" action="${pageContext.request.contextPath}/Catalogo" method="post">
-                    <input type="text" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
-                    <button type="submit">Cerca</button>
-                </form>
-
                 <!-- FORM 2: Filtro per produttore -->
                 <form class="scheda-filtro" action="${pageContext.request.contextPath}/Catalogo" method="post">
+                	<label for = "nomeModello" style = "text-align: left;">Nome del Modello</label>
+               		<input type="text" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
                     <label for="produttore">Produttore:</label>
                     <input type="text" id="produttore" name="produttore" placeholder="Es. Samsung, Apple..." value="${param.produttore}">
-                    <button type="submit">Filtra</button>
-                </form>
-
-                <!-- FORM 3: Filtro per tipo -->
-                <form class="scheda-filtro" action="${pageContext.request.contextPath}/Catalogo" method="post">
-                    <label for="tipo">Tipo:</label>
+                   	
+                   	<label for="tipo">Tipo:</label>
                     <select id="tipo" name="tipo">
                         <option value="">Tutti</option>
                         <option value="Smartphone" ${param.tipo == 'Smartphone' ? 'selected' : ''}>Smartphone</option>
@@ -118,12 +186,10 @@
                         <option value="Tablet" ${param.tipo == 'Tablet' ? 'selected' : ''}>Tablet</option>
                         <option value="Accessorio" ${param.tipo == 'Accessorio' ? 'selected' : ''}>Accessorio</option>
                     </select>
-                    <button type="submit">Filtra</button>
-                </form>
-
-                <!-- RANGE PREZZO: slider a doppia maniglia -->
-                <form class="scheda-filtro" action="${pageContext.request.contextPath}/Catalogo" method="post" id="form-prezzo">
-                    <label>Fascia di prezzo:</label>
+                	
+                	
+                	
+            		<label>Fascia di prezzo:</label>
 
                     <div class="slider-prezzo-wrapper">
                         <div class="slider-prezzo-track"></div>
@@ -144,8 +210,13 @@
                     <input type="hidden" name="prezzoMin" id="prezzoMinHidden" value="${empty param.prezzoMin ? 0 : param.prezzoMin}">
                     <input type="hidden" name="prezzoMax" id="prezzoMaxHidden" value="${empty param.prezzoMax ? 2000 : param.prezzoMax}">
 
-                    <button type="submit">Applica filtro prezzo</button>
+                    <button type="submit">Search</button>
                 </form>
+
+                <!-- FORM 3: Filtro per tipo -->
+
+                <!-- RANGE PREZZO: slider a doppia maniglia -->
+               
 
             </div>
 

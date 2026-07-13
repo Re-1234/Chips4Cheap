@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
+import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
+
 /**
  * Servlet implementation class prodotti
  */
@@ -25,9 +29,17 @@ public class prodotti extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DataSource da = (DataSource) getServletContext().getAttribute("DataSource");
 		String nomeModello = request.getParameter("nomeModello");
 		String produttore = request.getParameter("produttore");
 		String tipo = request.getParameter("tipo");
+		String minInt = request.getParameter("prezzoMinSlider");
+		String maxInt = request.getParameter("prezzoMaxSlider");
+		
+		ProdottoDAO prodotto = new ProdottoDAO(da);
+		
+		prodotto.
+		
 		
 	}
 
