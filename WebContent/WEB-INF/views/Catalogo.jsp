@@ -229,7 +229,7 @@
                                 </c:if>
 
                                 <span class="testo-modello">
-                                    <a href="${pageContext.request.contextPath}/Prodotto?id=${prodotto.nomeModello}">
+                                    <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}">
                                         ${prodotto.nomeModello}
                                     </a>
                                 </span>
