@@ -26,7 +26,7 @@ public class ModificaAccount extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,8 +45,8 @@ public class ModificaAccount extends HttpServlet {
             vecchiaPassword == null || vecchiaPassword.isEmpty() ||
             nuovaPassword == null || nuovaPassword.isEmpty() ||
             via == null || via.trim().isEmpty() ||
-            cap == null || !cap.trim().isEmpty() ||
-            numeroCivico == null || !numeroCivico.trim().isEmpty()) {
+            cap == null || cap.trim().isEmpty() ||
+            numeroCivico == null || numeroCivico.trim().isEmpty()) {
             
             request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
             request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);

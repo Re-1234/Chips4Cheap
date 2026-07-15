@@ -52,13 +52,13 @@
                                     </a>
                                 </span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${prodotto.prezzoscontato} €</span>
+        						<span>Prezzo unitario: ${prodotto.prezzoScontato} €</span>
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci', '${pageContext.request.contextPath}')">-</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'sottrai', '${pageContext.request.contextPath}')">-</button>
             						<span id="quantita-${prodotto.nomeModello}">${prodotto.quantità}</span>
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta', '${pageContext.request.contextPath}')">+</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aggiungi', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
         						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.subtotale} €</span>

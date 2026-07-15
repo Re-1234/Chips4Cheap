@@ -37,7 +37,7 @@ public class CancellaProdotto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String nomeModello = request.getParameter("nomeModello");
+		String nomeModello = request.getParameter("nomeModello");
 		
 		if (nomeModello != null && !nomeModello.trim().isEmpty()) { 
 			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
@@ -45,9 +45,9 @@ String nomeModello = request.getParameter("nomeModello");
 			Prodotto prodottoDaCancellare = prodottoDAO.doSearchElement(nomeModello);
 			
 			if (prodottoDaCancellare != null) {
-				prodottoDAO.doDelete(prodottoDaCancellare);
-				// Includi ControlloImmagini per rimuovere l'mmagine, DEVE ESSERE doPOST per questo!
+				// Includi ControlloImmagini per rimuovere l'mmagine, DEVE ESSERE doPOST per questo! e fallo prima di cancellare il prodotto
 				request.getRequestDispatcher("/ControlloImmagini?action=delete").include(request, response);
+				prodottoDAO.doDelete(prodottoDaCancellare);
 			}
 		}
 		request.getRequestDispatcher("/Catalogo").forward(request, response);
