@@ -10,155 +10,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
-
-    <style>
-    .zona-filtri {
-        margin-bottom: 24px;
-    }
-
-    .scheda-filtro {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 20px 24px;
-        background: #f9f9f9;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        width: 900px;          /* card ancora più larga */
-        max-width: 100%;
-    }
-
-    .riga-campo {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0px;              /* gap quasi zero tra label e input */
-        width: 100%;
-    }
-
-    .riga-campo label {
-        font-weight: 600;
-        margin-bottom: 2px;
-    }
-
-    .riga-campo input[type="text"],
-    .riga-campo select {
-        width: 320px;
-        max-width: 100%;
-        padding: 8px 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 0.95em;
-        box-sizing: border-box;
-    }
-
-    .scheda-filtro button {
-        padding: 8px 20px;
-        border: none;
-        border-radius: 6px;
-        background: #333;
-        color: #fff;
-        cursor: pointer;
-        font-size: 0.9em;
-    }
-
-    .scheda-filtro button:hover {
-        background: #555;
-    }
-
-    /* --- Slider prezzo a doppia maniglia --- */
-    .slider-prezzo-wrapper {
-        position: relative;
-        width: 320px;
-        max-width: 100%;
-        height: 40px;
-        margin-top: 2px;
-    }
-
-    .slider-prezzo-track {
-        position: absolute;
-        top: 18px;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: #ddd;
-        border-radius: 2px;
-    }
-
-    .slider-prezzo-range {
-        position: absolute;
-        top: 18px;
-        height: 4px;
-        background: #333;
-        border-radius: 2px;
-    }
-
-    .slider-prezzo-wrapper input[type="range"] {
-        -webkit-appearance: none !important;
-        appearance: none !important;
-        position: absolute;
-        top: 10px;
-        left: 0;
-        width: 100%;
-        height: 18px;
-        margin: 0;
-        background: transparent !important;
-        pointer-events: none;
-    }
-
-    .slider-prezzo-wrapper input[type="range"]::-webkit-slider-runnable-track {
-        background: transparent !important;
-        border: none !important;
-        height: 4px;
-    }
-
-    .slider-prezzo-wrapper input[type="range"]::-moz-range-track {
-        background: transparent !important;
-        border: none !important;
-        height: 4px;
-    }
-
-    .slider-prezzo-wrapper input[type="range"]::-webkit-slider-thumb {
-        pointer-events: auto;
-        -webkit-appearance: none !important;
-        appearance: none !important;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #333 !important;
-        cursor: pointer;
-        border: 2px solid #fff;
-        box-shadow: 0 0 2px rgba(0,0,0,0.4);
-    }
-
-    .slider-prezzo-wrapper input[type="range"]::-moz-range-thumb {
-        pointer-events: auto;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #333 !important;
-        cursor: pointer;
-        border: 2px solid #fff;
-        box-shadow: 0 0 2px rgba(0,0,0,0.4);
-    }
-
-    .valori-prezzo-selezionati {
-        position: relative;
-        width: 320px;
-        max-width: 100%;
-        height: 20px;
-        font-size: 0.9em;
-        font-weight: 600;
-        margin-top: 2px;
-    }
-
-    .valori-prezzo-selezionati span[id^="etichetta"] {
-        position: absolute;
-        transform: translateX(-50%);
-        white-space: nowrap;
-    }
-</style>
 </head>
 <body>
 
@@ -171,14 +22,15 @@
 
             <div class="zona-filtri">
 
-                <!-- FORM 2: Filtro per produttore -->
-                <form class="scheda-filtro" action="${pageContext.request.contextPath}/RicercaProdotti" method="post">
-                	<label for = "nomeModello" style = "text-align: left;">Nome del Modello</label>
-               		<input type="text" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
+                <!-- FORM: Filtro prodotti -->
+                <form class="scheda-filtro" id="formRicerca">
+                    <label for="nomeModello" style="text-align: left;">Nome del Modello</label>
+                    <input type="text" id="nomeModello" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
+
                     <label for="produttore">Produttore:</label>
                     <input type="text" id="produttore" name="produttore" placeholder="Es. Samsung, Apple..." value="${param.produttore}">
-                   	
-                   	<label for="tipo">Tipo:</label>
+
+                    <label for="tipo">Tipo:</label>
                     <select id="tipo" name="tipo">
                         <option value="">Tutti</option>
                         <option value="Smartphone" ${param.tipo == 'Smartphone' ? 'selected' : ''}>Smartphone</option>
@@ -186,10 +38,8 @@
                         <option value="Tablet" ${param.tipo == 'Tablet' ? 'selected' : ''}>Tablet</option>
                         <option value="Accessorio" ${param.tipo == 'Accessorio' ? 'selected' : ''}>Accessorio</option>
                     </select>
-                	
-                	
-                	
-            		<label>Fascia di prezzo:</label>
+
+                    <label>Fascia di prezzo:</label>
 
                     <div class="slider-prezzo-wrapper">
                         <div class="slider-prezzo-track"></div>
@@ -213,41 +63,36 @@
                     <button type="submit">Search</button>
                 </form>
             </div>
-            	
-            <c:choose>
-                <c:when test="${empty prodotti}">
-                    <p class="avviso-vuoto">Nessun prodotto trovato con i filtri selezionati.</p>
-                </c:when>
 
-                <c:otherwise>
-                    <ul class="lista-elementi">
-                        <c:forEach var="prodotto" items="${prodotti}">
-                            <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
-
-                                <c:if test="${not empty prodotto.imagine}">
-                                    <img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
-                                </c:if>
-
-                                <span class="testo-modello">
-                                    <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}">
-                                        ${prodotto.nomeModello}
-                                    </a>
-                                </span>
-                                <span>Produttore: ${prodotto.nCAutore}</span>
-                                <span>Tipo: ${prodotto.tipo}</span>
-                                <span>Prezzo: ${prodotto.prezzo} €</span>
-                                <c:if test="${prodotto.sconto > 0}">
-                                    <span class="testo-importante">Sconto: ${prodotto.sconto}%</span>
-                                </c:if>
-                                <span>${prodotto.descrizione}</span>
-
-                                <button type="button" onclick="aggiungiAlCarrello('${prodotto.nomeModello}')">Aggiungi al Carrello</button>
-
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </c:otherwise>
-            </c:choose>
+            <div id="risultatiProdotti">
+                <c:choose>
+                    <c:when test="${empty prodotti}">
+                        <p class="avviso-vuoto">Nessun prodotto trovato con i filtri selezionati.</p>
+                    </c:when>
+                    <c:otherwise>
+                        <ul class="lista-elementi">
+                            <c:forEach var="prodotto" items="${prodotti}">
+                                <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
+                                    <c:if test="${not empty prodotto.imagine}">
+                                        <img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
+                                    </c:if>
+                                    <span class="testo-modello">
+                                        <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}">${prodotto.nomeModello}</a>
+                                    </span>
+                                    <span>Produttore: ${prodotto.nCAutore}</span>
+                                    <span>Tipo: ${prodotto.tipo}</span>
+                                    <span>Prezzo: ${prodotto.prezzo} €</span>
+                                    <c:if test="${prodotto.sconto > 0}">
+                                        <span class="testo-importante">Sconto: ${prodotto.sconto}%</span>
+                                    </c:if>
+                                    <span>${prodotto.descrizione}</span>
+                                    <button type="button" onclick="aggiungiAlCarrello('${prodotto.nomeModello}')">Aggiungi al Carrello</button>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:otherwise>
+                </c:choose>
+            </div>
 
         </div>
     </main>
@@ -258,53 +103,7 @@
         var contextPath = "${pageContext.request.contextPath}";
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
-
-    <script>
-        (function () {
-            var sliderMin = document.getElementById("prezzoMinSlider");
-            var sliderMax = document.getElementById("prezzoMaxSlider");
-            var hiddenMin = document.getElementById("prezzoMinHidden");
-            var hiddenMax = document.getElementById("prezzoMaxHidden");
-            var testoMin = document.getElementById("valoreMinVisualizzato");
-            var testoMax = document.getElementById("valoreMaxVisualizzato");
-            var rangeColorato = document.getElementById("rangeColorato");
-
-            var scartoMinimo = 20;
-
-            function aggiornaRangeVisivo() {
-                var min = parseInt(sliderMin.value, 10);
-                var max = parseInt(sliderMax.value, 10);
-                var totale = parseInt(sliderMin.max, 10);
-
-                var percentualeMin = (min / totale) * 100;
-                var percentualeMax = (max / totale) * 100;
-
-                rangeColorato.style.left = percentualeMin + "%";
-                rangeColorato.style.right = (100 - percentualeMax) + "%";
-
-                testoMin.innerText = min;
-                testoMax.innerText = max;
-
-                hiddenMin.value = min;
-                hiddenMax.value = max;
-            }
-
-            sliderMin.addEventListener("input", function () {
-                if (parseInt(sliderMax.value, 10) - parseInt(sliderMin.value, 10) < scartoMinimo) {
-                    sliderMin.value = parseInt(sliderMax.value, 10) - scartoMinimo;
-                }
-                aggiornaRangeVisivo();
-            });
-
-            sliderMax.addEventListener("input", function () {
-                if (parseInt(sliderMax.value, 10) - parseInt(sliderMin.value, 10) < scartoMinimo) {
-                    sliderMax.value = parseInt(sliderMin.value, 10) + scartoMinimo;
-                }
-                aggiornaRangeVisivo();
-            });
-
-            aggiornaRangeVisivo();
-        })();
-    </script>
+    <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
+	<script src="${pageContext.request.contextPath}/scripts/filtroPrezzo.js"></script>
 </body>
 </html>
