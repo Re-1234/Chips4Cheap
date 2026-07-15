@@ -38,9 +38,14 @@
                 </c:when>
                 
                 <c:otherwise>
+                
+                	<c:set var="totaleCarrello" value="0" />
+                	
                     <ul class="lista-elementi">
                         <c:forEach var="prodotto" items="${sessionScope.carrello}">
                             <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
+        
+        						<c:set var="totaleCarrello" value="${totaleCarrello + prodotto.subtotale}" />
         
         						<c:if test="${not empty prodotto.imagine}">
             						<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60"> <!-- SERVE IL SEPARATORE QUI / tra le 2 EL no? -->
@@ -71,7 +76,7 @@
 
                     <div class="scheda-elemento separatore-alto">
                         <span class="testo-importante">Totale Complessivo:</span>
-                        <span id="totale-carrello-dinamico" class="testo-importante">${sessionScope.carrello.prezzoTotale} €</span>
+                        <span id="totale-carrello-dinamico" class="testo-importante">${totaleCarrello} €</span>
                     </div>
                     
                     <div class="zona-navigazione margine-alto">
