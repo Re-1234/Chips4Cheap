@@ -141,8 +141,12 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		if(bArray[2]){
 			elemet += 1;
 		}
+		for(int i = 0;i < 3;i++){
+			System.out.println(bArray[i]);
+		}
 		
 		if(elemet != 0){
+			System.out.println("Sono dentro all'element");
 			s += "where ";
 			for(int i = 0;i < 3;i++) {
 				if(bArray[i] && i == 0){
@@ -179,6 +183,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			}	
 		}else{
 			if(prezzoMin <= prezzoMax){
+				s += "where ";
 				s+= "Prezzo >= ? and Prezzo <= ?";
 			}else {
 				throw new RuntimeException("Il Prezzo di minimo è maggiore del Prezzo di massimo");
@@ -189,7 +194,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		int j = 1;
 		try(Connection c = ds.getConnection()){
 			ArrayList<Prodotto> w = new ArrayList<>();
-			System.out.println(s);
 			PreparedStatement p = c.prepareStatement(s);
 			if(bArray[0]){
 				p.setString(j, nomeModello);

@@ -21,42 +21,49 @@
             <h2>Catalogo Prodotti</h2>
 
             <div class="zona-filtri">
-
                 <!-- FORM: Filtro prodotti -->
                 <form class="scheda-filtro" id="formRicerca">
-                    <label for="nomeModello" style="text-align: left;">Nome del Modello</label>
-                    <input type="text" id="nomeModello" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
-
-                    <label for="produttore">Produttore:</label>
-                    <input type="text" id="produttore" name="produttore" placeholder="Es. Samsung, Apple..." value="${param.produttore}">
-
-                    <label for="tipo">Tipo:</label>
-                    <select id="tipo" name="tipo">
-                        <option value="">Tutti</option>
-                        <option value="Smartphone" ${param.tipo == 'Smartphone' ? 'selected' : ''}>Smartphone</option>
-                        <option value="Laptop" ${param.tipo == 'Laptop' ? 'selected' : ''}>Laptop</option>
-                        <option value="Tablet" ${param.tipo == 'Tablet' ? 'selected' : ''}>Tablet</option>
-                        <option value="Accessorio" ${param.tipo == 'Accessorio' ? 'selected' : ''}>Accessorio</option>
-                    </select>
-
-                    <label>Fascia di prezzo:</label>
-
-                    <div class="slider-prezzo-wrapper">
-                        <div class="slider-prezzo-track"></div>
-                        <div class="slider-prezzo-range" id="rangeColorato"></div>
-
-                        <input type="range" id="prezzoMinSlider" min="0" max="2000" step="10"
-                               value="${empty param.prezzoMin ? 0 : param.prezzoMin}">
-                        <input type="range" id="prezzoMaxSlider" min="0" max="2000" step="10"
-                               value="${empty param.prezzoMax ? 2000 : param.prezzoMax}">
+                    
+                    <div class="riga-campo">
+                        <label for="nomeModello">Nome del Modello</label>
+                        <input type="text" id="nomeModello" name="nomeModello" placeholder="Cerca per nome modello..." value="${param.nomeModello}">
                     </div>
 
-                    <div class="valori-prezzo-selezionati">
-                        <span>€ <span id="valoreMinVisualizzato">${empty param.prezzoMin ? 0 : param.prezzoMin}</span></span>
-                        <span>€ <span id="valoreMaxVisualizzato">${empty param.prezzoMax ? 2000 : param.prezzoMax}</span></span>
+                    <div class="riga-campo">
+                        <label for="produttore">Produttore</label>
+                        <input type="text" id="produttore" name="produttore" placeholder="Es. Samsung, Apple..." value="${param.produttore}">
                     </div>
 
-                    <!-- campi nascosti: sono questi che vengono realmente inviati al server -->
+                    <div class="riga-campo">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo">
+                            <option value="">Tutti</option>
+                            <option value="Smartphone" ${param.tipo == 'Smartphone' ? 'selected' : ''}>Smartphone</option>
+                            <option value="Laptop" ${param.tipo == 'Laptop' ? 'selected' : ''}>Laptop</option>
+                            <option value="Tablet" ${param.tipo == 'Tablet' ? 'selected' : ''}>Tablet</option>
+                            <option value="Accessorio" ${param.tipo == 'Accessorio' ? 'selected' : ''}>Accessorio</option>
+                        </select>
+                    </div>
+
+                    <div class="riga-campo">
+                        <label>Fascia di prezzo</label>
+                        <div class="slider-prezzo-wrapper">
+                            <div class="slider-prezzo-track"></div>
+                            <div class="slider-prezzo-range" id="rangeColorato"></div>
+
+                            <input type="range" id="prezzoMinSlider" min="0" max="2000" step="10"
+                                   value="${empty param.prezzoMin ? 0 : param.prezzoMin}">
+                            <input type="range" id="prezzoMaxSlider" min="0" max="2000" step="10"
+                                   value="${empty param.prezzoMax ? 2000 : param.prezzoMax}">
+                        </div>
+
+                        <div class="valori-prezzo-selezionati" style="display: flex; justify-content: space-between; width: 360px; max-width: 100%; font-size: 0.9rem; font-weight: 600; color: #555; margin-top: 5px;">
+                            <span>€ <span id="valoreMinVisualizzato">${empty param.prezzoMin ? 0 : param.prezzoMin}</span></span>
+                            <span>€ <span id="valoreMaxVisualizzato">${empty param.prezzoMax ? 2000 : param.prezzoMax}</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Campi nascosti per invio dati al server -->
                     <input type="hidden" name="prezzoMin" id="prezzoMinHidden" value="${empty param.prezzoMin ? 0 : param.prezzoMin}">
                     <input type="hidden" name="prezzoMax" id="prezzoMaxHidden" value="${empty param.prezzoMax ? 2000 : param.prezzoMax}">
 
@@ -72,21 +79,45 @@
                     <c:otherwise>
                         <ul class="lista-elementi">
                             <c:forEach var="prodotto" items="${prodotti}">
+                                
+                                <!-- La scheda intera è cliccabile (grazie al link-esteso) ed ha effetti hover -->
                                 <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
-                                    <c:if test="${not empty prodotto.imagine}">
-                                        <img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60">
-                                    </c:if>
-                                    <span class="testo-modello">
-                                        <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}">${prodotto.nomeModello}</a>
-                                    </span>
-                                    <span>Produttore: ${prodotto.nCAutore}</span>
-                                    <span>Tipo: ${prodotto.tipo}</span>
-                                    <span>Prezzo: ${prodotto.prezzo} €</span>
-                                    <c:if test="${prodotto.sconto > 0}">
-                                        <span class="testo-importante">Sconto: ${prodotto.sconto}%</span>
-                                    </c:if>
-                                    <span>${prodotto.descrizione}</span>
-                                    <button type="button" onclick="aggiungiAlCarrello('${prodotto.nomeModello}')">Aggiungi al Carrello</button>
+                                    
+                                    <!-- Gestione Immagine / Fallback -->
+                                    <c:choose>
+                                        <c:when test="${not empty prodotto.imagine}">
+                                            <img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" size = "">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="no-img-placeholder">No Img</div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                    <!-- Informazioni di prodotto -->
+                                    <div class="scheda-info-prodotto">
+                                        <!-- Titolo pulito che non sembra un link blu del browser, ma che copre l'intera riga al click -->
+                                        <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}" class="link-esteso">
+                                            ${prodotto.nomeModello}
+                                        </a>
+                                        <div class="scheda-dettagli-tecnici">
+                                            <span>Produttore: <strong>${prodotto.nCAutore}</strong></span>
+                                            <span>Tipo: <strong>${prodotto.tipo}</strong></span>
+                                        </div>
+                                        <p class="scheda-descrizione-prodotto">${prodotto.descrizione}</p>
+                                    </div>
+
+                                    <!-- Box prezzi e sconti -->
+                                    <div class="scheda-prezzo-box">
+                                        <span class="scheda-prezzo-corrente">${prodotto.prezzo} €</span>
+                                        <c:if test="${prodotto.sconto > 0}">
+                                            <span class="scheda-sconto-badge">-${prodotto.sconto}%</span>
+                                        </c:if>
+                                    </div>
+
+                                    <!-- Bottone Carrello Giallo (Con z-index elevato per essere cliccato indipendentemente dalla scheda) -->
+                                    <button type="button" class="add-cart-button-small" data-nome="${prodotto.nomeModello}">
+                                        Aggiungi al Carrello
+                                    </button>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -104,6 +135,6 @@
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
-	<script src="${pageContext.request.contextPath}/scripts/filtroPrezzo.js"></script>
+    <script src="${pageContext.request.contextPath}/scripts/FiltroPrezzo.js"></script>
 </body>
 </html>
