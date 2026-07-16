@@ -69,6 +69,31 @@ public class GestioneProdotto extends HttpServlet {
             errore = "Lo sconto deve essere una percentuale intera compresa tra 0 e 100.";
         }
 
+        if (errore == null) { // HAI CARICATO UN IMMAGINE?
+            Part filePart = request.getPart("imagine");
+            
+            if (filePart != null && filePart.getSize() > 0) {
+                String contentType = filePart.getContentType();
+                
+                // Se il tipo non rientra tra quelli permessi, blocchiamo l'inserimento
+                if (contentType == null || 
+                    (!contentType.equalsIgnoreCase("image/png") && 
+                     !contentType.equalsIgnoreCase("image/jpeg") && 
+                     !contentType.equalsIgnoreCase("image/jpg") && 
+                     !contentType.equalsIgnoreCase("image/webp"))) {
+                    errore = "Formato immagine non valido. Sono ammessi solo file PNG, JPEG, JPG e WEBP.";
+                }
+            }
+        }
+
+        // Esiste già e stiamo provando ad aggiungere?
+        if (errore == null && "add".equalsIgnoreCase(action)) {
+            Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
+            if (prodottoEsistente != null) {
+                errore = "Esiste già un prodotto nel catalogo con il codice '" + nomeModello + "'.";
+            }
+        }
+        
         // esiste già e stiamo provando ad aggiungere?
         if (errore == null && "add".equalsIgnoreCase(action)) {
             Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);

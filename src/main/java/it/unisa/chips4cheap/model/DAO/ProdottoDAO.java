@@ -102,16 +102,16 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		}
 		try {
 			Connection con = ds.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement("Update Prodotto Set NomeModello = ? , Produttore = ? , Prezzo = ? , Descrizione = ? , Sconto = ? , Tipo = ? , Quantità = ? , Image = ?,MimeType = ?");
-			preparedStatement.setString(1,element.getNomeModello());
-			preparedStatement.setString(2, element.getnCAutore());
-			preparedStatement.setDouble(3, element.getPrezzo());
-			preparedStatement.setString(4,element.getDescrizione());
-			preparedStatement.setInt(5, element.getSconto());
-			preparedStatement.setString(6, element.getTipo());
-			preparedStatement.setInt(7,element.getQuantità());
-			preparedStatement.setString(8,element.getImagine());
-			preparedStatement.setString(9,element.getMimeType());
+			PreparedStatement preparedStatement = con.prepareStatement("Update Prodotto Set Produttore = ? , Prezzo = ? , Descrizione = ? , Sconto = ? , Tipo = ? , Quantità = ? , Image = ?,MimeType = ? where NomeModello = ?");
+			preparedStatement.setString(1, element.getnCAutore());
+			preparedStatement.setDouble(2, element.getPrezzo());
+			preparedStatement.setString(3,element.getDescrizione());
+			preparedStatement.setInt(4, element.getSconto());
+			preparedStatement.setString(5, element.getTipo());
+			preparedStatement.setInt(6,element.getQuantità());
+			preparedStatement.setString(7,element.getImagine());
+			preparedStatement.setString(8,element.getMimeType());
+			preparedStatement.setString(9, element.getNomeModello());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			con.close();
@@ -124,9 +124,9 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		String s = "Select * From Prodotto ";
 		boolean [] bArray  = new boolean [3];
 		
-		bArray[0] = nomeModello != null && !nomeModello.equals("");
-		bArray[1] = produttore != null && !produttore.equals("");
-		bArray[2] = tipo != null && !tipo.equals("");
+		bArray[0] = nomeModello != null && !nomeModello.trim().isEmpty();
+		bArray[1] = produttore != null && !produttore.trim().isEmpty();
+		bArray[2] = tipo != null && !tipo.trim().isEmpty();
 		int elemet = 0;
 		
 		if(bArray[0]){

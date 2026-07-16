@@ -12,7 +12,7 @@ public final class ProdottoRicevuta implements Serializable{
 	private String imagine;
 	private int iDRicevutaFiscale;
 	
-	public final static double EPSILON = 1e9;
+	public final static double EPSILON = 1e-9;
 	
 	public ProdottoRicevuta(){
 		nCAutore = "";

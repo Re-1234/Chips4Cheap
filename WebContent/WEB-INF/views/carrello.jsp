@@ -38,9 +38,14 @@
                 </c:when>
                 
                 <c:otherwise>
+                
+                	<c:set var="totaleCarrello" value="0" />
+                	
                     <ul class="lista-elementi">
                         <c:forEach var="prodotto" items="${sessionScope.carrello}">
                             <li class="scheda-elemento" id="riga-${prodotto.nomeModello}">
+        
+        						<c:set var="totaleCarrello" value="${totaleCarrello + prodotto.subtotale}" />
         
         						<c:if test="${not empty prodotto.imagine}">
             						<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60"> <!-- SERVE IL SEPARATORE QUI / tra le 2 EL no? -->
@@ -52,13 +57,13 @@
                                     </a>
                                 </span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${prodotto.prezzoscontato} €</span>
+        						<span>Prezzo unitario: ${prodotto.prezzoScontato} €</span>
         
         						<span>
             						Quantità: 
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'diminuisci', '${pageContext.request.contextPath}')">-</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'sottrai', '${pageContext.request.contextPath}')">-</button>
             						<span id="quantita-${prodotto.nomeModello}">${prodotto.quantità}</span>
-            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aumenta', '${pageContext.request.contextPath}')">+</button>
+            						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aggiungi', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
         						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.subtotale} €</span>
@@ -71,7 +76,7 @@
 
                     <div class="scheda-elemento separatore-alto">
                         <span class="testo-importante">Totale Complessivo:</span>
-                        <span id="totale-carrello-dinamico" class="testo-importante">${sessionScope.carrello.prezzoTotale} €</span>
+                        <span id="totale-carrello-dinamico" class="testo-importante">${totaleCarrello} €</span>
                     </div>
                     
                     <div class="zona-navigazione margine-alto">

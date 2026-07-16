@@ -79,7 +79,7 @@ public class CreaRicevuta extends HttpServlet {
 
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
-            request.getRequestDispatcher("/WEB-INF/views/pagamento.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/pagamento.jsp").forward(request, response);
         } else {
             try {
             	

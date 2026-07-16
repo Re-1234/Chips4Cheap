@@ -35,7 +35,7 @@ function cercaRicevute(contextPath) {
                         '    <span>Emessa il: ' + r.dataEmissione + '</span>' +
                         '    <span>Pagamento: ' + r.metodoPagamento + '</span>' +
                         '    <span>Via: ' + r.via + '</span>' +
-                        '    <a href="' + contextPath + 'VisualizzaRicevuta?id=' + r.IDRicevutaFiscale + '">Apri Ricevuta</a>' +
+                        '    <a href="' + contextPath + '/common/VisualizzaRicevuta?id=' + r.IDRicevutaFiscale + '">Apri Ricevuta</a>' +
                         '</li>';
                 }
                 

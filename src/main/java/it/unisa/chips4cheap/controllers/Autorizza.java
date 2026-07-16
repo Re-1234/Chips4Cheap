@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
+import it.unisa.chips4cheap.model.DTO.Prodotto;
 
 import java.nio.charset.StandardCharsets;
 
@@ -53,6 +55,8 @@ public class Autorizza extends HttpServlet {
         if (account != null && hashPasswordSHA512(password).equals(account.getPassword())) {
         	HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
+            ArrayList<Prodotto> carrello = new ArrayList<Prodotto>(); // inizializzo già quando fa il login un carrello vuoto per sicurezza
+            session.setAttribute("carrello", carrello);
             request.getRequestDispatcher("/common/AreaPersonale").forward(request, response);
         } else {
              request.setAttribute("erroreServer", "Email o Password errati. Riprova.");

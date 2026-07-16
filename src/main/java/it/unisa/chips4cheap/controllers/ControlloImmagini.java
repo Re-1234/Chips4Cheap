@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
 import it.unisa.chips4cheap.model.DTO.Prodotto;
 
-@WebServlet("/ControlloImmagini")
+@WebServlet("/admin/ControlloImmagini")
 @MultipartConfig(
     maxFileSize = 5 * 1024 * 1024,      // max 5 MB per file
     maxRequestSize = 10 * 1024 * 1024,  // max 10 MB per richiesta
