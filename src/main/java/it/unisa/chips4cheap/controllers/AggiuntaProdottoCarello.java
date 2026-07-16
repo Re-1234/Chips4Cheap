@@ -36,7 +36,7 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		Prodotto p = prodot.doSearchElement(nomeModello);
 		System.out.println("ciao");
 		HttpSession http = request.getSession();
-		ArrayList<Prodotto> pro = (ArrayList<Prodotto>) http.getAttribute("carello");
+		ArrayList<Prodotto> pro = (ArrayList<Prodotto>) http.getAttribute("carrello");
 		
 		if (pro == null) {
 			pro = new ArrayList<>();

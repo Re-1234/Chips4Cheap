@@ -143,7 +143,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
-    	var isAdmin = "${sessionScope.account.amministratore ? 'true' : 'false'}";
+    	var isAdmin = ${sessionScope.account.amministratore ? 'true' : 'false'};
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
