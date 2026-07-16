@@ -11,13 +11,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/moduli.css" type="text/css">
 </head>
-<body>
+<body class="${sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">	<!-- un po brutto per applicare la vista admin ma funziona, senza avre strisce per via del padding -->
 
     <jsp:include page="../header.jsp" />
 
-    <main class="contenitore-pagina">
-        <div class="modulo-centrato">
-            <h2>Area Personale</h2>
+    <main>
+        <section class="modulo-centrato">
+            
+            <h2 class="${sessionScope.account.amministratore ? 'titolo-admin-color' : ''}">
+                <c:choose>
+                    <c:when test="${sessionScope.account.amministratore}">
+                        Area Personale (Amministratore)
+                    </c:when>
+                    <c:otherwise>
+                        Area Personale
+                    </c:otherwise>
+                </c:choose>
+            </h2>
             
             <div class="sezione-contenuto">
                 <h3>I tuoi Dati</h3>
@@ -51,10 +61,21 @@
             </div>
 
             <div id="blocco-azioni-account">
-                <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-azione" id="link-ricevute">Visualizza i tuoi acquisti e ricevute</a>
-                <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica o Cancella Account</a>
+                <c:choose>
+                    <c:when test="${sessionScope.account.amministratore}">
+                        <a href="${pageContext.request.contextPath}/admin/ModificaProdotti" class="link-azione azione-admin-color">Gestione e Modifica Prodotti</a>
+                        <a href="${pageContext.request.contextPath}/admin/MandaAnnuncio" class="link-azione azione-admin-color">Invia Annuncio / Comunicazione</a>
+                        <a href="${pageContext.request.contextPath}/admin/CercaRicevute" class="link-azione azione-admin-color">Ricerca Ricevute Fiscali</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-azione" id="link-ricevute">Visualizza i tuoi acquisti e ricevute</a>
+                        <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica o Cancella Account</a>
+                    </c:otherwise>
+                </c:choose>
+                
+                <a href="${pageContext.request.contextPath}/common/Logout" class="link-azione" id="link-logout">Logout</a>
             </div>
-        </div>
+        </section>
     </main>
 
     <jsp:include page="../footer.jsp" />

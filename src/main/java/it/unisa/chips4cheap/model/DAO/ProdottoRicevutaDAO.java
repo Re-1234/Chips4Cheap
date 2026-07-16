@@ -124,5 +124,4 @@ public class ProdottoRicevutaDAO implements InterfaceDAO<ProdottoRicevuta>{
 		}
 		return null;
 	}
-
 }

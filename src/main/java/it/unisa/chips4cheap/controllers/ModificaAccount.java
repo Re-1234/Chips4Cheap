@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.sql.DataSource;
+
 import it.unisa.chips4cheap.model.DAO.AccountDAO;
 import it.unisa.chips4cheap.model.DTO.Account;
 
@@ -43,39 +45,45 @@ public class ModificaAccount extends HttpServlet {
             vecchiaPassword == null || vecchiaPassword.isEmpty() ||
             nuovaPassword == null || nuovaPassword.isEmpty() ||
             via == null || via.trim().isEmpty() ||
-            cap == null || !cap.trim().matches("^\\d{5}$") ||
-            numeroCivico == null || !numeroCivico.trim().matches("^\\d+$")) {
+            cap == null || !cap.trim().isEmpty() ||
+            numeroCivico == null || !numeroCivico.trim().isEmpty()) {
             
-            request.setAttribute("erroreServer", "I dati inseriti non sono validi o sono incompleti.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
 
+        if (!cap.trim().matches("^\\d{5}$")) {
+            request.setAttribute("erroreServer", "Il CAP deve essere composto da esattamente 5 cifre numeriche.");
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
+            return;
+        }
+
+        if (!numeroCivico.trim().matches("^\\d+$")) {
+            request.setAttribute("erroreServer", "Il numero civico deve essere un valore numerico.");
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
+            return;
+        }
+        
         String hashedVecchia = hashPasswordSHA512(vecchiaPassword);
         if (!hashedVecchia.equals(accountLoggato.getPassword())) {
             request.setAttribute("erroreServer", "La vecchia password inserita non è corretta.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/common/modificaAccount.jsp").forward(request, response);
             return;
         }
 
-        try {
             accountLoggato.setUsername(username.trim());
             accountLoggato.setPassword(hashPasswordSHA512(nuovaPassword));
             accountLoggato.setVia(via.trim());
             accountLoggato.setCap(cap.trim());
             accountLoggato.setNumeroCivico(Integer.parseInt(numeroCivico.trim()));
 
-            AccountDAO dao = new AccountDAO();
+            DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+            AccountDAO dao = new AccountDAO(ds);
             dao.doUpdate(accountLoggato);
 
             session.setAttribute("account", accountLoggato);
             response.sendRedirect(request.getContextPath() + "/common/AreaPersonale");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("erroreServer", "Errore durante l'aggiornamento dei dati. Riprova.");
-            request.getRequestDispatcher("/WEB-INF/common/modificaAccount.jsp").forward(request, response);
-        }
     }
 
     private String hashPasswordSHA512(String password) {

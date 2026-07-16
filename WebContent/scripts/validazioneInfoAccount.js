@@ -49,7 +49,7 @@ function validaPassword() {
     return true;
 }
 
-function validaVecchiaPassword() {
+function validaVecchiaPassword() {	/* è praticamente identico al controllo password ma con messaggi diversi */
     const el = document.getElementById("vecchiaPassword");
     if (!el) return true;
 
@@ -145,22 +145,3 @@ function validaModifica() {
     const isCivicoValid = validaCivico();
     return isEmailValid && isUsernameValid && isVecchiaPasswordValid && isPasswordValid && isViaValid && isCapValid && isCivicoValid;
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const campi = [
-        { id: "email", handler: validaEmail },
-        { id: "username", handler: validaUsername },
-        { id: "password", handler: validaPassword },
-        { id: "vecchiaPassword", handler: validaVecchiaPassword },
-        { id: "via", handler: validaVia },
-        { id: "cap", handler: validaCap },
-        { id: "numeroCivico", handler: validaCivico }
-    ];
-
-    campi.forEach(campo => {
-        const elemento = document.getElementById(campo.id);
-        if (elemento) {
-            elemento.addEventListener("change", campo.handler);
-        }
-    });
-});

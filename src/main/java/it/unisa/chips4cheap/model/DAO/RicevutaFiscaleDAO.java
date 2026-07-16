@@ -106,7 +106,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 		String s = "Select * From RicevutaFiscale";
 		
 		boolean [] barray = new boolean[4];
-			barray[0] = email != null && email.equals("");
+			barray[0] = email != null && !email.equals("");
 			barray[1] = metodoPagamento != null && !metodoPagamento.equals("");
 			barray[2] = dataInizio != null;
 			barray[3] = dataFine != null;
@@ -120,17 +120,17 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 			}
 			if(barray[2] && barray[3]){
 				if(dataInizio.getYear() > dataFine.getYear()){
-					throw new DateTimeException("l'anno della data di inizio suppera l'anno della data di fine");
+					return new ArrayList<>();
 				}else {
 					if(dataInizio.getYear() == dataFine.getYear()){
 						if(dataInizio.getMonthValue() > dataFine.getMonthValue()){
-							throw new DateTimeException("il mese della data di inizio suppera quella della data di fine");
+							return new ArrayList<>();
 						}else {
 							if(dataInizio.getMonthValue() == dataFine.getMonthValue()){
 								if(dataInizio.getDayOfMonth() <= dataFine.getDayOfMonth()){
 									elemet += 2;
 								}else{
-									throw new DateTimeException("il giorno della data di inizio suppera quella della data di fine");
+									return new ArrayList<>();
 								}
 							}else{
 								elemet += 2;

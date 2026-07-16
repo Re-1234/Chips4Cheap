@@ -1,17 +1,31 @@
 @charset "UTF-8";
 
-/* ==========================================================================
-   1. STRUTTURA E CONTAINER PRINCIPALI (COMUNI)
-   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-.contenitore-pagina {
+html {
+    height: 100%;
+    background-color: #dfdfdf; 
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 7.5rem; /* Rilascia lo spazio per il footer absolute */
+    background-color: transparent; /* ??? */
+}
+
+main {
     padding: 3rem 5%; 
     display: block;
 }
 
 .modulo-centrato {
-    background-color: #dfdfdf; 
-    max-width: 35rem; /* Dimensione ideale bilanciata per tutti e tre i moduli */
+    max-width: 35rem; 
     margin: 0 auto; 
     padding: 2.5rem 6%;
     border-radius: 0.5rem;
@@ -24,7 +38,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Specifico per la suddivisione interna dell'Area Personale */
 .sezione-contenuto {
     width: 100%;
     margin-bottom: 2rem;
@@ -38,26 +51,23 @@
     padding-bottom: 0.25rem;
 }
 
-/* ==========================================================================
-   2. ELEMENTI DEI FORM E CAMPI INFORMATIVI
-   ========================================================================== */
+
 
 .gruppo-campo {
     width: 100%;
     margin-bottom: 1rem;
 }
 
-/* Stile per le etichette dei form e per i testi descrittivi dell'area personale */
+
 .gruppo-campo label, 
 .etichetta-fissa {
     display: block;
     font-weight: bold;
-    color: #333333;
+    color: #666666;	/* invece di 333333 cosi è visibbile sia normalmente che da admin? */
     margin-bottom: 0.375rem; 
     font-size: 1rem;
 }
 
-/* Input editabili (Login/Registrazione) e Spazi di testo fisso (Area Personale) */
 .gruppo-campo input, 
 .valore-fisso {
     display: block;
@@ -71,18 +81,25 @@
     box-sizing: border-box;
 }
 
-/* Impedisce al testo fisso molto lungo (es. email) di strabordare su schermi piccoli */
+.gruppo-campo textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical; /*solo verso il basso */
+}
+
+/* testo molto lungo puo strabordare su schermi piccoli */
 .valore-fisso {
     word-wrap: break-word;
 }
 
-/* ==========================================================================
-   3. STRUTTURA DEL LAYOUT AFFIANCATO (CAP / CIVICO)
-   ========================================================================== */
-
 .riga-doppia {
     width: 100%;
-    overflow: hidden; /* Clearfix automatico per i float dei figli */
+    overflow: hidden; /* per i float dei figli */
 }
 
 .meta-larghezza {
@@ -94,9 +111,7 @@
     margin-right: 4%;
 }
 
-/* ==========================================================================
-   4. BOTTONI E LINK DI AZIONE (STILE BOTTONE)
-   ========================================================================== */
+
 
 .bottone-azione, 
 .link-azione {
@@ -110,11 +125,10 @@
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 0.25rem;
+    border-radius: 0.25rem; /* anche se non ha bordo posso arrotondarlo*/
     margin-top: 0.75rem;
     box-sizing: border-box;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
 .bottone-azione:hover, 
@@ -122,9 +136,7 @@
     background-color: #000055; 
 }
 
-/* ==========================================================================
-   5. SEZIONE ERRORI E VALIDAZIONE
-   ========================================================================== */
+
 
 .errore-server {
     background-color: #ffe6e6;
@@ -141,14 +153,13 @@
     color: #cc0000;
     font-size: 0.875rem;
     margin-top: 0.25rem;
-    min-height: 1.25rem; /* Evita il saltellamento del layout alla comparsa dell'errore */
+    min-height: 1.25rem; /* Mi serve per evitare che salta il layout quando c'è errore e modifichi il DOM */
 }
 
-/* ==========================================================================
-   6. SEPARAZIONE LOGICA: REGOLE SPECIFICHE TRAMITE ID
-   ========================================================================== */
 
-/* Login: Blocco di rimando alla registrazione */
+
+/* ID speciali per login, registrazione e modifica cosi non sono esattamente identici*/
+/* Login, se non sei registrato */
 #zona-registrazione-alternativa {
     text-align: center;
     margin-top: 1.5rem;
@@ -183,13 +194,25 @@
 }
 
 
-/* ==========================================================================
-   7. MEDIA QUERIES (RESPONSIVITÀ ADATTATA AI DISPOSITIVI)
-   ========================================================================== */
+/* --------------------------- Per Visualizzazzione Admin (Arancione e nero) --------------------------------*/
+.modulo-admin-bg {
+    background-color: #2a2a2a;
+}
 
-/* Schermi Ultra-Wide / 2K */
+.titolo-admin-color {
+    color: #ff8c00;
+}
+
+.azione-admin-color {
+    background-color: #000000;
+    color: #ff8c00;
+}
+/* --------------------------------------Vanno qui cosi sovrascrivo i colori definiti sopra------------------------------------------- */
+
+
+
 @media (max-width: 2560px) {
-    .contenitore-pagina {
+    main {
         padding: 2.5rem 5%;
     }
     .modulo-centrato h2 {
@@ -197,9 +220,9 @@
     }
 }
 
-/* Laptop e Desktop Standard */
+
 @media (max-width: 1280px) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 5%;
     }
     .modulo-centrato h2 {
@@ -223,9 +246,9 @@
     }
 }
 
-/* Tablet e Schermi Medi in Landscape (Orizzontale) */
+
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: landscape) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 5%;
     }
     .modulo-centrato h2 {
@@ -233,9 +256,9 @@
     }
 }
 
-/* Tablet in Portrait (Verticale) */
+
 @media (max-width: 1280px) and (min-width: 769px) and (orientation: portrait) {
-    .contenitore-pagina {
+    main {
         padding: 2rem 4%;
     }
     .modulo-centrato {
@@ -246,9 +269,9 @@
     }
 }
 
-/* Smartphone e Dispositivi Mobili (Sotto i 768px) */
+
 @media (max-width: 768px) {
-    .contenitore-pagina {
+    main {
         padding: 1.5rem 4%;
     }
     .modulo-centrato {
@@ -258,7 +281,6 @@
         font-size: 1.5rem; 
     }
     
-    /* Annulliamo l'affiancamento di CAP e Civico portandoli a tutta larghezza verticalmente */
     .meta-larghezza {
         width: 100%;
         float: none;

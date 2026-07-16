@@ -121,7 +121,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 	}
 
 	public ArrayList<Prodotto> doFilter(String nomeModello,String produttore,String tipo,int prezzoMin ,int prezzoMax){
-		
 		String s = "Select * From Prodotto ";
 		boolean [] bArray  = new boolean [3];
 		
@@ -146,7 +145,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		}
 		
 		if(elemet != 0){
-			System.out.println("Sono dentro all'element");
 			s += "where ";
 			for(int i = 0;i < 3;i++) {
 				if(bArray[i] && i == 0){
@@ -179,14 +177,14 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 					s+= "and Prezzo >= ? and Prezzo <= ?";
 				}
 			}else {
-				throw new RuntimeException("Il Prezzo di minimo è maggiore del Prezzo di massimo");
+				return new ArrayList<>();
 			}	
 		}else{
 			if(prezzoMin <= prezzoMax){
 				s += "where ";
 				s+= "Prezzo >= ? and Prezzo <= ?";
 			}else {
-				throw new RuntimeException("Il Prezzo di minimo è maggiore del Prezzo di massimo");
+				return new ArrayList<>();
 			}
 		}
 		
@@ -240,5 +238,4 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		}
 		return null;
 	}
-
 }
