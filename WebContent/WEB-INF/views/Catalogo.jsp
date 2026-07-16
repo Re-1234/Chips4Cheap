@@ -114,8 +114,8 @@
                                     </div>
 
                                     <form action="${pageContext.request.contextPath}/AggiuntaProdottoCarello" method="post">
-									  <input type="hidden" name="NomeModello" value="${NomeModello}">
-									   <button type="submit" class="add-cart-button">
+									  <input type="hidden" name="NomeModello" value="${prodotto.nomeModello}">
+									   <button type="submit" class="add-cart-button-small">
 									        Aggiungi al Carrello
 									   </button>
 									</form>
@@ -143,7 +143,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
-    	var isAdmin = "${sessionScope.account.amministratore ? 'true' : 'false'}"
+    	var isAdmin = "${sessionScope.account.amministratore ? 'true' : 'false'}";
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
