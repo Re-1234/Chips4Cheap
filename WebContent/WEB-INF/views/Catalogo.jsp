@@ -113,10 +113,22 @@
                                         </c:if>
                                     </div>
 
-                                    <!-- Bottone Carrello Giallo (Con z-index elevato per essere cliccato indipendentemente dalla scheda) -->
-                                    <button type="button" class="add-cart-button-small" data-nome="${prodotto.nomeModello}">
-                                        Aggiungi al Carrello
-                                    </button>
+                                    <form action="${pageContext.request.contextPath}/AggiuntaProdottoCarello" method="post">
+									  <input type="hidden" name="NomeModello" value="${NomeModello}">
+									   <button type="submit" class="add-cart-button">
+									        Aggiungi al Carrello
+									   </button>
+									</form>
+
+                                    <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
+                                    <c:if test="${sessionScope.account.amministratore == true}">
+                                        <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post" style="margin-top: 5px;">
+                                            <input type="hidden" name="NomeModello" value="${prodotto.nomeModello}">
+                                            <button type="submit" class="bottone-pericolo">
+                                                Rimuovi Prodotto
+                                            </button>
+                                        </form>
+                                    </c:if>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -131,6 +143,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
+    	var isAdmin = "${sessionScope.account.amministratore ? 'true' : 'false'}"
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
