@@ -1,5 +1,6 @@
 package it.unisa.chips4cheap.controllers;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,11 +34,16 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nomeModello = request.getParameter("NomeModello");
+		
+		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		ProdottoDAO prodot = new ProdottoDAO(ds);
-		Prodotto p = prodot.doSearchElement();
+		Prodotto p = prodot.doSearchElement(nomeModello);
 		HttpSession http =	request.getSession();
-		http.setAttribute("Prodotto", );
+		http.setAttribute("prodotto",p);
+		RequestDispatcher r = request.getRequestDispatcher("WEB-INF\\views\\Prodotto.jsp");
+		r.forward(request, response);
 	}
 
 	/**

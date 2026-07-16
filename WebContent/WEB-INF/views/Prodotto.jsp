@@ -83,8 +83,8 @@
 			        </c:choose>
 			    </div>
 			
-			    <form action="${pageContext.request.contextPath}/AggiungiAlCarrello" method="post">
-			        <input type="hidden" name="NomeModello" value="${idProdotto}">
+			    <form action="${pageContext.request.contextPath}/AggiuntaProdottoCarello.java" method="post">
+			        <input type="hidden" name="NomeModello" value="${NomeModello}">
 			        <button type="submit" class="add-cart-button">
 			            Aggiungi al Carrello
 			        </button>
