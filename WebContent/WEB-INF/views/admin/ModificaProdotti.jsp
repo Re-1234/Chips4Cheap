@@ -122,13 +122,8 @@ pageEncoding="UTF-8"%>
                                 ${prodotto.sconto}%
                             </span>
 
-                            <form action="${pageContext.request.contextPath}/admin/ModificaProdotto"
-                                  method="get">
-
-                                <input type="hidden"
-                                       name="codice"
-                                       value="${prodotto.nCAutore}">
-
+                            <form action="${pageContext.request.contextPath}/admin/ModificaProdotto" method="post">
+                                <input type="hidden" name="codice" value="${prodotto.nomeModello}">
                                 <button type="submit"
                                         class="azione-admin-color">
                                     Modifica
