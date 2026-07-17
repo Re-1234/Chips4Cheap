@@ -525,6 +525,37 @@ h3 {
     .scheda-elemento .add-cart-button-small {
         margin: 10px auto 0 auto !important; /* Centra il bottone sotto */
     }
+
+    /* --- Pagina Dettaglio Prodotto: da 2 colonne a 1 colonna --- */
+    .product-layout {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .product-left,
+    .product-right {
+        width: 100%;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 1 / 1; /* mantiene il quadrato senza altezza fissa in px */
+        margin: 0 auto;
+        display: block;
+    }
+
+    .product-price-box {
+        margin-top: 25px;
+        margin-bottom: 20px;
+    }
+
+    .add-cart-button {
+        width: 100%;
+        padding: 16px 20px !important;
+        font-size: 16px !important;
+    }
 }
 
 /* ==========================================================================

@@ -43,6 +43,12 @@ pageEncoding="UTF-8"%>
         Seleziona il prodotto che desideri modificare.
     </p>
 
+    <div class="zona-navigazione">
+        <a href="${pageContext.request.contextPath}/admin/AggiungiProdotto" class="azione-admin-color link-navigazione-indietro">
+            + Aggiungi nuovo prodotto
+        </a>
+    </div>
+
     <c:choose>
 
         <c:when test="${empty prodotti}">
@@ -83,7 +89,7 @@ pageEncoding="UTF-8"%>
 
                         <div class="scheda-info-prodotto">
 
-                            <a href="${pageContext.request.contextPath}/admin/ModificaProdotto?codice=${prodotto.nomeModello}"
+                            <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}"
                                class="link-esteso">
                                 ${prodotto.nomeModello}
                             </a>
@@ -125,8 +131,7 @@ pageEncoding="UTF-8"%>
 
                             <form action="${pageContext.request.contextPath}/admin/ModificaProdotto" method="post">
                                 <input type="hidden" name="codice" value="${prodotto.nomeModello}">
-                                <button type="submit"
-                                        class="azione-admin-color">
+                                <button type="submit" class="azione-admin-color">
                                     Modifica
                                 </button>
 
