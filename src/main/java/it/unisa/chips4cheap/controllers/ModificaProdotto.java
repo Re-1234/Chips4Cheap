@@ -41,7 +41,7 @@ public class ModificaProdotto extends HttpServlet {
 		ProdottoDAO pro = new ProdottoDAO(ds);
 		Prodotto p =  pro.doSearchElement(request.getParameter("nomeModello"));
 		request.setAttribute("prodotto", p);
-		request.getRequestDispatcher("").forward(request, response);
+		request.getRequestDispatcher("WEB-INF//view//Prodotto.jsp").forward(request, response);
 	}
 
 }

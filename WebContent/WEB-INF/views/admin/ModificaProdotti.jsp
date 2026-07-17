@@ -83,9 +83,10 @@ pageEncoding="UTF-8"%>
 
                         <div class="scheda-info-prodotto">
 
-                            <h3>
+                            <a href="${pageContext.request.contextPath}/admin/ModificaProdotto?codice=${prodotto.nomeModello}"
+                               class="link-esteso">
                                 ${prodotto.nomeModello}
-                            </h3>
+                            </a>
 
                             <p class="scheda-descrizione-prodotto">
                                 ${prodotto.descrizione}
@@ -154,4 +155,3 @@ pageEncoding="UTF-8"%>
 </body>
 
 </html>
-

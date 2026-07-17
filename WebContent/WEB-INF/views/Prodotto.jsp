@@ -91,14 +91,23 @@
 			    </form>
 
 			    <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
-			    <c:if test="${not empty sessionScope.account and sessionScope.account.amministratore}">
-			        <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post">
-			            <input type="hidden" name="NomeModello" value="${NomeModello}">
-			            <button type="submit" class="bottone-pericolo">
-			                Rimuovi Prodotto
-			            </button>
-			        </form>
-			    </c:if>
+				<c:if test="${not empty sessionScope.account and sessionScope.account.amministratore}">
+				
+					   <form action="${pageContext.request.contextPath}/admin/ModificaProdotto" method="get">
+						    <input type="hidden" name="codice" value="${NomeModello}">
+						    <button type="submit" class="azione-admin-color bottone-pericolo">
+						        Modifica Prodotto
+						    </button>
+						</form>
+				
+				    <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post">
+				        <input type="hidden" name="NomeModello" value="${NomeModello}">
+				        <button type="submit" class="bottone-pericolo">
+				            Rimuovi Prodotto
+				        </button>
+				    </form>
+				
+				</c:if>
 			</aside>
     	</div>
 	</main>
