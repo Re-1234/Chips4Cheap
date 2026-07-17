@@ -44,15 +44,7 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		}
 
 		boolean cista = false;
-		for (Prodotto pe : pro) {
-			if (pe.getNomeModello().equals(p.getNomeModello())) {
-				cista = true;
-				break;
-			}
-		}
-		if (!cista) {
-			pro.add(p);
-		}
+		pro.add(p);
 		System.out.println(pro);
 		response.sendRedirect(request.getContextPath() + "/Catalogo");
 	}

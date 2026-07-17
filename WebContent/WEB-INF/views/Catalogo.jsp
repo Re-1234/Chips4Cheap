@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
 </head>
-<body>
+<body class="${not empty sessionScope.account and sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">
 
     <jsp:include page="header.jsp" />
 
@@ -143,7 +143,7 @@
 
     <script>
         var contextPath = "${pageContext.request.contextPath}";
-    	var isAdmin = ${sessionScope.account.amministratore ? 'true' : 'false'};
+    	var isAdmin = ${not empty sessionScope.account and sessionScope.account.amministratore};
     </script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>

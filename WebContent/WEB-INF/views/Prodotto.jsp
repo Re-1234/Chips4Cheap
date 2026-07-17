@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
 
 </head>
-<body class="product-page">
+<body class="product-page ${not empty sessionScope.account and sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">
 	<jsp:include page="header.jsp"/>
 	<main class="product-main">
     <h1 class="product-name">
@@ -82,17 +82,18 @@
 			            </c:otherwise>
 			        </c:choose>
 			    </div>
-			
+
 			    <form action="${pageContext.request.contextPath}/AggiuntaProdottoCarello" method="post">
 			        <input type="hidden" name="NomeModello" value="${NomeModello}">
 			        <button type="submit" class="add-cart-button">
 			            Aggiungi al Carrello
 			        </button>
 			    </form>
-			
-			    <c:if test="${sessionScope.isAdmin == true}">
+
+			    <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
+			    <c:if test="${not empty sessionScope.account and sessionScope.account.amministratore}">
 			        <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post">
-			            <input type="hidden" name="NomeModello" value="${idProdotto}">
+			            <input type="hidden" name="NomeModello" value="${NomeModello}">
 			            <button type="submit" class="bottone-pericolo">
 			                Rimuovi Prodotto
 			            </button>

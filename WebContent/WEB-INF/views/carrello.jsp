@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -57,7 +58,7 @@
                                     </a>
                                 </span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
-        						<span>Prezzo unitario: ${prodotto.prezzoScontato} €</span>
+        						<span>Prezzo unitario: <fmt:formatNumber value="${prodotto.prezzoScontato}" minFractionDigits="2" maxFractionDigits="2"/> €</span>
         
         						<span>
             						Quantità: 
@@ -66,7 +67,7 @@
             						<button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'aggiungi', '${pageContext.request.contextPath}')">+</button>
         						</span>
         
-        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: ${prodotto.subtotale} €</span>
+        						<span id="subtotale-${prodotto.nomeModello}">Subtotale: <fmt:formatNumber value="${prodotto.subtotale}" minFractionDigits="2" maxFractionDigits="2"/> €</span>
         
        							 <button type="button" onclick="modificaCarrello('${prodotto.nomeModello}', 'rimuovi', '${pageContext.request.contextPath}')">Rimuovi</button>
         
@@ -76,7 +77,7 @@
 
                     <div class="scheda-elemento separatore-alto">
                         <span class="testo-importante">Totale Complessivo:</span>
-                        <span id="totale-carrello-dinamico" class="testo-importante">${totaleCarrello} €</span>
+                        <span id="totale-carrello-dinamico" class="testo-importante"><fmt:formatNumber value="${totaleCarrello}" minFractionDigits="2" maxFractionDigits="2"/> €</span>
                     </div>
                     
                     <div class="zona-navigazione margine-alto">
