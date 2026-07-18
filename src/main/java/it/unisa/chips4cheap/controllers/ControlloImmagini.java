@@ -86,6 +86,22 @@ public class ControlloImmagini extends HttpServlet {
         
         if ("upload".equalsIgnoreCase(action)) {
             Part part = request.getPart("imagine"); 
+            
+                
+            if (part != null && part.getSize() > 0) { // controllo per l'immagine anche qui
+            	String contentType = part.getContentType();
+                    
+                // Se il tipo non rientra tra quelli permessi, blocchiamo l'inserimento
+                if (contentType == null || 
+                		(!contentType.equalsIgnoreCase("image/png") && 
+                         !contentType.equalsIgnoreCase("image/jpeg") && 
+                         !contentType.equalsIgnoreCase("image/jpg") && 
+                         !contentType.equalsIgnoreCase("image/webp"))) {
+                        return;
+                }
+            }
+            
+            
             if (part != null) {
                 String originalFileName = part.getSubmittedFileName();
                 if (originalFileName != null && !originalFileName.isEmpty() && part.getSize() > 0) {
