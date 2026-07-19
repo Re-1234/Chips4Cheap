@@ -1,6 +1,8 @@
 function formattaPrezzo(numero) {
-    return numero.toLocaleString('it-IT', { 
-        minimumFractionDigits: 2, 
-        maximumFractionDigits: 2 
+    let valore = Number(numero); // forza la conversione, anche se arriva come stringa dal server
+    return valore.toLocaleString('it-IT', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
     }) + ' €';
 }
+ 

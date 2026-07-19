@@ -98,6 +98,7 @@
     </main>
 
     <jsp:include page="footer.jsp" />
+    <script src="${pageContext.request.contextPath}/scripts/arrotondamentoPrezzi.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
 </body>
 </html>
