@@ -53,7 +53,7 @@ public class Carrello extends HttpServlet {
 	    }
 
 	    JSONObject jsonRequest = new JSONObject(sb.toString());
-	    String modello = jsonRequest.getString("modello");
+	    String modello = jsonRequest.optString("modello", ""); // optString cosi non esplodiamo se non ci sta il prodotto, anche se mandiamo '' dalla JSP
 	    String azione = jsonRequest.getString("azione");
 
 	    HttpSession session = request.getSession();	  
@@ -74,6 +74,7 @@ public class Carrello extends HttpServlet {
 	    
 	    if ("svuota".equalsIgnoreCase(azione)) { // aggiunto per permettere di svuotare il carrello in una botta
 	        carrello.clear();
+	        rimosso = true;
 	    }
 	    
 	    else {
