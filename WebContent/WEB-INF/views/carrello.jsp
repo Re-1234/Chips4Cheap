@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="isAdmin" value="${sessionScope.ruolo == 'admin'}" />
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -12,14 +13,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
 </head>
-<body>
+<body class="${isAdmin ? 'modulo-admin-bg' : ''}">
 
     <jsp:include page="header.jsp" />
 
     <main>
         <section>
             
-            <h2>Il tuo Carrello</h2>
+            <h2 class="${isAdmin ? 'titolo-admin-color' : ''}">Il tuo Carrello</h2>
 			
 			<c:if test="${not empty requestScope.erroreServer}">
                 <div class="errore-server">
@@ -52,11 +53,13 @@
             						<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}" width="60"> <!-- SERVE IL SEPARATORE QUI / tra le 2 EL no? -->
         						</c:if>
         
-        						<span class=testo-importante>
-                                    <a href="${pageContext.request.contextPath}/Prodotto?id=${prodotto.nomeModello}">
-                                        ${prodotto.nomeModello}
-                                    </a>
-                                </span>
+        						<span class="testo-importante">
+								    <span class="testo-importante">
+									    <a href="${pageContext.request.contextPath}/MostrareProdotto?id=${prodotto.nomeModello}">
+									        ${prodotto.nomeModello}
+									    </a>
+									</span>
+								</span>
         						<span>Produttore: ${prodotto.nCAutore}</span>
         						<span>Prezzo unitario: <fmt:formatNumber value="${prodotto.prezzoScontato}" minFractionDigits="2" maxFractionDigits="2"/> €</span>
         
@@ -81,15 +84,15 @@
                     </div>
                     
                     <div class="zona-navigazione margine-alto">
-                        <a href="${pageContext.request.contextPath}/Catalogo" class="link-navigazione-indietro">
-                            Continua lo Shopping
-                        </a>
-                        <a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro">
-                            Procedi all'Ordine
-                        </a>
-                        <button type="button" class="link-navigazione-indietro" onclick="modificaCarrello('', 'svuota')"> <!-- lo stile funziona con un button? -->
-                            Svuota il Carrello
-                        </button>
+                        <a href="${pageContext.request.contextPath}/Catalogo" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}">
+						    Continua lo Shopping
+						</a>
+						<a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}">
+						    Procedi all'Ordine
+						</a>
+						<button type="button" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}" onclick="modificaCarrello('', 'svuota')">
+						    Svuota il Carrello
+						</button>
                     </div>
                 </c:otherwise>
             </c:choose>
