@@ -34,16 +34,13 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		ProdottoDAO prodot = new ProdottoDAO(ds);
 		Prodotto p = prodot.doSearchElement(nomeModello);
-		System.out.println("ciao");
+		p.setQuantità(1);
 		HttpSession http = request.getSession();
 		ArrayList<Prodotto> pro = (ArrayList<Prodotto>) http.getAttribute("carrello");
-		
 		if (pro == null) {
 			pro = new ArrayList<>();
 			http.setAttribute("carello", pro);
 		}
-
-		boolean cista = false;
 		pro.add(p);
 		System.out.println(pro);
 		response.sendRedirect(request.getContextPath() + "/Catalogo");

@@ -21,11 +21,11 @@ function modificaCarrello(modello, azione, contextPath) {
                 let subtotaleEl = document.getElementById("subtotale-" + modello);
 
                 if (quantitaEl) quantitaEl.innerText = data.nuovaQuantita;
-                if (subtotaleEl) subtotaleEl.innerText = "Subtotale: " + data.nuovoSubtotale + " €";
+                if (subtotaleEl) subtotaleEl.innerText = "Subtotale: " + formattaPrezzo(data.nuovoSubtotale);
             }
 
             let totaleEl = document.getElementById("totale-carrello-dinamico");
-            if (totaleEl) totaleEl.innerText = data.nuovoTotale + " €";
+            if (totaleEl) totaleEl.innerText = formattaPrezzo(data.nuovoTotale);
 
             if (data.carrelloVuoto) {
                 let pagina = document.getElementById("blocco-contenuto");
