@@ -15,15 +15,16 @@ create table Account1(
 );
 
 create table Prodotto(
-	NomeModello varchar(50) not null,
+	NomeModello varchar(250) not null,
     Produttore varchar(50) not null,
     Prezzo double not null,
-	Descrizione varchar(5000) not null,
-    Sconto int not null,
+	Descrizione Text not null,
+    Sconto int not null default 0,
     Tipo varchar(50) not null,
     Quantità int not null,
     Image varchar(50) not null,
-	primary key(NomeModello)
+	MimeType varchar(50) not null,
+    primary key(NomeModello)
 );
 
 create table Annuncio(
@@ -56,7 +57,9 @@ create table ProdottoRicevuta(
     email varchar(50) not null,
     NomeModello varchar(50) not null,
     image varchar(50) not null,
+    MimeType varchar(50) not null default "png",
     tipo varchar(50) not null,
+    
     foreign key(email , IDRicevutaFiscale) references RicevutaFiscale(email ,IDRicevutaFiscale) on update cascade on delete cascade,
     primary key(email ,IDRicevutaFiscale, NomeModello),
     Key(IDRicevutaFiscale)

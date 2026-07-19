@@ -27,10 +27,11 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 			p.setString(3, elemet.getText());
 			
 			p.executeUpdate();
-			
+			int res = 0;
 			ResultSet r = p.getGeneratedKeys();
-			
-			int res = r.getInt("IDAnnuncio");
+			if(r.next()){
+				res = r.getInt(1);
+			}
 			
 			r.close();
 			p.close();

@@ -2,6 +2,7 @@ package it.unisa.chips4cheap.model.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Annuncio implements Cloneable,Serializable{
 	private int idAnnuncio;
@@ -54,6 +55,11 @@ public class Annuncio implements Cloneable,Serializable{
 	public void setText(String text){
 		this.text = text;
 	}
+	
+	public String dataPubFormattata(){
+		return dataPubblicazione.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	}
+	
 	@Override
 	public String toString(){
 		return getClass().getName() + "[ idAnnuncio = " + idAnnuncio + ", titolo = " + titolo + ", dataPubblicazione = " + dataPubblicazione +", text = " + text + "]";

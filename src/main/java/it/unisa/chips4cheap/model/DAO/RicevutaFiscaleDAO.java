@@ -37,7 +37,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 				ResultSet r = pre.getGeneratedKeys();
 				int id = 0;
 				if(r.next()){
-					id = r.getInt("IDRicevutaFiscale");
+					id = r.getInt(1);
 				}
 				r.close();
 				pre.close();

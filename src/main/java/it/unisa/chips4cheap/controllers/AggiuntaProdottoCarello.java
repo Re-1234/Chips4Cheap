@@ -39,7 +39,7 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		ArrayList<Prodotto> pro = (ArrayList<Prodotto>) http.getAttribute("carrello");
 		if (pro == null) {
 			pro = new ArrayList<>();
-			http.setAttribute("carello", pro);
+			http.setAttribute("carrello", pro);
 		}
 		pro.add(p);
 		System.out.println(pro);
