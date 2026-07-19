@@ -93,14 +93,6 @@ public class GestioneProdotto extends HttpServlet {
                 errore = "Esiste già un prodotto nel catalogo con il codice '" + nomeModello + "'.";
             }
         }
-        
-        // esiste già e stiamo provando ad aggiungere?
-        if (errore == null && "add".equalsIgnoreCase(action)) {
-            Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
-            if (prodottoEsistente != null) {
-                errore = "Esiste già un prodotto nel catalogo con il codice '" + nomeModello + "'.";
-            }
-        }
 
         // manda errore se ce
         if (errore != null) {

@@ -50,7 +50,7 @@ public class CancellaProdotto extends HttpServlet {
 				prodottoDAO.doDelete(prodottoDaCancellare);
 			}
 		}
-		request.getRequestDispatcher("/Catalogo").forward(request, response);
+		request.getRequestDispatcher("/admin/ModificaProdotti").forward(request, response);
 	}
 
 }
