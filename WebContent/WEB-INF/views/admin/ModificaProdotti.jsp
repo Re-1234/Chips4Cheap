@@ -71,9 +71,11 @@ pageEncoding="UTF-8"%>
 
                             <c:when test="${not empty prodotto.imagine}">
 
-                                <img
+            					<img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}">
+
+                                <!--<img
                                     src="${pageContext.request.contextPath}/Image?codice=${prodotto.nCAutore}"
-                                    alt="${prodotto.nomeModello}">
+                                    alt="${prodotto.nomeModello}"> -->
 
                             </c:when>
 
@@ -129,7 +131,7 @@ pageEncoding="UTF-8"%>
                                 ${prodotto.sconto}%
                             </span>
 
-                            <form action="${pageContext.request.contextPath}/admin/ModificaProdotto" method="post">
+                            <form action="${pageContext.request.contextPath}/admin/ModificaProdottoForm" method="get">
                                 <input type="hidden" name="codice" value="${prodotto.nomeModello}">
                                 <button type="submit" class="azione-admin-color">
                                     Modifica

@@ -38,7 +38,7 @@ public class MostrareProdotto extends HttpServlet {
 		request.setAttribute("PrezzoScontato",p.getPrezzoScontato());
 		request.setAttribute("Sconto", p.getSconto());
 		request.setAttribute("Tipo", p.getTipo());
-		request.getRequestDispatcher("WEB-INF\\views\\Prodotto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/Prodotto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

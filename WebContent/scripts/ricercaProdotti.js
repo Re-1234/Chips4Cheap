@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	function rimuoviProdotto(nomeModello) {
 	    if (!confirm('Sei sicuro di voler rimuovere questo prodotto?')) return;
 
-	    fetch(contextPath + '/RimuoviProdotto', {
+	    fetch(contextPath + '/admin/CancellaProdotto', {
 	        method: 'POST',
 	        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 	        body: new URLSearchParams({ nomeModello: nomeModello }).toString()

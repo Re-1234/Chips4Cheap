@@ -55,8 +55,8 @@ create table ProdottoRicevuta(
     Produttore varchar(50) not null,
     IDRicevutaFiscale int not null ,
     email varchar(50) not null,
-    NomeModello varchar(50) not null,
-    image varchar(50) not null,
+    NomeModello varchar(250) not null,
+    image varchar(255) not null,
     MimeType varchar(50) not null default "png",
     tipo varchar(50) not null,
     

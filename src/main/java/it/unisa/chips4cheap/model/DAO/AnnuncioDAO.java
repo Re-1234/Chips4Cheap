@@ -57,10 +57,10 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 
 	@Override
 	public Annuncio doSearchElement(Object o) {
-		if(o instanceof Integer){
-			throw new RuntimeException();
+		if(!(o instanceof Integer)){
+			throw new IllegalArgumentException("La chiave di ricerca dell'annuncio deve essere un Integer (IDAnnuncio).");
 		}
-		
+
 		Integer f = (Integer) o;
 		
 		try(Connection c = ds.getConnection()){
@@ -85,7 +85,7 @@ public class AnnuncioDAO implements InterfaceDAO<Annuncio>{
 	@Override
 	public void doUpdate(Annuncio element) {
 		try(Connection c = ds.getConnection()){
-			PreparedStatement p = c.prepareStatement("Update Annoucio Set Titolo = ? , Data_Pubblicazione = ? , Descrizione = ? where IDAnnuncio = ?");
+			PreparedStatement p = c.prepareStatement("Update Annuncio Set Titolo = ? , Data_Pubblicazione = ? , Descrizione = ? where IDAnnuncio = ?");
 			p.setString(1, element.getTitolo());
 			p.setDate(2,Date.valueOf(element.getDataPublicazione()));
 			p.setString(3, element.getText());

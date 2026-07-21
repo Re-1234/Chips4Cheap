@@ -99,11 +99,11 @@ public class GestioneProdotto extends HttpServlet {
             request.setAttribute("erroreServer", errore);
             
             if ("add".equalsIgnoreCase(action)) {
-                request.getRequestDispatcher("/admin/aggiungiProdotto.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/admin/aggiungiProdotto.jsp").forward(request, response);
             } else {
                 Prodotto prodottoDaModificare = prodottoDAO.doSearchElement(nomeModello);
                 request.setAttribute("prodotto", prodottoDaModificare);
-                request.getRequestDispatcher("/admin/modificaProdotto.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/admin/modificaProdotto.jsp").forward(request, response);
             }
             return; 
         }
@@ -146,6 +146,6 @@ public class GestioneProdotto extends HttpServlet {
             
          // Outsorced il controllo delle immagini
             request.getRequestDispatcher("/admin/ControlloImmagini?action=upload").include(request, response); // già c'è in richiesta nomeModello
-            response.sendRedirect(request.getContextPath() + "/Prodotto?nomeModello=" + nomeModello); // USA IL CONTROLLER EUGENIO
+            response.sendRedirect(request.getContextPath() + "/MostrareProdotto?id=" + nomeModello);
     }
 }

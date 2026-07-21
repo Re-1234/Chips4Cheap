@@ -19,7 +19,7 @@ public class Catalogo extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher re = request.getRequestDispatcher("WEB-INF\\views\\Catalogo.jsp");
+		RequestDispatcher re = request.getRequestDispatcher("/WEB-INF/views/Catalogo.jsp");
 		re.forward(request, response);
 	}
 	
