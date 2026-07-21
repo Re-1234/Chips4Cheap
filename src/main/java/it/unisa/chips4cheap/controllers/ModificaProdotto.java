@@ -15,7 +15,7 @@ import it.unisa.chips4cheap.model.DTO.Prodotto;
 /**
  * Servlet implementation class ModificaProdotto
  */
-@WebServlet("/ModificaProdotto")
+@WebServlet("/admin/ModificaProdotto")
 public class ModificaProdotto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

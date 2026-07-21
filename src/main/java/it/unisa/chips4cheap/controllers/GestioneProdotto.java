@@ -145,7 +145,7 @@ public class GestioneProdotto extends HttpServlet {
         }
             
          // Outsorced il controllo delle immagini
-            request.getRequestDispatcher("/ControlloImmagini?action=upload").include(request, response); // già c'è in richiesta nomeModello
+            request.getRequestDispatcher("/admin/ControlloImmagini?action=upload").include(request, response); // già c'è in richiesta nomeModello
             response.sendRedirect(request.getContextPath() + "/Prodotto?nomeModello=" + nomeModello); // USA IL CONTROLLER EUGENIO
     }
 }

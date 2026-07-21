@@ -38,7 +38,7 @@ public class ModificaProdottoForm extends HttpServlet {
 			request.setAttribute("prodotto", prodotto);
 		}
 		
-		request.getRequestDispatcher("/admin/modificaProdotto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/modificaProdotto.jsp").forward(request, response);
 	}
 
 	/**

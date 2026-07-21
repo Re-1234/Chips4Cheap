@@ -100,7 +100,7 @@
 						    </button>
 						</form>
 				
-				    <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post">
+				    <form action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post">
 				        <input type="hidden" name="NomeModello" value="${NomeModello}">
 				        <button type="submit" class="bottone-pericolo">
 				            Rimuovi Prodotto

@@ -46,7 +46,7 @@ public class CancellaProdotto extends HttpServlet {
 			
 			if (prodottoDaCancellare != null) {
 				// Includi ControlloImmagini per rimuovere l'mmagine, DEVE ESSERE doPOST per questo! e fallo prima di cancellare il prodotto
-				request.getRequestDispatcher("/ControlloImmagini?action=delete").include(request, response);
+				request.getRequestDispatcher("/admin/ControlloImmagini?action=delete").include(request, response);
 				prodottoDAO.doDelete(prodottoDaCancellare);
 			}
 		}

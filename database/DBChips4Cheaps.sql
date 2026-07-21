@@ -22,7 +22,7 @@ create table Prodotto(
     Sconto int not null default 0,
     Tipo varchar(50) not null,
     Quantità int not null,
-    Image varchar(50) not null,
+    Image varchar(255) not null,
 	MimeType varchar(50) not null,
     primary key(NomeModello)
 );

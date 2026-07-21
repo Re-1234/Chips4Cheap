@@ -28,7 +28,7 @@
 	
 	<display-name>Chips4Cheap</display-name>
 	<welcome-file-list>
-		<welcome-file>homePage.jsp</welcome-file>
+		<welcome-file>Home</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>index.xhtml</welcome-file>
