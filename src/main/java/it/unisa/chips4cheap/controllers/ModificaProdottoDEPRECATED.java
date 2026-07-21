@@ -16,13 +16,13 @@ import it.unisa.chips4cheap.model.DTO.Prodotto;
  * Servlet implementation class ModificaProdotto
  */
 @WebServlet("/admin/ModificaProdotto")
-public class ModificaProdotto extends HttpServlet {
+public class ModificaProdottoDEPRECATED extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificaProdotto() {
+    public ModificaProdottoDEPRECATED() {
         super();
         // TODO Auto-generated constructor stub
     }

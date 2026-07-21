@@ -50,7 +50,8 @@ public class CancellaProdotto extends HttpServlet {
 				prodottoDAO.doDelete(prodottoDaCancellare);
 			}
 		}
-		request.getRequestDispatcher("/admin/ModificaProdotti").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/admin/ModificaProdotti"); // la redirect ha piu senso?
+		// request.getRequestDispatcher("/admin/ModificaProdotti").forward(request, response);
 	}
 
 }
