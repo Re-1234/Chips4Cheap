@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	        let html = '';
 
 	        if (p.imagine) {
-	            html += `<img src="${contextPath}/images/${p.imagine}" alt="${p.nomeModello}">`;
+	            html += `<img src="${contextPath}/${p.imagine}" alt="${p.nomeModello}">`;
 	        } else {
 	            html += `<div class="no-img-placeholder">No Img</div>`;
 	        }

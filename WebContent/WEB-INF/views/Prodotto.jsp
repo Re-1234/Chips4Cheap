@@ -30,7 +30,7 @@
             <div class="product-image-container">
                 <c:choose>
                     <c:when test="${not empty Image}">
-                        <img src="${pageContext.request.contextPath}/${Image}" alt="${prodotto.nomeModello}">
+                        <img src="${pageContext.request.contextPath}/${Image}" alt="${prodotto.nomeModello}"  width="180">
                     </c:when>
                     <c:otherwise>
                         <div class="product-image-placeholder">
