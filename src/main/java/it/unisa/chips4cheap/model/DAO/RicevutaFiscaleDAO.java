@@ -103,7 +103,7 @@ public class RicevutaFiscaleDAO implements InterfaceDAO<RicevutaFiscale>{
 	
 	public ArrayList<RicevutaFiscale> doFilter(String email , String metodoPagamento , LocalDate dataInizio ,LocalDate dataFine){
 		
-		String s = "Select * From RicevutaFiscale";
+		String s = "Select * From RicevutaFiscale ";
 		
 		boolean [] barray = new boolean[4];
 			barray[0] = email != null && !email.trim().isEmpty();
