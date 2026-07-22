@@ -82,33 +82,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	        html += `<button type="button" class="add-cart-button-small" onclick="aggiungiAlCarrello('${p.nomeModello}')">Aggiungi al Carrello</button>`;
 
-	        if (typeof isAdmin !== 'undefined' && isAdmin) {
-	            html += `<button type="button" class="bottone-pericolo" onclick="rimuoviProdotto('${p.nomeModello}')">Rimuovi Prodotto</button>`;
-	        }
-
 	        li.innerHTML = html;
 	        ul.appendChild(li);
 	    });
 
 	    container.appendChild(ul);
 	}
-
-	function rimuoviProdotto(nomeModello) {
-	    if (!confirm('Sei sicuro di voler rimuovere questo prodotto?')) return;
-
-	    fetch(contextPath + '/admin/CancellaProdotto', {
-	        method: 'POST',
-	        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-	        body: new URLSearchParams({ nomeModello: nomeModello }).toString()
-	    })
-	    .then(response => {
-	        if (!response.ok) throw new Error('Errore durante la rimozione');
-	        document.getElementById('riga-' + nomeModello).remove();
-	    })
-	    .catch(err => {
-	        console.error(err);
-	        alert('Errore durante la rimozione del prodotto.');
-	    });
-	}
-
 });

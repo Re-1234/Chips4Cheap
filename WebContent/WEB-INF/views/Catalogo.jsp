@@ -119,16 +119,6 @@
 									        Aggiungi al Carrello
 									   </button>
 									</form>
-
-                                    <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
-                                    <c:if test="${sessionScope.account.amministratore == true}">
-                                        <form class = "form" action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post">
-                                            <input type="hidden" name="nomeModello" value="${prodotto.nomeModello}">
-                                            <button type="submit" class="bottone-pericolo">
-                                                Rimuovi Prodotto
-                                            </button>
-                                        </form>
-                                    </c:if>
                                 </li>
                             </c:forEach>
                         </ul>
