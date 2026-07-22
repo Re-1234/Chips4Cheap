@@ -76,7 +76,7 @@ public class RegistraUtente extends HttpServlet {
         if (errore != null) {
             request.setAttribute("erroreServer", errore);
 
-            request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
+            // request.setAttribute("erroreServer", "Tutti i campi sono obbligatori.");
 
             request.getRequestDispatcher("/WEB-INF/views/registrazione.jsp").forward(request, response);
             return;

@@ -144,7 +144,7 @@ public class CreaRicevuta extends HttpServlet {
                 session.removeAttribute("carrello"); // a questo punto buttalo nel Monte Fato, in futuro lo ricreiamo da zero se ci serve
 
                 request.setAttribute("ricevuta", ricevutaEffettiva);
-                request.setAttribute("prodottiRicevuta", prodottiSalvati);
+                request.setAttribute("listaProdotti", prodottiSalvati);
 
                 request.getRequestDispatcher("/WEB-INF/views/common/visualizzaRicevuta.jsp").forward(request, response); 
 

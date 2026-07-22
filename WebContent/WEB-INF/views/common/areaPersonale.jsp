@@ -65,11 +65,12 @@
                     <c:when test="${sessionScope.account.amministratore}">
                         <a href="${pageContext.request.contextPath}/admin/ModificaProdotti" class="link-azione azione-admin-color">Gestione e Modifica Prodotti</a>
                         <a href="${pageContext.request.contextPath}/admin/MandaAnnuncio" class="link-azione azione-admin-color">Invia Annuncio / Comunicazione</a>
+                        <a href="${pageContext.request.contextPath}/admin/CancellaAnnunci" class="link-azione azione-admin-color">Visualizza / Cancella Annunci</a>
                         <a href="${pageContext.request.contextPath}/admin/CercaRicevute" class="link-azione azione-admin-color">Ricerca Ricevute Fiscali</a>
                     </c:when>
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-azione" id="link-ricevute">Visualizza i tuoi acquisti e ricevute</a>
-                        <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica o Cancella Account</a>
+                        <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica Account</a>
                     </c:otherwise>
                 </c:choose>
                 
