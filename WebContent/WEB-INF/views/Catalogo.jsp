@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css" type="text/css">
 </head>
-<body class="${not empty sessionScope.account and sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}">
+<body class="${not empty sessionScope.account and sessionScope.account.amministratore ? 'modulo-admin-bg' : ''}"
+      data-context-path="${pageContext.request.contextPath}"
+      data-is-admin="${not empty sessionScope.account and sessionScope.account.amministratore}">
 
     <jsp:include page="header.jsp" />
 
@@ -35,13 +37,7 @@
 
                     <div class="riga-campo">
                         <label for="tipo">Tipo</label>
-                        <select id="tipo" name="tipo">
-                            <option value="">Tutti</option>
-                            <option value="Smartphone" ${param.tipo == 'Smartphone' ? 'selected' : ''}>Smartphone</option>
-                            <option value="Laptop" ${param.tipo == 'Laptop' ? 'selected' : ''}>Laptop</option>
-                            <option value="Tablet" ${param.tipo == 'Tablet' ? 'selected' : ''}>Tablet</option>
-                            <option value="Accessorio" ${param.tipo == 'Accessorio' ? 'selected' : ''}>Accessorio</option>
-                        </select>
+                        <input type = "text" id = "tipo" name = "tipo" placeholder="PC fisso , portatile , tablet ...." value ="${param.tipo}">
                     </div>
 
                     <div class="riga-campo">
@@ -131,10 +127,7 @@
 
     <jsp:include page="footer.jsp" />
 
-    <script>
-        var contextPath = "${pageContext.request.contextPath}";
-    	var isAdmin = ${not empty sessionScope.account and sessionScope.account.amministratore};
-    </script>
+    <script src="${pageContext.request.contextPath}/scripts/riconoscimentoAdmin.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/gestioneCarrello.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/ricercaProdotti.js"></script>
     <script src="${pageContext.request.contextPath}/scripts/FiltroPrezzo.js"></script>
