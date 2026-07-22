@@ -10,9 +10,6 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.UUID;
-
 import javax.sql.DataSource;
 
 import it.unisa.chips4cheap.model.DAO.ProdottoDAO;
@@ -38,7 +35,8 @@ public class GestioneProdotto extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String action = request.getParameter("action"); 
+        String action = request.getParameter("action"); 
+        String nCAutore = request.getParameter("nCAutore"); // Estrazione nuovo parametro
         String nomeModello = request.getParameter("nomeModello");
         String descrizione = request.getParameter("descrizione");
         String tipo = request.getParameter("tipo");
@@ -55,6 +53,8 @@ public class GestioneProdotto extends HttpServlet {
         // solito bloccomonolitico di rejex
         if (action == null || (!action.equalsIgnoreCase("add") && !action.equalsIgnoreCase("edit"))) {
             errore = "Azione di sistema non valida.";
+        } else if (nCAutore == null || nCAutore.trim().isEmpty() || nCAutore.length() > 50) { // Validazione nCAutore
+            errore = "Il Produttore/Autore non può essere vuoto o superare i 50 caratteri.";
         } else if (nomeModello == null || nomeModello.trim().isEmpty() || nomeModello.length() > 50) {
             errore = "Il Nome Modello non può essere vuoto o superare i 50 caratteri.";
         } else if (descrizione == null || descrizione.trim().isEmpty()) {
@@ -112,10 +112,10 @@ public class GestioneProdotto extends HttpServlet {
         int quantita = Integer.parseInt(quantitaStr);
         int sconto = Integer.parseInt(scontoStr);
         
-        // NOTA non sto facendo trimming o modifiche ai altri campi
         if ("add".equalsIgnoreCase(action)) {
 
-        	Prodotto nuovoProdotto = new Prodotto();
+            Prodotto nuovoProdotto = new Prodotto();
+            nuovoProdotto.setnCAutore(nCAutore); // Setting nCAutore
             nuovoProdotto.setNomeModello(nomeModello);
             nuovoProdotto.setPrezzo(prezzo);
             nuovoProdotto.setDescrizione(descrizione);
@@ -128,9 +128,10 @@ public class GestioneProdotto extends HttpServlet {
             
         } else if ("edit".equalsIgnoreCase(action)) {
 
-        	Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
+            Prodotto prodottoEsistente = prodottoDAO.doSearchElement(nomeModello);
             
-            if (prodottoEsistente != null) { // non permettiamo di modificare il nome?
+            if (prodottoEsistente != null) {
+                prodottoEsistente.setnCAutore(nCAutore); // Setting nCAutore in fase di modifica
                 prodottoEsistente.setPrezzo(prezzo);
                 prodottoEsistente.setDescrizione(descrizione);
                 prodottoEsistente.setTipo(tipo);
@@ -144,8 +145,8 @@ public class GestioneProdotto extends HttpServlet {
             }
         }
             
-         // Outsorced il controllo delle immagini
-            request.getRequestDispatcher("/admin/ControlloImmagini?action=upload").include(request, response); // già c'è in richiesta nomeModello
-            response.sendRedirect(request.getContextPath() + "/MostrareProdotto?id=" + nomeModello);
+        // Outsorced il controllo delle immagini ADDENDUM: quando aggiungiamo un nuovo prodotto l'immaggine non compare immediatamente ma non è un gran problema.
+        request.getRequestDispatcher("/admin/ControlloImmagini?action=upload").include(request, response);
+        response.sendRedirect(request.getContextPath() + "/MostrareProdotto?id=" + nomeModello);
     }
 }

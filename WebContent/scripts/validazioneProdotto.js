@@ -17,6 +17,25 @@ function validaNomeModello() {
     return true;
 }
 
+function validaNCAutore() {
+    const el = document.getElementById("nCAutore");
+    if (!el) return true;
+
+    const ncAutore = el.value.trim();
+    const errEl = document.getElementById("err-nCAutore");
+    
+    if (!ncAutore) {
+        errEl.innerText = "Il produttore è obbligatorio.";
+        return false;
+    } else if (ncAutore.length > 50) {
+        errEl.innerText = "Il produttore non può superare i 50 caratteri.";
+        return false;
+    }
+    
+    errEl.innerText = "";
+    return true;
+}
+
 function validaPrezzo() {
     const el = document.getElementById("prezzo");
     if (!el) return true;
@@ -111,11 +130,12 @@ function validaDescrizione() {
 
 function validaProdotto() {
     const isNomeValid = validaNomeModello();
+	const isNCAutoreValid = validaNCAutore();
     const isPrezzoValid = validaPrezzo();
     const isTipoValid = validaTipo();
     const isQuantitaValid = validaQuantita();
     const isScontoValid = validaSconto();
     const isDescrizioneValid = validaDescrizione();
     
-    return isNomeValid && isPrezzoValid && isTipoValid && isQuantitaValid && isScontoValid && isDescrizioneValid;
+    return isNomeValid && isNCAutoreValid && isPrezzoValid && isTipoValid && isQuantitaValid && isScontoValid && isDescrizioneValid;
 }
