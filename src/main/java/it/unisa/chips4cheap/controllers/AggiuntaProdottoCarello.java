@@ -37,12 +37,23 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		p.setQuantità(1);
 		HttpSession http = request.getSession();
 		ArrayList<Prodotto> pro = (ArrayList<Prodotto>) http.getAttribute("carrello");
-		if (pro == null) {
+		boolean trovato = false; 
+		if (pro == null){
 			pro = new ArrayList<>();
 			http.setAttribute("carrello", pro);
+		}else {
+			for(Prodotto p1 : pro){
+				if(p1.equals(pro)){
+					trovato = true;
+					break;
+				}
+			}
 		}
-		pro.add(p);
-		System.out.println(pro);
+		
+		if(!trovato){
+			pro.add(p);
+		}
+		
 		response.sendRedirect(request.getContextPath() + "/Catalogo");
 	}
 

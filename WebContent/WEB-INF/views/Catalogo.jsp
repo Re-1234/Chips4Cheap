@@ -56,7 +56,7 @@
                                    value="${empty param.prezzoMax ? 2000 : param.prezzoMax}">
                         </div>
 
-                        <div class="valori-prezzo-selezionati" style="display: flex; justify-content: space-between; width: 360px; max-width: 100%; font-size: 0.9rem; font-weight: 600; color: #555; margin-top: 5px;">
+                        <div class="valori-prezzo-selezionati">
                             <span>€ <span id="valoreMinVisualizzato">${empty param.prezzoMin ? 0 : param.prezzoMin}</span></span>
                             <span>€ <span id="valoreMaxVisualizzato">${empty param.prezzoMax ? 2000 : param.prezzoMax}</span></span>
                         </div>
@@ -122,7 +122,7 @@
 
                                     <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
                                     <c:if test="${sessionScope.account.amministratore == true}">
-                                        <form action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post" style="margin-top: 5px;">
+                                        <form class = "form" action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post">
                                             <input type="hidden" name="nomeModello" value="${prodotto.nomeModello}">
                                             <button type="submit" class="bottone-pericolo">
                                                 Rimuovi Prodotto
