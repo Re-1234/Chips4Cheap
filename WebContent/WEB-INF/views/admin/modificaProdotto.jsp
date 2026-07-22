@@ -35,6 +35,12 @@
                     <p class="messaggio-errore" id="err-nomeModello"></p>
                 </div>
 
+				<div class="gruppo-campo">
+                    <label for="nCAutore">Produttore / Marca *</label>
+                    <input type="text" id="nCAutore" name="nCAutore" required maxlength="50" placeholder="Es. AMD, Intel, Nvidia" onchange="validaNCAutore()">
+                    <p class="messaggio-errore" id="err-nCAutore"></p>
+                </div>
+
                 <div class="riga-doppia">
                     <div class="gruppo-campo meta-larghezza">
                         <label for="prezzo">Prezzo (€) *</label>
