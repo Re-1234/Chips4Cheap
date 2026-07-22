@@ -55,8 +55,10 @@ public class Autorizza extends HttpServlet {
         if (account != null && hashPasswordSHA512(password).equals(account.getPassword())) {
         	HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
-            ArrayList<Prodotto> carrello = new ArrayList<Prodotto>(); // inizializzo già quando fa il login un carrello vuoto per sicurezza
-            session.setAttribute("carrello", carrello);
+            if(session.getAttribute("carrello") == null) { // soltanto se non ci sta già genio
+            	ArrayList<Prodotto> carrello = new ArrayList<Prodotto>(); // inizializzo già quando fa il login un carrello vuoto per sicurezza
+            	session.setAttribute("carrello", carrello);
+            }
             request.getRequestDispatcher("/common/AreaPersonale").forward(request, response);
         } else {
              request.setAttribute("erroreServer", "Email o Password errati. Riprova.");
