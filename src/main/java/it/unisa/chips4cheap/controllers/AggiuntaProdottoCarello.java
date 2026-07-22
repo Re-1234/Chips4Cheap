@@ -41,13 +41,16 @@ public class AggiuntaProdottoCarello extends HttpServlet {
 		if (pro == null){
 			pro = new ArrayList<>();
 			http.setAttribute("carrello", pro);
-		}else {
-			for(Prodotto p1 : pro){
-				if(p1.equals(pro)){
-					trovato = true;
-					break;
+		}else{
+			if(pro.size() > 0){
+				for(Prodotto p1 : pro){
+					if(p1.equals(p)){
+						trovato = true;
+						break;
+					}
 				}
 			}
+			
 		}
 		
 		if(!trovato){
