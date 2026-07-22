@@ -5,7 +5,7 @@ function modificaCarrello(modello, azione, contextPath) {
 
     setTimeout(function () {
         if (xhr.readyState < 4) {
-            xhr.abort(); // sì, xhr.abort() è corretto: si chiama sull'oggetto XMLHttpRequest stesso
+            xhr.abort();
         }
     }, 10000);
 
@@ -26,9 +26,9 @@ function modificaCarrello(modello, azione, contextPath) {
 
             let totaleEl = document.getElementById("totale-carrello-dinamico");
             if (totaleEl) totaleEl.innerText = formattaPrezzo(data.nuovoTotale);
-
+			
             if (data.carrelloVuoto) {
-                let pagina = document.getElementById("blocco-contenuto");
+                let pagina = document.getElementsByTagName("section")[0];
                 pagina.innerHTML =
                     '<h2>Il tuo Carrello</h2>' +
                     '<p class="avviso-vuoto">Il tuo carrello è attualmente vuoto.</p>' +
