@@ -59,7 +59,8 @@ public class CreaAnnuncio extends HttpServlet {
 					getServletContext().setAttribute("tuttiAnnunci", listaAggiornata);
 					
 					// lo butto nella sua area Personale
-					response.sendRedirect(request.getContextPath() + "/common/AreaPersonale");
+					// response.sendRedirect(request.getContextPath() + "/common/AreaPersonale");
+					response.sendRedirect(request.getContextPath() + "/admin/CancellaAnnunci"); // la redirect ha piu senso?
 					
 				} else {
 					request.setAttribute("erroreServer", "Titolo e descrizione sono obbligatori!");

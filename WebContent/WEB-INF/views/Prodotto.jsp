@@ -30,9 +30,7 @@
             <div class="product-image-container">
                 <c:choose>
                     <c:when test="${not empty Image}">
-                        <img class="product-image"
-                             src="${pageContext.request.contextPath}/images/${Image}"
-                             alt="${NomeModello}">
+                        <img src="${pageContext.request.contextPath}/${Image}" alt="${prodotto.nomeModello}"  width="180">
                     </c:when>
                     <c:otherwise>
                         <div class="product-image-placeholder">
@@ -100,8 +98,8 @@
 						    </button>
 						</form>
 				
-				    <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post">
-				        <input type="hidden" name="NomeModello" value="${NomeModello}">
+				    <form action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post">
+				        <input type="hidden" name="nomeModello" value="${NomeModello}">
 				        <button type="submit" class="bottone-pericolo">
 				            Rimuovi Prodotto
 				        </button>

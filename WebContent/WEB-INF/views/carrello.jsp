@@ -90,7 +90,7 @@
 						<a href="${pageContext.request.contextPath}/common/Pagamento" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}">
 						    Procedi all'Ordine
 						</a>
-						<button type="button" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}" onclick="modificaCarrello('', 'svuota', ${pageContext.request.contextPath}')">
+						<button type="button" class="link-navigazione-indietro ${isAdmin ? 'azione-admin-color' : ''}" onclick="modificaCarrello('', 'svuota', '${pageContext.request.contextPath}')">
 						    Svuota il Carrello
 						</button>
                     </div>

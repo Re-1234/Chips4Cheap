@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	        let html = '';
 
 	        if (p.imagine) {
-	            html += `<img src="${contextPath}/images/${p.imagine}" alt="${p.nomeModello}">`;
+	            html += `<img src="${contextPath}/${p.imagine}" alt="${p.nomeModello}">`;
 	        } else {
 	            html += `<div class="no-img-placeholder">No Img</div>`;
 	        }
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	function rimuoviProdotto(nomeModello) {
 	    if (!confirm('Sei sicuro di voler rimuovere questo prodotto?')) return;
 
-	    fetch(contextPath + '/RimuoviProdotto', {
+	    fetch(contextPath + '/admin/CancellaProdotto', {
 	        method: 'POST',
 	        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 	        body: new URLSearchParams({ nomeModello: nomeModello }).toString()

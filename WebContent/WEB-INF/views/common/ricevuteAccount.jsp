@@ -27,12 +27,12 @@
                     <ul class="lista-elementi">
                         <c:forEach var="ricevuta" items="${requestScope.ricevute}">
                             <li class="scheda-elemento">
-                                <span>Ricevuta n°:  ${ricevuta.IDRicevutaFiscale}</span>
-                                <span>Emessa il:  ${ricevuta.dataEmissione}</span>
+                                <span>Ricevuta n°:  ${ricevuta.idRicevutaFiscale}</span>
+                                <span>Emessa il:  ${ricevuta.localDate}</span>
                                 <span>Pagamento:  ${ricevuta.metodoPagamento}</span>
                                 <span>Pagamento:  ${ricevuta.via}</span>	<!-- non faccio vedere numeroCivico, cap, visualizzo il resto nella singola ricevuta -->
                                 
-                                <a href="${pageContext.request.contextPath}/VisualizzaRicevuta?id=${ricevuta.IDRicevutaFiscale}"> <!-- RIMOSSO "link-nascosto-elemento" -->
+                                <a href="${pageContext.request.contextPath}/common/VisualizzaRicevuta?id=${ricevuta.idRicevutaFiscale}"> <!-- RIMOSSO "link-nascosto-elemento" -->
                                     Apri Ricevuta
                                 </a>
                             </li>

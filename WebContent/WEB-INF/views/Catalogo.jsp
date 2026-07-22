@@ -85,7 +85,7 @@
                                     <!-- Gestione Immagine / Fallback -->
                                     <c:choose>
                                         <c:when test="${not empty prodotto.imagine}">
-                                            <img src="${pageContext.request.contextPath}/images/${prodotto.imagine}" alt="${prodotto.nomeModello}" size = "">
+                                            <img src="${pageContext.request.contextPath}/${prodotto.imagine}" alt="${prodotto.nomeModello}">
                                         </c:when>
                                         <c:otherwise>
                                             <div class="no-img-placeholder">No Img</div>
@@ -122,8 +122,8 @@
 
                                     <!-- Bottone Rimuovi Prodotto, visibile solo agli amministratori -->
                                     <c:if test="${sessionScope.account.amministratore == true}">
-                                        <form action="${pageContext.request.contextPath}/CancellaProdotto" method="post" style="margin-top: 5px;">
-                                            <input type="hidden" name="NomeModello" value="${prodotto.nomeModello}">
+                                        <form action="${pageContext.request.contextPath}/admin/CancellaProdotto" method="post" style="margin-top: 5px;">
+                                            <input type="hidden" name="nomeModello" value="${prodotto.nomeModello}">
                                             <button type="submit" class="bottone-pericolo">
                                                 Rimuovi Prodotto
                                             </button>
