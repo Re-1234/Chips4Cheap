@@ -30,7 +30,6 @@ body {
     color: #333333;
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 devo vedere ora per questo secondo body */
 
@@ -121,9 +120,7 @@ h3 {
     padding-bottom: 0.25rem;
 }
 
-/* --------------------------------------------------------------------------
-		 COMPONENTI DI SERVIZIO E SCHEDE PRODOTTO (CATALOGO)
-   -------------------------------------------------------------------------- */
+/* ------------------------ COMPONENTI DI SERVIZIO E SCHEDE PRODOTTO (CATALOGO) ------------------------------- */
 .titolo-errore {
     color: #cc0000;
     text-align: center;
@@ -273,13 +270,10 @@ h3 {
     border-radius: 12px;
     font-weight: bold;
 }
-
-/* IL BELLISSIMO BOTTONE GIALLO E BLU (Stile Chips4Cheap) 
-   Funziona su qualsiasi tag button dentro la scheda (a prova di JS!) */
 .scheda-elemento button,
 .scheda-elemento .add-cart-button-small {
-    background: #FFCA00 !important; /* Giallo del brand */
-    color: #000080 !important; /* Scritta blu scuro */
+    background: #FFCA00 !important; 
+    color: #000080 !important; 
     border: 2px solid #FFCA00 !important;
     padding: 8px 18px !important;
     font-size: 0.9rem !important;
@@ -289,18 +283,15 @@ h3 {
     box-shadow: 0 3px 6px rgba(255, 202, 0, 0.3) !important;
     white-space: nowrap !important;
     display: inline-block !important;
-    width: fit-content !important; /* Impedisce al bottone di allungarsi al 100% */
+    width: fit-content !important;
     margin: 5px 0 0 0;
     
-    /* Inversione di colore fluida al passaggio del mouse */
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.1s, box-shadow 0.2s !important;
     
-    /* Lo solleviamo sopra lo strato cliccabile della scheda così rimane cliccabile da solo! */
     position: relative !important;
     z-index: 5 !important; 
 }
 
-/* Hover del Bottone Giallo: diventa Blu con scritta Gialla */
 .scheda-elemento button:hover,
 .scheda-elemento .add-cart-button-small:hover {
     background: #000080 !important;
@@ -310,7 +301,6 @@ h3 {
     box-shadow: 0 4px 10px rgba(0, 0, 128, 0.25) !important;
 }
 
-/* Fallback immagine mancante */
 .no-img-placeholder {
     width: 80px;
     height: 80px;

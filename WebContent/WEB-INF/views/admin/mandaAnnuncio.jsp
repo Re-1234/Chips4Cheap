@@ -40,7 +40,7 @@
                 <button type="submit" class="bottone-azione">Pubblica Annuncio</button>
                 
                 <div class="zona-navigazione">
-                    <a href="${pageContext.request.contextPath}/common/AreaPersonale" class="link-azione azione-admin-color">
+                    <a href="${pageContext.request.contextPath}/common/AreaPersonale" class="link-azione" id="link-logout">
                         Annulla e torna all'Area Personale
                     </a>
                 </div>
