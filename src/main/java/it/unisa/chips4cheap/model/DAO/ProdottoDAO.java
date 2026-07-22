@@ -23,8 +23,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		if(elemet == null) {
 			throw new NullPointerException();
 		}
-		try{
-			Connection c = ds.getConnection();
+		try(Connection c = ds.getConnection()){
 			PreparedStatement pre = c.prepareStatement("Insert into Prodotto(Prezzo , Produttore , NomeModello , Descrizione , Sconto , Quantità , image , Tipo , MimeType ) values(?,?,?,?,?,?,?,?,?)");
 			pre.setDouble(1, elemet.getPrezzo());
 			pre.setString(2, elemet.getnCAutore());
@@ -37,11 +36,10 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			pre.setString(9, elemet.getMimeType());
 			int y = pre.executeUpdate();
 			pre.close();
-			c.close();
 			return y;
 		}catch(SQLException c){
 			c.printStackTrace();
-		}	
+		}
 		return -1;
 	}
 
@@ -52,13 +50,12 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			throw new NullPointerException();
 		}
 		
-		try{
-			Connection co = (Connection) ds.getConnection();
+		try(Connection co = (Connection) ds.getConnection()){
 			PreparedStatement pr = co.prepareStatement("Delete From Prodotto where NomeModello = ?");
 			pr.setString(1, element.getNomeModello());
 			pr.executeUpdate();
 			pr.close();
-			co.close();
+			
 		}catch(SQLException s){
 			s.printStackTrace();
 		}
@@ -73,8 +70,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			throw new RuntimeException();
 		}
 		String nomeModello = (String) o;
-		try {
-			Connection con = ds.getConnection();
+		try(Connection con = ds.getConnection()){
 			PreparedStatement p = con.prepareStatement("Select * From Prodotto where NomeModello = ?");
 			p.setString(1,nomeModello);
 			ResultSet result = p.executeQuery();
@@ -87,7 +83,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			}
 			result.close();
 			p.close();
-			con.close();
 			return null;
 		}catch(SQLException c){
 			c.printStackTrace();
@@ -100,8 +95,7 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 		if(element == null) {
 			throw new NullPointerException();
 		}
-		try {
-			Connection con = ds.getConnection();
+		try(Connection con = ds.getConnection()){
 			PreparedStatement preparedStatement = con.prepareStatement("Update Prodotto Set Produttore = ? , Prezzo = ? , Descrizione = ? , Sconto = ? , Tipo = ? , Quantità = ? , Image = ?,MimeType = ? where NomeModello = ?");
 			preparedStatement.setString(1, element.getnCAutore());
 			preparedStatement.setDouble(2, element.getPrezzo());
@@ -114,7 +108,6 @@ public class ProdottoDAO implements InterfaceDAO<Prodotto>{
 			preparedStatement.setString(9, element.getNomeModello());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			con.close();
 		}catch(SQLException c){
 			c.printStackTrace();
 		}

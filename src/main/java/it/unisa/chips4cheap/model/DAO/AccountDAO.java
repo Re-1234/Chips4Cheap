@@ -50,14 +50,11 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			throw new NullPointerException();
 		}
 		
-		Context initCtx;
-		try{
-			Connection c = ds.getConnection();
+		try(Connection c = ds.getConnection()){
 			PreparedStatement preparedStatement = c.prepareStatement("Delete From Account1 where email = ?");
 			preparedStatement.setString(1,element.getEmail());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			c.close();
 		}catch(SQLException sqlException) {
 			sqlException.printStackTrace();
 		}
@@ -74,7 +71,6 @@ public class AccountDAO implements InterfaceDAO<Account>{
 				PreparedStatement preparedStatement = co.prepareStatement("Select * From Account1 where email = ?");
 				preparedStatement.setString(1,email);
 				ResultSet resultSet = preparedStatement.executeQuery();
-				
 				if(resultSet.next()){
 					Account account = new Account(resultSet.getString("username"),resultSet.getString("Password1"),resultSet.getString("Via"),resultSet.getString("Cap"),resultSet.getInt("NumeroCivico"),resultSet.getString("email"),resultSet.getBoolean("Amministratore"));
 					preparedStatement.close();
@@ -96,7 +92,7 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			throw new NullPointerException();
 		}
 		try{
-				try(Connection conn = ds.getConnection()){
+			try(Connection conn = ds.getConnection()){
 				PreparedStatement pre = conn.prepareStatement("Update Account1 Set username = ? , Password1 = ? , Via = ? , Cap = ? , NumeroCivico = ? , Amministratore = ? where email = ?");
 				pre.setString(1,element.getUsername());
 				pre.setString(2,element.getPassword());
@@ -124,6 +120,8 @@ public class AccountDAO implements InterfaceDAO<Account>{
 			while(s.next()) {
 				c1.add(new Account(s.getString("username"),s.getString("Password1"),s.getString("Via"),s.getString("Cap"),s.getInt("NumeroCivico"),s.getString("email"),s.getBoolean("Amministratore")));
 			}
+			s.close();
+			p.close();
 			return c1; 
 		}catch(SQLException s){
 			s.printStackTrace();
