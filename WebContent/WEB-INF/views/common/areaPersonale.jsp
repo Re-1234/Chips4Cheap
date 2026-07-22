@@ -69,7 +69,7 @@
                     </c:when>
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath}/common/RicevuteAccount" class="link-azione" id="link-ricevute">Visualizza i tuoi acquisti e ricevute</a>
-                        <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica o Cancella Account</a>
+                        <a href="${pageContext.request.contextPath}/common/ModificaAccountForm" class="link-azione" id="link-modifica-cancella">Modifica Account</a>
                     </c:otherwise>
                 </c:choose>
                 

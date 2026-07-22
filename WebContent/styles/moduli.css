@@ -184,7 +184,7 @@ main {
 }
 
 /* Area Personale: Pulsante secondario (Modifica/Cancella) */
-#link-modifica-cancella {
+#link-logout {
     background-color: #a0a0a0; 
     color: #ffffff; 
     margin-top: 0.75rem;
